@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: node.js, | caines.ca]]></title>
+  <link href="http://caines.ca/blog/categories/node-dot-js/atom.xml" rel="self"/>
+  <link href="http://caines.ca/"/>
+  <updated>2014-06-02T10:54:40-07:00</updated>
+  <id>http://caines.ca/</id>
+  <author>
+    <name><![CDATA[Gregg Caines]]></name>
+    <email><![CDATA[gregg@caines.ca]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Production-Quality Node.js Web Apps : Part I, The Basics]]></title>
+    <link href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/"/>
+    <updated>2014-06-01T10:09:00-07:00</updated>
+    <id>http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been working on production-quality node.js web applications for a couple of years now, and I thought it&rsquo;d be worth writing down some of the more interesting tricks that I&rsquo;ve learned along the way.</p>
+
+<p>I&rsquo;m mostly going to talk about maintaining a low-defect rate and high availability, rather than get into the details about scaling that are covered in a lot of other places.   In particular, I’ll be talking about load-balancing, process management, logging, and metrics, and the how’s and why’s of each.</p>
+
+<h3>Balance the Load</h3>
+
+<p>I&rsquo;m going to assume that you&rsquo;re already load-balancing on a given server with <a href="http://nodejs.org/api/cluster.html">cluster</a> or some higher level abstraction ( I use <a href="https://github.com/isaacs/cluster-master">cluster-master</a>) as well as between servers with a load-balancer like <a href="http://haproxy.1wt.eu/">ha-proxy</a>.</p>
+
+<p>Performance considerations aside, your service will have much better availability, quality, and uptime if you&rsquo;ve got multiple processes running on multiple machines.  More specifically, you get:
+* the ability to immediately failover in the case of single process or single machine failure
+* reduced overall service failure in the case of single process or single machine failure
+* the ability to gracefully deploy with the load-balancer</p>
+
+<h3>Gracefully Deploy</h3>
+
+<p>Gracefully deploying means that your deploy process has enough servers running to handle the load at all times throughout the actual deployment process, and that none of the servers are taken off-line while outstanding requests are still in progress.  This means:</p>
+
+<ul>
+<li><p>Your clustering solution must be able to stop new connections and not exit the master process until all servers have finished processing their existing requests.  The solution I personally use is <a href="https://github.com/isaacs/cluster-master">cluster-master</a>, but there are bunch of suitable alternatives.</p></li>
+<li><p>You need a rolling deployment, meaning that servers are restarted one-at-a-time, or in small groups, rather than all at once.  The easiest way to do this is probably to write a nice deploy script that takes restarting servers out of the load-balancer until they&rsquo;re running again.</p></li>
+</ul>
+
+
+<p>If you don&rsquo;t have a graceful deploy solution, every deployment of new code will lose requests in progress, and your users will have a terrible experience.</p>
+
+<p>Also note: I&rsquo;ve seen a few clustering solutions that use some sort of hot-deploy (hot-deploy loads a new version of code without taking the server down) functionality.  If you&rsquo;ve got a rolling deploy via your load balancer though, you probably <em>don&rsquo;t</em> need any sort of hot-deploy functionality.  I&rsquo;d personally avoid solutions that involve the complexity of hot-deploying.</p>
+
+<h3>Run as a Service</h3>
+
+<p>You&rsquo;re also going to want to be running your app as a service that the OS knows to restart with some service manager like <a href="http://caolanmcmahon.com/posts/deploying_node_js_with_upstart/">upstart</a>.  A service manager like this is going to be absolutely essentially for when your node.js app crashes, or when you spin up new machines.</p>
+
+<p>It&rsquo;s probably worth noting that you won&rsquo;t really want to use something like <a href="https://github.com/nodejitsu/forever">forever</a> or <a href="http://nodemon.io/">nodemon</a> in production, because it doesn&rsquo;t survive reboots, and is pretty redundant once you&rsquo;ve added service management that actually does (This is a case where you don&rsquo;t want redundancy, because these types of process managers can end up fighting with each other to restart the app, thus never really allowing the app to start).</p>
+
+<h4>Log to Standard Output</h4>
+
+<p>Logging to standard output (using <code>console.log()</code>) and standard error (using <code>console.error()</code>) is the simplest and most powerful way to log.  Here&rsquo;s how:</p>
+
+<h5>pipe it, don&rsquo;t write it</h5>
+
+<p>In the config file for running your app, you want something like this to specify a log file:</p>
+
+<p><code>bash
+node server.js &gt;&gt; /var/log/myserver.log 2&gt;&amp;1
+</code></p>
+
+<p>The <code>&gt;&gt;</code> tells your node process to append output to the specified log file and the <code>2&gt;&amp;1</code> tells it that both standard out and standard error should go to that same log file.  You don&rsquo;t want to be writing to the logs programmatically from within the node process, because you will miss any output that you don&rsquo;t specifically log, like standard error output from node.js itself which happens anytime that your server crashes.  That kind of information is too critical to miss.</p>
+
+<h5>console is the only &ldquo;logging library&rdquo; you need</h5>
+
+<p>With this kind of logging set up, I just have to <code>console.log()</code> for any debug output that I need (usually just temporarily for a specific issue that I&rsquo;m trying to solve), or <code>console.error()</code> for any errors I encounter.</p>
+
+<p>Additionally, one of the first things I do on a new web service is to set up a <code>console.log()</code> for each request (this should work in any <code>express</code> or <code>connect</code> app):</p>
+
+<p>```javascript
+  app.use(function(req, res, next){</p>
+
+<pre><code>res.on('finish', function(evt){
+  console.log(req.method, req.url, res.statusCode);
+});
+</code></pre>
+
+<p>  });
+```</p>
+
+<p>This chunk of code gives me nice simple logs for every request that look like this:</p>
+
+<p><code>
+...
+POST /api/session 400
+POST /api/session 401
+POST /api/session 200
+GET /api/status 200
+GET /api/status 200
+...
+</code></p>
+
+<h5>rotating the logs</h5>
+
+<p>The missing infrastructure needed to support this is a way to rotate the logs, like <a href="http://www.rackspace.com/knowledge_center/article/understanding-logrotate-part-1">logrotate</a>.  Once that&rsquo;s set up properly, your logs will rotate for you nicely and not fill up your disk on you.</p>
+
+<h2>Tools to Help Detect Problems at Runtime</h2>
+
+<p>There are two basic key ways that I like to instrument an application to detect problems that occur at runtime: Aggregated logging and metrics.</p>
+
+<h4>Agreggated Logging</h4>
+
+<p>One of the most important things you can do for error and defect detection is to have aggregated logging &mdash; some service that brings all your web servers' logs together into one large searchable log.  There are a few products for this:  The stand-out open source one for me seemed to be the <a href="http://www.elasticsearch.org/overview/kibana/">logstash/kibana combination</a>, though these days I&rsquo;m lazy and generally use the <a href="https://papertrailapp.com/">papertrail service</a> instead.</p>
+
+<p>I would highly recommend that you set a service like this up immediately, because the small amount of friction involved in <code>ssh</code>ing into servers to <code>tail</code> logs is enough to seriously reduce how often you and your teammates will actually look at the logs. The sooner you set this up, the sooner you can benefit from being able to learn about your application through the logs that you have it write.</p>
+
+<h4>Metrics</h4>
+
+<p>When I say &ldquo;metrics&rdquo; I really mean time-series metrics, that allow me to see the frequency of different types of events over time.  These are invaluable because they</p>
+
+<ul>
+<li>tell you when something unusual is happening</li>
+<li>aggregate certain types of data in ways that logs can&rsquo;t</li>
+<li>help you rally the team or company around specific high-value goals (be careful with this one!)</li>
+</ul>
+
+
+<p>The stand-out metrics/graphic open source product is probably <a href="http://graphite.wikidot.com/">graphite</a>.  I&rsquo;ve generally been using <a href="https://metrics.librato.com">Librato&rsquo;s metrics service</a> though because it&rsquo;s easy to set up, and looks great, so that&rsquo;s where I&rsquo;ll pull my screenshots from for time-series data.  I&rsquo;ve also had a pretty good experience with <a href="http://datadog.com">DataDog&rsquo;s service</a> as well.  Both also come with the ability to raise alerts when a metric surpasses a threshold, which can be a nice way to know when something is going on that you should investigate.</p>
+
+<h5>Basic Metrics</h5>
+
+<p>There are a bunch of basic metrics that you can track to see what&rsquo;s going on in your server.</p>
+
+<p>Here&rsquo;s an example of some very high-level metrics for us over a week:</p>
+
+<p><img src="/images/metrics_requests_duration.png" title="[metrics : number of requests vs average duration [metrics : number of requests vs average duration]]" ></p>
+
+<ul>
+<li>in blue: number of requests</li>
+<li>in green: average duration of requests</li>
+</ul>
+
+
+<p>(Note that at this resolution, the y-values are averages over such long durations that the values aren&rsquo;t really that useful at face value; it&rsquo;s the visualization of general trends that is useful.)</p>
+
+<p>There are a few obvious things that should jump out right away in this example:</p>
+
+<ul>
+<li>We have daily traffic spikes with 5 peaks really standing out and 2 being almost flat (those happen to be Saturday and Sunday).</li>
+<li>We had a spike in average request duration (on Friday morning &mdash; the third peak).  This was caused by some performance issues with our database, and resulted in service outage for a number of our users during that time.</li>
+</ul>
+
+
+<p>I can basically put <code>metrics.increment("someEventName");</code> anywhere in my codebase to tell my metrics service when a particular event occurred.</p>
+
+<p>Also consider OS metrics like:
+* disk space usage
+* cpu utilization
+* memory consumption
+* etc, etc</p>
+
+<p>I&rsquo;ve got my codebase set up so that <code>metrics.gauge("someMetricName", value);</code> will allow me to graph specific values like these over time as well.</p>
+
+<p>If you&rsquo;re not already doing monitoring like this, you must be wondering what your servers would tell you.  When it&rsquo;s this easy, you tend to do it all the time and get all kinds of interesting metrics including more business-specific metrics.</p>
+
+<h2>What next?</h2>
+
+<p>These are really just the basics.  If you&rsquo;re not doing these things, and you care about running a production-quality web service, you&rsquo;re probably putting yourself at a disadvantage.</p>
+
+<p>There is a lot more that you can do though, and I&rsquo;ll get into that in my next post, which will be Part II to this one.</p>
+]]></content>
+  </entry>
+  
+</feed>

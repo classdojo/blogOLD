@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://caines.ca/sitemap.xml 

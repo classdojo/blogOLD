@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>
+            http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/
+        </loc>
+        <lastmod>2014-06-02T10:12:35-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/robots.txt</loc>
+        <lastmod>2014-06-01T23:44:31-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/</loc>
+        <lastmod>2014-06-02T10:13:50-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/archives/</loc>
+        <lastmod>2014-06-02T10:33:17-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/categories/</loc>
+        <lastmod>2014-06-01T23:45:54-07:00</lastmod>
+    </url>
+</urlset>

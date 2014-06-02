@@ -1,0 +1,10 @@
+<ul class="main">
+    <li><a href="{{ root_url }}/">Latest</a></li>
+
+  {% for post in site.posts reverse %}
+  <li><a href="{{ root_url }}{{ post.url }}">{{post.title}}</a></li>
+  {% endfor %}
+    </section>
+
+    <!-- <li><a href="{{ root_url }}/blog/archives">Archives</a></li> -->
+</ul>
