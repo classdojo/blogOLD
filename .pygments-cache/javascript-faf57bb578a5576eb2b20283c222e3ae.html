@@ -1,0 +1,12 @@
+<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+  <span class="nx">timeoutThreshold</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span> <span class="c1">// 10 seconds</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">timeoutCheck</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">increment</span><span class="p">(</span><span class="s2">&quot;slowRequest&quot;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;slow request: &quot;</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">method</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">(),</span> <span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+  <span class="p">},</span> <span class="nx">timeoutThreshold</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;finish&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">){</span>
+      <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">timeoutCheck</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>

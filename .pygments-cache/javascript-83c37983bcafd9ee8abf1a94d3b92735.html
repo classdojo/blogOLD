@@ -1,0 +1,15 @@
+<div class="highlight"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">flog</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">increment</span><span class="p">){</span>
+    <span class="nx">metrics</span><span class="p">.</span><span class="nx">increment</span><span class="p">(</span><span class="s2">&quot;loggedErrors&quot;</span><span class="p">);</span>  
+    <span class="c1">// assume `metrics` is required earlier</span>
+  <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="s2">&quot;testing&quot;</span><span class="p">){</span>
+    <span class="nx">args</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="s2">&quot;LOGGED ERROR:&quot;</span><span class="p">);</span>  
+    <span class="c1">// put a prefix on error logs to make them easier to search for</span>
+  <span class="p">}</span>  
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>

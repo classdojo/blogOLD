@@ -1,0 +1,9 @@
+<div class="highlight"><pre><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">someId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">internalServerError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="s2">&quot;Internal Server Error&quot;</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="c1">// and normal stuff with the user object goes here</span>
+        <span class="c1">// ...</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>

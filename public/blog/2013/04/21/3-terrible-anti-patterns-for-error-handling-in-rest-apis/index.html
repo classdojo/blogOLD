@@ -1,0 +1,210 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>3 Terrible Anti-patterns for Error-Handling in 'REST' APIs: - caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="3 Terrible Anti-patterns for Error-Handling in 'REST' APIs: I’ve seen these anti-patterns in a lot of web APIs, so I thought I’d detail why they’re &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</h1>
+	<div class="entry-content" itemprop="articleBody"><p>I’ve seen these anti-patterns in a lot of web APIs, so I thought I’d detail why they’re bad and what to do instead.</p>
+
+<h1>Using a 200 status code for every response:</h1>
+
+<p>This anti-pattern is common for SOAP-like RPC APIs.  Using a 200 status code for all your responses is silly because you end up having to reinvent an error-indication in your response body instead, and nobody in the world knows your new standard (or wants to have to learn it).</p>
+
+<p>It’s also extremely confusing in the cases that an error has occurred because a status code of 200 means everything is A-OK.  <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">There are already a bunch of error codes in the 400 and 500 ranges</a> that are fully capable of indicating all sorts of common problems. It’s still great to put an error message in the response body, but there should be a 400 or 500-level status code so people know that an error even occurred and don’t go ahead and try to interpret the response body as normal or otherwise assume a success.</p>
+
+<h1>Using a 500 status code for all errors:</h1>
+
+<p>This anti-pattern is common because 500 is what most frameworks will do when a web application throws an uncaught exception, and so it becomes convenient to just throw exceptions and not worry about the repercussions. This is mildly better than using a 200 status code for literally everything, because at least it shows an error occurred but it still causes a lot of confusion for client developers.</p>
+
+<p>When you 500 for an error (even if your web framework did it for you), you’re signalling that the problem with the request was the fault of your application (the server) and it’s possible that retrying the request will be successful. Because 500 errors indicate an internal <strong>server error</strong>, they shouldn’t actually ever happen though<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> — In general, you’ve got a bug in your application if they do, and the web server will tell everyone about it. The right thing to do, if there’s something wrong with the request is to respond with the appropriate 400-level status code.</p>
+
+<p>Using a 500 error when a 400-level status code is more appropriate is obviously really confusing to the person making the requests because it doesn’t even let them know that their request needs to be fixed. Even if that person is also you, it forces you to start digging into your back-end for what could possibly just be a bad client request. If you don’t know which 400-level code to use, at the very least use 400 (Bad Request) itself. This will at least give your client developer an indication if the blame is on the server or the client and cut your debugging in half. A few words about the error in the response body can go a long way as well.</p>
+
+<h1>Logging 400-level codes at ‘error’ level:</h1>
+
+<p>Logging is pretty important to measuring the quality of implementation of an API, and learning about specific defects. The ‘error’ level in your logs should be a way to indicate “things that should not have happened that are within this application’s control”, so that you actually have a hope of attempting a 0-error policy. 400 level codes are errors of course, but they’re client errors, and not your server application’s error, so they should not be logged as errors along with your actual 500-level errors (Of course you might still log them as “info” level to keep track of what kinds of crazy things your clients are doing).</p>
+
+<h1>Why do all these details matter?</h1>
+
+<p>When you have an interface between two applications (the client and the server in this case) like HTTP, it REALLY simplifies things a lot if they communicate whether messages are acceptable or not (and why). Even if you control both ends of the interaction, you can save yourself a lot of server-side debugging by having the server indicate what exactly went wrong with a given request, instead of repeatedly reading stack traces every time some JSON you POSTed is missing a property. Compared to how little extra work there is involved in communicating the problem correctly, it’s pretty short-sighted to just let all exceptions bubble-up, or catch all exceptions silently (and 200).</p>
+
+<p>Keep in mind too that if you’re now convinced that communicating errors is important, then HTTP already has a system for just that: HTTP status codes (plus whatever specifics you want to additionally communicate in the response body). Status codes are part of the greater HTTP standard that a lot of developers, libraries, proxies, and caches already understand. Re-inventing your own error mechanism is generally a waste of everyone’s time (with you at the top of the list).</p>
+
+<p>Getting this right is a real time-saver over the long-haul even if you’re the only consumer of the API writing both client-side and server-side.  The time-savings only multiplies as you add more clients.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Sometimes 500 is appropriate of course: If your application requires a database and its lost connectivity to it, then a 500 makes total sense. It signals that there’s a problem in your application and the client can possibly try the request again later.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

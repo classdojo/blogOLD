@@ -1,0 +1,194 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>My Favourite New Ility - caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="My Favourite New Ility If you’ve ever seen a laundry list of the types of non-functional requirements like testability, accessibility, reliability, &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/2013/06/09/my-favourite-new-ility/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">My Favourite New Ility</h1>
+	<div class="entry-content" itemprop="articleBody"><p>If you’ve ever seen a laundry list of the types of <a href="https://en.wikipedia.org/wiki/Non-functional_requirement">non-functional requirements</a> like testability, accessibility, reliability, etc, (often called “ilities” because of their common suffix) you probably haven’t seen “rewritability”, but I really want to add it to the pile.</p>
+
+<p>I’ve often found in software engineering that counterintuitively, if something is difficult or scary there’s a lot to be gained by doing it more often. I think we can probably agree that software rewrites are <a href="http://www.joelonsoftware.com/articles/fog0000000069.html">amoung</a> <a href="http://www.neilgunton.com/doc/?o=1&amp;doc_id=8583">those</a> <a href="http://chadfowler.com/blog/2006/12/27/the-big-rewrite/">difficult</a> <a href="http://onstartups.com/tabid/3339/bid/2596/Why-You-Should-Almost-Never-Rewrite-Your-Software.aspx">and</a> <a href="http://en.wikipedia.org/wiki/Second-system_effect">scary</a> <a href="http://steveblank.com/2011/01/25/startup-suicide-%E2%80%93-rewriting-the-code/">tasks</a>.</p>
+
+<p>Now that we’re starting to get better at service-oriented architecture, where networked applications are better divided into disparate services that individually have narrow responsibilities, a natural side effect is that it’s getting easier to write services that are replaceable later.</p>
+
+<p>So what makes a piece of software rewritable?</p>
+
+<p><strong>Clearly defined requirements:</strong> not just what it needs to do, but also what it won’t do, so that feature-creep creeps into another more appropriate service. This one ends up requiring some discipline when the best place and the easiest place for a given responsibility don’t end up being the same service, but it’s almost always worth it.</p>
+
+<p><strong>Clearly defined interface:</strong> If you want to be able to just drop a new replacement in place of a previous one, it’s got to support all the integration points of the previous one. When interfaces are large and complicated this gets a lot harder and a lot riskier. In my opinion, this makes a lot of applications with GUIs very difficult to rewrite from scratch without anyone noticing (Maybe it’s because UX is hard. Maybe that’s because I’m terrible at GUIs.).</p>
+
+<p><strong>Small:</strong> Even with clearly defined requirements and interface, a rewrite is still going to be expensive and hard to estimate if there’s a lot to rewrite.</p>
+
+<p>Any software engineers that have found themselves locked into a monolithic ball of mud application can see the obvious upsides of having a viable escape route though.</p>
+
+<p>And once we’re not scared of rewrites, what new possibilities emerge?  Real experimentation?  Throw-away prototypes that we actually get to throw away?</p>
+
+<p>How much easier is it to reason about a piece of software when it also meets all the criteria that make it easy to rewrite?</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>
