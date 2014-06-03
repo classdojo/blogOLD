@@ -2,9 +2,45 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>
+            http://caines.ca/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/
+        </loc>
+        <lastmod>2014-06-02T22:26:21-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://caines.ca/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/
+        </loc>
+        <lastmod>2014-06-02T22:19:18-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/2013/05/07/a-requiem-for-a-team/</loc>
+        <lastmod>2014-06-02T21:42:52-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/2013/06/09/my-favourite-new-ility/</loc>
+        <lastmod>2014-06-02T21:25:50-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://caines.ca/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/
+        </loc>
+        <lastmod>2014-06-02T18:53:43-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/2014/01/11/in-defence-of-the-office/</loc>
+        <lastmod>2014-06-02T17:38:14-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
             http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/
         </loc>
-        <lastmod>2014-06-02T10:12:35-07:00</lastmod>
+        <lastmod>2014-06-02T17:51:48-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/
+        </loc>
+        <lastmod>2014-06-02T17:52:02-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/robots.txt</loc>
@@ -12,11 +48,11 @@
     </url>
     <url>
         <loc>http://caines.ca/</loc>
-        <lastmod>2014-06-02T10:13:50-07:00</lastmod>
+        <lastmod>2014-06-02T22:26:21-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/archives/</loc>
-        <lastmod>2014-06-02T10:33:17-07:00</lastmod>
+        <lastmod>2014-06-02T22:26:21-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/categories/</loc>
