@@ -7,7 +7,7 @@ comments: true
 categories: programming, node.js, quality, metrics
 ---
 
-This is the second part of a three part series on making node.js web apps that are (what I would consider to be) production quality.  The [first part](http://caines.ca/blog/programming/production-quality-node-js-web-apps-part-i-the-basics/) really just covered the basics, so if you're missing some aspect covered in the basics, you're likely going to have some issues with the approaches discussed here.
+This is the second part of a three part series on making node.js web apps that are (what I would consider to be) production quality.  The [first part](/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/) really just covered the basics, so if you're missing some aspect covered in the basics, you're likely going to have some issues with the approaches discussed here.
 
 First, I'm going to talk about a few major classes of defects and how to **detect** them.  
 
@@ -25,7 +25,7 @@ There are (at least) 4 types of error scenarios that you're going to want to eli
 
 ### Restarts
 
-Assuming you've got a service manager to restart your application when it fails and a cluster manager to restart a chlid process when one fails (like I talked about in [Part I](http://caines.ca/blog/programming/production-quality-node-js-web-apps-part-i-the-basics/)), one of the worst types of error-scenarios that you're likely to encounter will be when a child process dies and has to restart.  It's a fairly common mistke to believe that once you have automatic restarting working, process failure is no longer a problem.  That's really only the beginning of a solution to the problem though.  Here's why:
+Assuming you've got a service manager to restart your application when it fails and a cluster manager to restart a chlid process when one fails (like I talked about in [Part I](/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/)), one of the worst types of error-scenarios that you're likely to encounter will be when a child process dies and has to restart.  It's a fairly common mistke to believe that once you have automatic restarting working, process failure is no longer a problem.  That's really only the beginning of a solution to the problem though.  Here's why:
 
 * Node.js is built to solve the [C10K problem](http://www.kegel.com/c10k.html), so you should expect to have a high number of requests per process in progress at any given time. 
 
@@ -63,19 +63,21 @@ app.use(function(req, res, next){
 
 ### 500s
 
-On a web application, one of the first things I want to ensure is that we're using proper status codes.  This isn't just HTTP nerd talk (though no one will say I'm innocent of that), but rather a great system of easily categorizing the nature of your traffic going through your site.  I've written about [the common anti-patterns here](http://caines.ca/blog/programming/3-terrible-anti-patterns-for-error-handling-in-rest-apis/), but the gist of it is:
+On a web application, one of the first things I want to ensure is that we're using proper status codes.  This isn't just HTTP nerd talk (though no one will say I'm innocent of that), but rather a great system of easily categorizing the nature of your traffic going through your site.  I've written about [the common anti-patterns here](/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/), but the gist of it is:
 
 ##### Respond with 500-level errors if the problem was a bug in your app, and not in the client.
 This lets you know that there was a problem, and it's your fault.  Most likely you only ever need to know `500 Internal Server Error` to accomplish this.
 
 ##### Respond with 400-level errors if the problem was a bug in the client.
 This lets you know that there was a problem and it was the client app's fault.  If you learn these 4 error codes, you'll have 90% of the cases covered:
+
 * 400 Bad Request  -- When it's a client error, and you don't have a better code than this, use this.  You can always give more detail in the response body.
 * 401 Not Authenticated -- When they need to be logged in, but aren't.
 * 403 Forbidden -- When they're not allowed to do do something
 * 404 Not Found -- When a url doesn't point to an existing thing.
 
 If you don't use these status codes properly, you won't be able to distinguish between:
+
 * successes and errors
 * errors that are the server's responsibility and errors that are the client's responsibility.
 

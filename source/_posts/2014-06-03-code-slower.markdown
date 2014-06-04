@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Code Slower"
-date: 2014-06-03 17:32:30 -0700
+date: 2009-12-13 17:32:30 -0700
 comments: true
 categories: 
 ---

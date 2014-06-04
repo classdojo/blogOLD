@@ -4,7 +4,7 @@
   <title><![CDATA[caines.ca]]></title>
   <link href="http://caines.ca/atom.xml" rel="self"/>
   <link href="http://caines.ca/"/>
-  <updated>2014-06-03T17:38:46-07:00</updated>
+  <updated>2014-06-03T22:31:00-07:00</updated>
   <id>http://caines.ca/</id>
   <author>
     <name><![CDATA[Gregg Caines]]></name>
@@ -14,60 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Code Slower]]></title>
-    <link href="http://caines.ca/blog/2014/06/03/code-slower/"/>
-    <updated>2014-06-03T17:32:30-07:00</updated>
-    <id>http://caines.ca/blog/2014/06/03/code-slower</id>
-    <content type="html"><![CDATA[<p>Here’s a controversial opinion, but one that I really believe to be true: most of the things we do to produce code faster are actually counter-productive.  It sounds crazy, and I would naturally oppose it except that every time I ignore this lesson, experience has a way of reteaching me.  This is as much a message to myself as it is to anyone else that might happen upon it (I’m talking to you, viagra comment spammers).</p>
-
-<h1>Development Time VS. Maintenance Time</h1>
-
-<p>There’s no doubt that the original development stage of a piece of software can be time-consuming.  It’s interesting though, when you consider the difference in time spent in development vs. time spent in maintenance.  At what point do you cross into maintenance mode?</p>
-
-<p>Let’s face it: you’re actually also in maintenance mode pretty much right away, unless you’re some superhuman that conceives of the whole system at once and doesn’t make any design tweaks (or even typos) while coding.  But you’re not.  So the development-time VS. maintenance-time dichotomy is a false one.  You’re always in maintenance mode.</p>
-
-<h1>Invest Early, Invest Often</h1>
-
-<p>So if you spend so much time (all your time) in maintenance mode, then it makes sense to do every little change and tweak in such a way that your subsequent tweaks and changes are as easy as possible.  We should be spending the majority of our energy optimizing our time spent on maintenance and not our time spent on development.</p>
-
-<p>Now it’s natural that one might say “well why not optimize both?”, and that’s a valid question.  There’s no good reason not to try to optimize both, but we have to remember to never ever ever optimize the development process at the expense of the maintenance process, simply because we just spend <strong>so</strong> much time in maintenance mode.</p>
-
-<h1>Some examples</h1>
-
-<h2>Skipping the planning stage.</h2>
-
-<p>This is generally caused by the “Weeks of coding can save days of planning” fallacy.  Uncover all the main parts of your design <strong>before</strong> you code yourself into a corner that requires a near-rewrite to escape.</p>
-
-<h2>Writing untestable code or skipping unit-testing</h2>
-
-<p>Unit-tests are your insurance that future changes don’t cause non-obvious regressions.  They also have a magical way of creating better factored, higher-quality code.  If you skip this stage, your code <strong>will not</strong> be factored as well as it could be, and come maintenance time, you’ll be scared to make changes for fear of breaking something somewhere else.</p>
-
-<h2>Writing classes and functions that do a lot</h2>
-
-<p>This one is a really seductive one.  We want to be <strong>consumers</strong> of classes and methods that do a lot for us, because higher levels of abstraction are how we get more done in less time.  From the consumer stand-point, this makes lots of sense, and it’s actually the best way to improve development speed and maintenance speed at the same time.  If you’re also the person writing the class or function that does more though, you have to be very careful to use the highest abstractions possible for that as well, even if you’re writing its inner abstractions as well.  What this means is that every level of abstraction does as little as possible, and you build up to the level of abstraction that you want with those thin, thin layers.  Classes and functions that try to do a lot instead of relying on other classes and functions are very hard to maintain, simply because there’s so much to do read and understand, and there’s no easy way for the maintainer to skim and decide what piece is relevant, because the pieces are doing multiple things.</p>
-
-<h2>Leaving code in a low-quality state</h2>
-
-<p>I’m talking about everything involving non-readable and poorly factored code, including bad names, foggy separation of concerns, etc.  Code should not be written just for the machine.  It needs to be written for the next guy that comes along as well.  That next guy could be you.  Or a <a href="http://wtfcode.net/post/193202062/always-code-as-if-the-guy-who-ends-up-maintaining">violent psychopath</a></p>
-
-<h2>Using code generation</h2>
-
-<p>Code generation is just pure evil, if there’s ever a remote chance a human will ever have to read it or change it.  A computer program doesn’t know how to write code that a human will understand, and human understanding is exactly what we need to strive for if we care about making maintainable code.</p>
-
-<h1>Understatement of the day:  You’re more than just a typist</h1>
-
-<p>It’s largely irrelevant if you can touch type at 90 wpm.  It’s largely irrelevant if your IDE can do automated refactors.  It’s largely irrelevant if your efficiency with Emacs or vim makes you look like Neo in The Matrix.  These things are great bonuses, but won’t make much difference to your proficiency (and efficiency) as a programmer if you neglect to first consider the maintainability of your codebase.  (Corollary:  In the name of all that is good in this world, please don’t name your variables p1, atb, etc, or your functions like atoi() just for the sake of saving keystrokes!)</p>
-
-<p>Time and time again my mistakes remind me:  there’s only one way to be more productive over the long haul: work with better, higher abstractions.</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Production-Quality Node.js Web Apps : Part II, Detecting Defects]]></title>
     <link href="http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/"/>
     <updated>2014-06-02T17:41:31-07:00</updated>
     <id>http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii</id>
-    <content type="html"><![CDATA[<p>This is the second part of a three part series on making node.js web apps that are (what I would consider to be) production quality.  The <a href="http://caines.ca/blog/programming/production-quality-node-js-web-apps-part-i-the-basics/">first part</a> really just covered the basics, so if you&rsquo;re missing some aspect covered in the basics, you&rsquo;re likely going to have some issues with the approaches discussed here.</p>
+    <content type="html"><![CDATA[<p>This is the second part of a three part series on making node.js web apps that are (what I would consider to be) production quality.  The <a href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">first part</a> really just covered the basics, so if you&rsquo;re missing some aspect covered in the basics, you&rsquo;re likely going to have some issues with the approaches discussed here.</p>
 
 <p>First, I&rsquo;m going to talk about a few major classes of defects and how to <strong>detect</strong> them.</p>
 
@@ -89,7 +40,7 @@
 
 <h3>Restarts</h3>
 
-<p>Assuming you&rsquo;ve got a service manager to restart your application when it fails and a cluster manager to restart a chlid process when one fails (like I talked about in <a href="http://caines.ca/blog/programming/production-quality-node-js-web-apps-part-i-the-basics/">Part I</a>), one of the worst types of error-scenarios that you&rsquo;re likely to encounter will be when a child process dies and has to restart.  It&rsquo;s a fairly common mistke to believe that once you have automatic restarting working, process failure is no longer a problem.  That&rsquo;s really only the beginning of a solution to the problem though.  Here&rsquo;s why:</p>
+<p>Assuming you&rsquo;ve got a service manager to restart your application when it fails and a cluster manager to restart a chlid process when one fails (like I talked about in <a href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Part I</a>), one of the worst types of error-scenarios that you&rsquo;re likely to encounter will be when a child process dies and has to restart.  It&rsquo;s a fairly common mistke to believe that once you have automatic restarting working, process failure is no longer a problem.  That&rsquo;s really only the beginning of a solution to the problem though.  Here&rsquo;s why:</p>
 
 <ul>
 <li><p>Node.js is built to solve the <a href="http://www.kegel.com/c10k.html">C10K problem</a>, so you should expect to have a high number of requests per process in progress at any given time.</p></li>
@@ -139,7 +90,7 @@
 
 <h3>500s</h3>
 
-<p>On a web application, one of the first things I want to ensure is that we&rsquo;re using proper status codes.  This isn&rsquo;t just HTTP nerd talk (though no one will say I&rsquo;m innocent of that), but rather a great system of easily categorizing the nature of your traffic going through your site.  I&rsquo;ve written about <a href="http://caines.ca/blog/programming/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">the common anti-patterns here</a>, but the gist of it is:</p>
+<p>On a web application, one of the first things I want to ensure is that we&rsquo;re using proper status codes.  This isn&rsquo;t just HTTP nerd talk (though no one will say I&rsquo;m innocent of that), but rather a great system of easily categorizing the nature of your traffic going through your site.  I&rsquo;ve written about <a href="http://caines.ca/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">the common anti-patterns here</a>, but the gist of it is:</p>
 
 <h5>Respond with 500-level errors if the problem was a bug in your app, and not in the client.</h5>
 
@@ -147,15 +98,23 @@
 
 <h5>Respond with 400-level errors if the problem was a bug in the client.</h5>
 
-<p>This lets you know that there was a problem and it was the client app&rsquo;s fault.  If you learn these 4 error codes, you&rsquo;ll have 90% of the cases covered:
-* 400 Bad Request  &mdash; When it&rsquo;s a client error, and you don&rsquo;t have a better code than this, use this.  You can always give more detail in the response body.
-* 401 Not Authenticated &mdash; When they need to be logged in, but aren&rsquo;t.
-* 403 Forbidden &mdash; When they&rsquo;re not allowed to do do something
-* 404 Not Found &mdash; When a url doesn&rsquo;t point to an existing thing.</p>
+<p>This lets you know that there was a problem and it was the client app&rsquo;s fault.  If you learn these 4 error codes, you&rsquo;ll have 90% of the cases covered:</p>
 
-<p>If you don&rsquo;t use these status codes properly, you won&rsquo;t be able to distinguish between:
-* successes and errors
-* errors that are the server&rsquo;s responsibility and errors that are the client&rsquo;s responsibility.</p>
+<ul>
+<li>400 Bad Request  &mdash; When it&rsquo;s a client error, and you don&rsquo;t have a better code than this, use this.  You can always give more detail in the response body.</li>
+<li>401 Not Authenticated &mdash; When they need to be logged in, but aren&rsquo;t.</li>
+<li>403 Forbidden &mdash; When they&rsquo;re not allowed to do do something</li>
+<li>404 Not Found &mdash; When a url doesn&rsquo;t point to an existing thing.</li>
+</ul>
+
+
+<p>If you don&rsquo;t use these status codes properly, you won&rsquo;t be able to distinguish between:</p>
+
+<ul>
+<li>successes and errors</li>
+<li>errors that are the server&rsquo;s responsibility and errors that are the client&rsquo;s responsibility.</li>
+</ul>
+
 
 <p>These distinctions are dead-simple to make and massively important for determining if errors are occuring, and if so, where to start debugging.</p>
 
@@ -536,7 +495,7 @@
 
 <p><strong>How would management work then?</strong>  The team should self-organize.  With clear priorities set, the team can and should, for the most part, self-direct.  A manager should not try to manage the avalanche of interactions that happen during free-collaboration throughout the day.  Trying to manage who works on what, will simply make that manager a choke-point and slow the process down (and he/she will inevitably be wrong more than right, compared to the wisdom of the entire team).  Often a non-technical manager can have the advantage over more technical managers, because he&rsquo;s forced to trust the team&rsquo;s decisions and doesn&rsquo;t become an &ldquo;approval choke-point&rdquo; for the team&rsquo;s engineering decisions.</p>
 
-<p>That doesn&rsquo;t mean a management role is unnecessary though; it&rsquo;s actually quite demanding to manage a team like this.  Priorities must always be crystal clear and for the most part, the top few priorities being worked on should not change very often.  If they do change often, you usually have either a management problem or a product quality problem.  Those problems should be fixed at the root as well, rather than making developers feel like management or customers are just a constant stream of interruptions.  Keep in mind that if you do change the top priority often enough, you can completely prevent the team from any progress at all (I&rsquo;ve spent months on a team like that before &mdash; it&rsquo;s not fun for anyone).  (For a more complete description of the ideal responsibilities for this style of management, see &ldquo;The Management&rdquo; <a href="http://caines.ca/blog/programming/a-requiem-for-a-team/">here</a> )</p>
+<p>That doesn&rsquo;t mean a management role is unnecessary though; it&rsquo;s actually quite demanding to manage a team like this.  Priorities must always be crystal clear and for the most part, the top few priorities being worked on should not change very often.  If they do change often, you usually have either a management problem or a product quality problem.  Those problems should be fixed at the root as well, rather than making developers feel like management or customers are just a constant stream of interruptions.  Keep in mind that if you do change the top priority often enough, you can completely prevent the team from any progress at all (I&rsquo;ve spent months on a team like that before &mdash; it&rsquo;s not fun for anyone).  (For a more complete description of the ideal responsibilities for this style of management, see &ldquo;The Management&rdquo; <a href="http://caines.ca/blog/2013/05/07/a-requiem-for-a-team/">here</a> )</p>
 
 <p>Does this work for all types of people?  No.  But then again, you&rsquo;ll never get a fast team of developers without hiring the right people.  If you have people on the team that are incapable of being team-players, it&rsquo;s certainly not going to work (and you&rsquo;ll likely have a number of problems).</p>
 
@@ -1683,7 +1642,7 @@ I agree, it sure wastes a hell lot of time.</p>
 <li><strong>Easy/fast (read “Automated”) deployment.</strong> If deployment takes a long time, then you can’t afford to deploy often. Also, if you can’t deploy quickly, you can’t redeploy quickly (in the event of a problem).</li>
 <li><strong>Easy-undo.</strong> Rolling back from a defective release to a known-good release is the simplest and fastest way to recover from defects, if the process is both quick and easy. Defects will happen no matter how much prevention you use: Easy-undo can mean the difference between light customer impact and heavy customer impact.</li>
 <li><strong>Smaller releases.</strong> Smaller releases have less code, and therefore generally less bugs. Because they don’t contain many changes, they’re easier to test and a rollback is less-likely to negatively impact a customer. Also when a production defect appears in the latest release you have much less code to sift through to determine the cause.</li>
-<li><strong>Practice Continuous Integration</strong> (<a href="http://caines.ca/blog/programming/311/">which necessarily involves always committing to master, and only incidentally has to do with using a CI server</a>) . Feature branches, infrequent commits, and committing non-production-ready work are all practices that need to be avoided, because they are all time-consuming delaying mechanisms.</li>
+<li><strong>Practice Continuous Integration</strong> (<a href="http://caines.ca/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">which necessarily involves always committing to master, and only incidentally has to do with using a CI server</a>) . Feature branches, infrequent commits, and committing non-production-ready work are all practices that need to be avoided, because they are all time-consuming delaying mechanisms.</li>
 <li><strong>“Done” == “In Production”.</strong> If the team moves on to new features before the last one is in production, then that last feature is obviously unnecessarily being held back from release. They will be faster if they deliver to production and ensure it functions there properly before moving on to new features because it avoids unnecessary and time-consuming multi-tasking. This goes hand-in-hand with smaller, more frequent releases.</li>
 <li><strong>Comprehensive Automated testing.</strong> When you deploy more often, you need to test more often. The cheapest way to do this is with comprehensive automated tests. While they’re a heavy-upfront cost, if you run them as often as possible, they’ll pay for themselves very shortly.</li>
 <li><strong>Continuous Production testing.</strong> Create automated <em>black-box</em> integration tests for some of your most important features and figure out a way to run them repeatedly and continuously against your production deployment so that you know instantly when those features are broken. There’s no need to wait for customer feedback to learn about a faulty release.</li>
@@ -1795,7 +1754,7 @@ Recognize work that will be impossible to do due to lack of clarity from the bus
 
 <h1>Be merciless about achieving high quality</h1>
 
-<p>Over the long haul, <a href="http://caines.ca/blog/testing/quality-control-is-the-constraint/">speed comes from quality</a>, so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.</p>
+<p>Over the long haul, <a href="http://caines.ca/blog/2010/12/05/quality-is-the-constraint/">speed comes from quality</a>, so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.</p>
 
 <ul>
 <li>Have QA personnel on every team, and have them testing as the team works.</li>
@@ -1988,6 +1947,55 @@ Recognize work that will be impossible to do due to lack of clarity from the bus
 <p>(It’s important to note too that YAGNI doesn’t say to avoid making your work as futureproof as possble.  YAGNI just says not to put extra code into making that possible.  For example, if you create a class for a UI button that will be used to save some user data in a form, don’t call it “UserDataSaveButton” — just call it “Button”.  It’s no extra work and the re-usability possibilities have increased dramatically.)</p>
 
 <p>We’re not engineers building bridges;  we don’t work with unchangeable steel and concrete, and we can accomodate changing requirements easily.  It’s unrealistic and wasteful to guess that we know what future requirements will come, especially when the potential work saved in the long run is neglible.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Code Slower]]></title>
+    <link href="http://caines.ca/blog/2009/12/13/code-slower/"/>
+    <updated>2009-12-13T16:32:30-08:00</updated>
+    <id>http://caines.ca/blog/2009/12/13/code-slower</id>
+    <content type="html"><![CDATA[<p>Here’s a controversial opinion, but one that I really believe to be true: most of the things we do to produce code faster are actually counter-productive.  It sounds crazy, and I would naturally oppose it except that every time I ignore this lesson, experience has a way of reteaching me.  This is as much a message to myself as it is to anyone else that might happen upon it (I’m talking to you, viagra comment spammers).</p>
+
+<h1>Development Time VS. Maintenance Time</h1>
+
+<p>There’s no doubt that the original development stage of a piece of software can be time-consuming.  It’s interesting though, when you consider the difference in time spent in development vs. time spent in maintenance.  At what point do you cross into maintenance mode?</p>
+
+<p>Let’s face it: you’re actually also in maintenance mode pretty much right away, unless you’re some superhuman that conceives of the whole system at once and doesn’t make any design tweaks (or even typos) while coding.  But you’re not.  So the development-time VS. maintenance-time dichotomy is a false one.  You’re always in maintenance mode.</p>
+
+<h1>Invest Early, Invest Often</h1>
+
+<p>So if you spend so much time (all your time) in maintenance mode, then it makes sense to do every little change and tweak in such a way that your subsequent tweaks and changes are as easy as possible.  We should be spending the majority of our energy optimizing our time spent on maintenance and not our time spent on development.</p>
+
+<p>Now it’s natural that one might say “well why not optimize both?”, and that’s a valid question.  There’s no good reason not to try to optimize both, but we have to remember to never ever ever optimize the development process at the expense of the maintenance process, simply because we just spend <strong>so</strong> much time in maintenance mode.</p>
+
+<h1>Some examples</h1>
+
+<h2>Skipping the planning stage.</h2>
+
+<p>This is generally caused by the “Weeks of coding can save days of planning” fallacy.  Uncover all the main parts of your design <strong>before</strong> you code yourself into a corner that requires a near-rewrite to escape.</p>
+
+<h2>Writing untestable code or skipping unit-testing</h2>
+
+<p>Unit-tests are your insurance that future changes don’t cause non-obvious regressions.  They also have a magical way of creating better factored, higher-quality code.  If you skip this stage, your code <strong>will not</strong> be factored as well as it could be, and come maintenance time, you’ll be scared to make changes for fear of breaking something somewhere else.</p>
+
+<h2>Writing classes and functions that do a lot</h2>
+
+<p>This one is a really seductive one.  We want to be <strong>consumers</strong> of classes and methods that do a lot for us, because higher levels of abstraction are how we get more done in less time.  From the consumer stand-point, this makes lots of sense, and it’s actually the best way to improve development speed and maintenance speed at the same time.  If you’re also the person writing the class or function that does more though, you have to be very careful to use the highest abstractions possible for that as well, even if you’re writing its inner abstractions as well.  What this means is that every level of abstraction does as little as possible, and you build up to the level of abstraction that you want with those thin, thin layers.  Classes and functions that try to do a lot instead of relying on other classes and functions are very hard to maintain, simply because there’s so much to do read and understand, and there’s no easy way for the maintainer to skim and decide what piece is relevant, because the pieces are doing multiple things.</p>
+
+<h2>Leaving code in a low-quality state</h2>
+
+<p>I’m talking about everything involving non-readable and poorly factored code, including bad names, foggy separation of concerns, etc.  Code should not be written just for the machine.  It needs to be written for the next guy that comes along as well.  That next guy could be you.  Or a <a href="http://wtfcode.net/post/193202062/always-code-as-if-the-guy-who-ends-up-maintaining">violent psychopath</a></p>
+
+<h2>Using code generation</h2>
+
+<p>Code generation is just pure evil, if there’s ever a remote chance a human will ever have to read it or change it.  A computer program doesn’t know how to write code that a human will understand, and human understanding is exactly what we need to strive for if we care about making maintainable code.</p>
+
+<h1>Understatement of the day:  You’re more than just a typist</h1>
+
+<p>It’s largely irrelevant if you can touch type at 90 wpm.  It’s largely irrelevant if your IDE can do automated refactors.  It’s largely irrelevant if your efficiency with Emacs or vim makes you look like Neo in The Matrix.  These things are great bonuses, but won’t make much difference to your proficiency (and efficiency) as a programmer if you neglect to first consider the maintainability of your codebase.  (Corollary:  In the name of all that is good in this world, please don’t name your variables p1, atb, etc, or your functions like atoi() just for the sake of saving keystrokes!)</p>
+
+<p>Time and time again my mistakes remind me:  there’s only one way to be more productive over the long haul: work with better, higher abstractions.</p>
 ]]></content>
   </entry>
   

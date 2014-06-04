@@ -50,7 +50,9 @@ body {
 		ul {
 			li {
 				margin-left: 0px;
-				display: block;
+				display: list-item;
+        line-height : 20px;
+        list-style-type : circle!important; 
 				a {
 					padding: 0px 0px;
 				}
@@ -200,6 +202,7 @@ body {
 		opacity: 1;
 	}
 	.left-col {
+    overflow-y : scroll;
 		width: 23%;
 		position: fixed;
 		color: $color-gray05;

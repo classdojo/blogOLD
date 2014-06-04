@@ -48,7 +48,7 @@ This sounds crazy to the uninitiated but there are two reasons for this:
 2. Many types of tasks get more difficult the longer they are postponed and so are always easier if you do them more often instead of letting the risk of complexity pile up.  Integrating code into the main branch is one example  (See [Continuous Integration](http://martinfowler.com/articles/continuousIntegration.html)).  Deploying is another (See [Continuous Delivery](http://continuousdelivery.com/)).
 
 # Be merciless about achieving high quality
-Over the long haul, [speed comes from quality](http://caines.ca/blog/testing/quality-control-is-the-constraint/), so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.
+Over the long haul, [speed comes from quality](/blog/2010/12/05/quality-is-the-constraint/), so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.
 
 * Have QA personnel on every team, and have them testing as the team works.
 * The whole team needs to agree on what level of quality is needed, and what quality metrics will be used to judge every check-in.

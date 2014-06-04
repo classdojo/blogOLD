@@ -9,7 +9,7 @@
 	<meta name="author" content="Gregg Caines">
 
 	
-	<meta name="description" content="Mar 16th, 2013 Release-ophobia If you’ve developed SaaS in a large organization (or even a small organization that acts like one), you’ve probably &hellip;">
+	<meta name="description" content="Jan 3rd, 2012 Your Team Probably Doesn&#8217;t Have the Same DVCS Requirements as Linus Version control branches come with costs. I’m at the point &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -63,8 +63,6 @@
     <li><a href="/">Latest</a></li>
 
   
-  <li><a href="/blog/2014/06/03/code-slower/">Code Slower</a></li>
-  
   <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
   
   <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
@@ -94,6 +92,8 @@
   <li><a href="/blog/2009/12/26/the-lost-art-of-prototyping/">The Lost Art of Prototyping</a></li>
   
   <li><a href="/blog/2009/12/20/the-future-proofing-trap/">The Future Proofing Trap</a></li>
+  
+  <li><a href="/blog/2009/12/13/code-slower/">Code Slower</a></li>
   
     </section>
 
@@ -139,86 +139,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-16T07:33:09-07:00" data-updated="true" itemprop="datePublished">Mar 16<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/03/16/release-ophobia/" itemprop="url">Release-ophobia</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>If you’ve developed SaaS in a large organization (or even a small organization that acts like one), you’ve probably seen some of the symptoms of fear of releasing software:</p>
-
-<ul>
-<li>Off-hours deployments and weekend deployments</li>
-<li>Infrequent releases</li>
-<li>extended code-freeze and testing cycles</li>
-<li>Reluctance to refactor</li>
-<li>Feature branches for the purpose of ‘cherry-picking’</li>
-<li>release managers</li>
-<li>many non-customer-facing environments before production.</li>
-</ul>
-
-
-<p>These symptoms usually happen only in larger/older organizations, because of two factors:</p>
-
-<ul>
-<li>They take a lot more personnel / time to implement than smaller organizations have.</li>
-<li>They are usually processes and attitudes that are collected as a reaction to problems that occur in the course of a company’s lifetime.</li>
-</ul>
-
-
-<h1>“But you can’t be too careful!”</h1>
-
-<p>One problem is that you CAN indeed be too careful. It’s absolutely imperative that the costs be considered as well, if you want software development to still go reasonably fast. Otherwise these manual preventative processes will slowly creep in over time and your team will be releasing at a snail’s pace.</p>
-
-<p>The other problem is that these policies alone are in some ways not careful <em>enough</em>. Where are the techniques for mitigating defects that inevitably still slip through? Where are the techniques to detect them, limit the customers exposed, and limit the time that customers are exposed?</p>
-
-<p>All of these symptoms have a few things in common: They tend toward heavy <strong>manual and preventative</strong> process added generously over time, usually with little thought to the cost/benefit ratio of such process. It’s all too common for every production issue to result in a new process to prevent it, without regard to how infrequently that problem might occur, how damaging the result is, or how easily it is rectified.</p>
-
-<h1>So how do we keep bugs from getting to our customers?!?</h1>
-
-<p>Non-preventative measures (I call them “<strong>Reactive Measures</strong>“) do indeed exist, and can help you safely maintain a fast and steady flow of new features to customers.</p>
-
-<ul>
-<li><a href="http://code.flickr.net/2009/12/02/flipping-out/">Feature-Flags</a> allow you to commit incomplete work to master and push it to production safely. Customer-specific feature flags allow you to test in production or enroll customers in a beta program. With a good feature-flag system, it’s even possible to release a feature to only a certain percentage of customers, and to watch your metrics to see the effects.</li>
-<li><strong>Easy/fast (read “Automated”) deployment.</strong> If deployment takes a long time, then you can’t afford to deploy often. Also, if you can’t deploy quickly, you can’t redeploy quickly (in the event of a problem).</li>
-<li><strong>Easy-undo.</strong> Rolling back from a defective release to a known-good release is the simplest and fastest way to recover from defects, if the process is both quick and easy. Defects will happen no matter how much prevention you use: Easy-undo can mean the difference between light customer impact and heavy customer impact.</li>
-<li><strong>Smaller releases.</strong> Smaller releases have less code, and therefore generally less bugs. Because they don’t contain many changes, they’re easier to test and a rollback is less-likely to negatively impact a customer. Also when a production defect appears in the latest release you have much less code to sift through to determine the cause.</li>
-<li><strong>Practice Continuous Integration</strong> (<a href="http://caines.ca/blog/programming/311/">which necessarily involves always committing to master, and only incidentally has to do with using a CI server</a>) . Feature branches, infrequent commits, and committing non-production-ready work are all practices that need to be avoided, because they are all time-consuming delaying mechanisms.</li>
-<li><strong>“Done” == “In Production”.</strong> If the team moves on to new features before the last one is in production, then that last feature is obviously unnecessarily being held back from release. They will be faster if they deliver to production and ensure it functions there properly before moving on to new features because it avoids unnecessary and time-consuming multi-tasking. This goes hand-in-hand with smaller, more frequent releases.</li>
-<li><strong>Comprehensive Automated testing.</strong> When you deploy more often, you need to test more often. The cheapest way to do this is with comprehensive automated tests. While they’re a heavy-upfront cost, if you run them as often as possible, they’ll pay for themselves very shortly.</li>
-<li><strong>Continuous Production testing.</strong> Create automated <em>black-box</em> integration tests for some of your most important features and figure out a way to run them repeatedly and continuously against your production deployment so that you know instantly when those features are broken. There’s no need to wait for customer feedback to learn about a faulty release.</li>
-<li><strong>Searchable, aggregated logging with proper log-levels.</strong> Making your logs easily searchable in one place makes them something that developers will actually use for defect detection and for debugging. They can go a long way to making your application more transparent.</li>
-<li><strong>Runtime monitoring, runtime metrics and information radiators (most importantly alerts).</strong> Instrument the things you care about most, and have alerts sent out when the measurements are abnormal.</li>
-</ul>
-
-
-<p><strong>Note:</strong> Of course some preventative processes are necessary, but when they are, automation is almost always preferable to time-consuming manual human processes.  Either way, you should consider the cost of the process and determine if it the fall-out from the type of defect it prevents is actually worth that cost.</p>
-
-<p>In the end, a fear of releasing is a fear of change, and a fear of change is a fear of improvement. This is a crucial lesson that Big Company software teams can learn from the small, scrappy start-ups that are quickly trying to disrupt them. The more often you release, the more often you can test hypotheses and get customer feedback, and the more often you can course-correct. Companies that don’t realize this are susceptible to being leap-frogged by competitors that do.</p>
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -357,7 +277,7 @@ Recognize work that will be impossible to do due to lack of clarity from the bus
 
 <h1>Be merciless about achieving high quality</h1>
 
-<p>Over the long haul, <a href="http://caines.ca/blog/testing/quality-control-is-the-constraint/">speed comes from quality</a>, so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.</p>
+<p>Over the long haul, <a href="/blog/2010/12/05/quality-is-the-constraint/">speed comes from quality</a>, so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.</p>
 
 <ul>
 <li>Have QA personnel on every team, and have them testing as the team works.</li>
@@ -623,6 +543,77 @@ Recognize work that will be impossible to do due to lack of clarity from the bus
 
 </article>
 
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-13T16:32:30-08:00" data-updated="true" itemprop="datePublished">Dec 13<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2009/12/13/code-slower/" itemprop="url">Code Slower</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Here’s a controversial opinion, but one that I really believe to be true: most of the things we do to produce code faster are actually counter-productive.  It sounds crazy, and I would naturally oppose it except that every time I ignore this lesson, experience has a way of reteaching me.  This is as much a message to myself as it is to anyone else that might happen upon it (I’m talking to you, viagra comment spammers).</p>
+
+<h1>Development Time VS. Maintenance Time</h1>
+
+<p>There’s no doubt that the original development stage of a piece of software can be time-consuming.  It’s interesting though, when you consider the difference in time spent in development vs. time spent in maintenance.  At what point do you cross into maintenance mode?</p>
+
+<p>Let’s face it: you’re actually also in maintenance mode pretty much right away, unless you’re some superhuman that conceives of the whole system at once and doesn’t make any design tweaks (or even typos) while coding.  But you’re not.  So the development-time VS. maintenance-time dichotomy is a false one.  You’re always in maintenance mode.</p>
+
+<h1>Invest Early, Invest Often</h1>
+
+<p>So if you spend so much time (all your time) in maintenance mode, then it makes sense to do every little change and tweak in such a way that your subsequent tweaks and changes are as easy as possible.  We should be spending the majority of our energy optimizing our time spent on maintenance and not our time spent on development.</p>
+
+<p>Now it’s natural that one might say “well why not optimize both?”, and that’s a valid question.  There’s no good reason not to try to optimize both, but we have to remember to never ever ever optimize the development process at the expense of the maintenance process, simply because we just spend <strong>so</strong> much time in maintenance mode.</p>
+
+<h1>Some examples</h1>
+
+<h2>Skipping the planning stage.</h2>
+
+<p>This is generally caused by the “Weeks of coding can save days of planning” fallacy.  Uncover all the main parts of your design <strong>before</strong> you code yourself into a corner that requires a near-rewrite to escape.</p>
+
+<h2>Writing untestable code or skipping unit-testing</h2>
+
+<p>Unit-tests are your insurance that future changes don’t cause non-obvious regressions.  They also have a magical way of creating better factored, higher-quality code.  If you skip this stage, your code <strong>will not</strong> be factored as well as it could be, and come maintenance time, you’ll be scared to make changes for fear of breaking something somewhere else.</p>
+
+<h2>Writing classes and functions that do a lot</h2>
+
+<p>This one is a really seductive one.  We want to be <strong>consumers</strong> of classes and methods that do a lot for us, because higher levels of abstraction are how we get more done in less time.  From the consumer stand-point, this makes lots of sense, and it’s actually the best way to improve development speed and maintenance speed at the same time.  If you’re also the person writing the class or function that does more though, you have to be very careful to use the highest abstractions possible for that as well, even if you’re writing its inner abstractions as well.  What this means is that every level of abstraction does as little as possible, and you build up to the level of abstraction that you want with those thin, thin layers.  Classes and functions that try to do a lot instead of relying on other classes and functions are very hard to maintain, simply because there’s so much to do read and understand, and there’s no easy way for the maintainer to skim and decide what piece is relevant, because the pieces are doing multiple things.</p>
+
+<h2>Leaving code in a low-quality state</h2>
+
+<p>I’m talking about everything involving non-readable and poorly factored code, including bad names, foggy separation of concerns, etc.  Code should not be written just for the machine.  It needs to be written for the next guy that comes along as well.  That next guy could be you.  Or a <a href="http://wtfcode.net/post/193202062/always-code-as-if-the-guy-who-ends-up-maintaining">violent psychopath</a></p>
+
+<h2>Using code generation</h2>
+
+<p>Code generation is just pure evil, if there’s ever a remote chance a human will ever have to read it or change it.  A computer program doesn’t know how to write code that a human will understand, and human understanding is exactly what we need to strive for if we care about making maintainable code.</p>
+
+<h1>Understatement of the day:  You’re more than just a typist</h1>
+
+<p>It’s largely irrelevant if you can touch type at 90 wpm.  It’s largely irrelevant if your IDE can do automated refactors.  It’s largely irrelevant if your efficiency with Emacs or vim makes you look like Neo in The Matrix.  These things are great bonuses, but won’t make much difference to your proficiency (and efficiency) as a programmer if you neglect to first consider the maintainability of your codebase.  (Corollary:  In the name of all that is good in this world, please don’t name your variables p1, atb, etc, or your functions like atoi() just for the sake of saving keystrokes!)</p>
+
+<p>Time and time again my mistakes remind me:  there’s only one way to be more productive over the long haul: work with better, higher abstractions.</p>
+
+		
+		
+	</div>
+
+</article>
+
 </div>
 <nav id="pagenavi">
     
@@ -642,6 +633,19 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 		</div>
 	</div>
 	
+
+<script type="text/javascript">
+      var disqus_shortname = 'cainesca';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

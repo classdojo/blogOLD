@@ -4,7 +4,7 @@
   <title><![CDATA[Category: node.js, | caines.ca]]></title>
   <link href="http://caines.ca/blog/categories/node-dot-js/atom.xml" rel="self"/>
   <link href="http://caines.ca/"/>
-  <updated>2014-06-03T17:38:46-07:00</updated>
+  <updated>2014-06-03T22:31:00-07:00</updated>
   <id>http://caines.ca/</id>
   <author>
     <name><![CDATA[Gregg Caines]]></name>
@@ -18,7 +18,7 @@
     <link href="http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/"/>
     <updated>2014-06-02T17:41:31-07:00</updated>
     <id>http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii</id>
-    <content type="html"><![CDATA[<p>This is the second part of a three part series on making node.js web apps that are (what I would consider to be) production quality.  The <a href="http://caines.ca/blog/programming/production-quality-node-js-web-apps-part-i-the-basics/">first part</a> really just covered the basics, so if you&rsquo;re missing some aspect covered in the basics, you&rsquo;re likely going to have some issues with the approaches discussed here.</p>
+    <content type="html"><![CDATA[<p>This is the second part of a three part series on making node.js web apps that are (what I would consider to be) production quality.  The <a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">first part</a> really just covered the basics, so if you&rsquo;re missing some aspect covered in the basics, you&rsquo;re likely going to have some issues with the approaches discussed here.</p>
 
 <p>First, I&rsquo;m going to talk about a few major classes of defects and how to <strong>detect</strong> them.</p>
 
@@ -40,7 +40,7 @@
 
 <h3>Restarts</h3>
 
-<p>Assuming you&rsquo;ve got a service manager to restart your application when it fails and a cluster manager to restart a chlid process when one fails (like I talked about in <a href="http://caines.ca/blog/programming/production-quality-node-js-web-apps-part-i-the-basics/">Part I</a>), one of the worst types of error-scenarios that you&rsquo;re likely to encounter will be when a child process dies and has to restart.  It&rsquo;s a fairly common mistke to believe that once you have automatic restarting working, process failure is no longer a problem.  That&rsquo;s really only the beginning of a solution to the problem though.  Here&rsquo;s why:</p>
+<p>Assuming you&rsquo;ve got a service manager to restart your application when it fails and a cluster manager to restart a chlid process when one fails (like I talked about in <a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Part I</a>), one of the worst types of error-scenarios that you&rsquo;re likely to encounter will be when a child process dies and has to restart.  It&rsquo;s a fairly common mistke to believe that once you have automatic restarting working, process failure is no longer a problem.  That&rsquo;s really only the beginning of a solution to the problem though.  Here&rsquo;s why:</p>
 
 <ul>
 <li><p>Node.js is built to solve the <a href="http://www.kegel.com/c10k.html">C10K problem</a>, so you should expect to have a high number of requests per process in progress at any given time.</p></li>
@@ -85,7 +85,7 @@ console.error("slow request: ", req.method.toUpperCase(), req.url);
 
 <h3>500s</h3>
 
-<p>On a web application, one of the first things I want to ensure is that we&rsquo;re using proper status codes.  This isn&rsquo;t just HTTP nerd talk (though no one will say I&rsquo;m innocent of that), but rather a great system of easily categorizing the nature of your traffic going through your site.  I&rsquo;ve written about <a href="http://caines.ca/blog/programming/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">the common anti-patterns here</a>, but the gist of it is:</p>
+<p>On a web application, one of the first things I want to ensure is that we&rsquo;re using proper status codes.  This isn&rsquo;t just HTTP nerd talk (though no one will say I&rsquo;m innocent of that), but rather a great system of easily categorizing the nature of your traffic going through your site.  I&rsquo;ve written about <a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">the common anti-patterns here</a>, but the gist of it is:</p>
 
 <h5>Respond with 500-level errors if the problem was a bug in your app, and not in the client.</h5>
 
@@ -93,15 +93,23 @@ console.error("slow request: ", req.method.toUpperCase(), req.url);
 
 <h5>Respond with 400-level errors if the problem was a bug in the client.</h5>
 
-<p>This lets you know that there was a problem and it was the client app&rsquo;s fault.  If you learn these 4 error codes, you&rsquo;ll have 90% of the cases covered:
-* 400 Bad Request  &mdash; When it&rsquo;s a client error, and you don&rsquo;t have a better code than this, use this.  You can always give more detail in the response body.
-* 401 Not Authenticated &mdash; When they need to be logged in, but aren&rsquo;t.
-* 403 Forbidden &mdash; When they&rsquo;re not allowed to do do something
-* 404 Not Found &mdash; When a url doesn&rsquo;t point to an existing thing.</p>
+<p>This lets you know that there was a problem and it was the client app&rsquo;s fault.  If you learn these 4 error codes, you&rsquo;ll have 90% of the cases covered:</p>
 
-<p>If you don&rsquo;t use these status codes properly, you won&rsquo;t be able to distinguish between:
-* successes and errors
-* errors that are the server&rsquo;s responsibility and errors that are the client&rsquo;s responsibility.</p>
+<ul>
+<li>400 Bad Request  &mdash; When it&rsquo;s a client error, and you don&rsquo;t have a better code than this, use this.  You can always give more detail in the response body.</li>
+<li>401 Not Authenticated &mdash; When they need to be logged in, but aren&rsquo;t.</li>
+<li>403 Forbidden &mdash; When they&rsquo;re not allowed to do do something</li>
+<li>404 Not Found &mdash; When a url doesn&rsquo;t point to an existing thing.</li>
+</ul>
+
+
+<p>If you don&rsquo;t use these status codes properly, you won&rsquo;t be able to distinguish between:</p>
+
+<ul>
+<li>successes and errors</li>
+<li>errors that are the server&rsquo;s responsibility and errors that are the client&rsquo;s responsibility.</li>
+</ul>
+
 
 <p>These distinctions are dead-simple to make and massively important for determining if errors are occuring, and if so, where to start debugging.</p>
 
