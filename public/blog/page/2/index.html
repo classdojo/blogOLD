@@ -1,0 +1,666 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="Mar 16th, 2013 Release-ophobia If you’ve developed SaaS in a large organization (or even a small organization that acts like one), you’ve probably &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/page/2/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/03/code-slower/">Code Slower</a></li>
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+  <li><a href="/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/">The Node.js Community is Quietly Changing the Face of Open Source</a></li>
+  
+  <li><a href="/blog/2013/03/16/release-ophobia/">Release-ophobia</a></li>
+  
+  <li><a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">Your Team Probably Doesn't have the Same DVCS Requirements as Linus</a></li>
+  
+  <li><a href="/blog/2011/09/14/yoagile-the-good-parts/">Agile: The Good Parts</a></li>
+  
+  <li><a href="/blog/2010/12/05/quality-is-the-constraint/">Quality is the Constraint</a></li>
+  
+  <li><a href="/blog/2009/12/26/the-lost-art-of-prototyping/">The Lost Art of Prototyping</a></li>
+  
+  <li><a href="/blog/2009/12/20/the-future-proofing-trap/">The Future Proofing Trap</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-16T07:33:09-07:00" data-updated="true" itemprop="datePublished">Mar 16<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/03/16/release-ophobia/" itemprop="url">Release-ophobia</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>If you’ve developed SaaS in a large organization (or even a small organization that acts like one), you’ve probably seen some of the symptoms of fear of releasing software:</p>
+
+<ul>
+<li>Off-hours deployments and weekend deployments</li>
+<li>Infrequent releases</li>
+<li>extended code-freeze and testing cycles</li>
+<li>Reluctance to refactor</li>
+<li>Feature branches for the purpose of ‘cherry-picking’</li>
+<li>release managers</li>
+<li>many non-customer-facing environments before production.</li>
+</ul>
+
+
+<p>These symptoms usually happen only in larger/older organizations, because of two factors:</p>
+
+<ul>
+<li>They take a lot more personnel / time to implement than smaller organizations have.</li>
+<li>They are usually processes and attitudes that are collected as a reaction to problems that occur in the course of a company’s lifetime.</li>
+</ul>
+
+
+<h1>“But you can’t be too careful!”</h1>
+
+<p>One problem is that you CAN indeed be too careful. It’s absolutely imperative that the costs be considered as well, if you want software development to still go reasonably fast. Otherwise these manual preventative processes will slowly creep in over time and your team will be releasing at a snail’s pace.</p>
+
+<p>The other problem is that these policies alone are in some ways not careful <em>enough</em>. Where are the techniques for mitigating defects that inevitably still slip through? Where are the techniques to detect them, limit the customers exposed, and limit the time that customers are exposed?</p>
+
+<p>All of these symptoms have a few things in common: They tend toward heavy <strong>manual and preventative</strong> process added generously over time, usually with little thought to the cost/benefit ratio of such process. It’s all too common for every production issue to result in a new process to prevent it, without regard to how infrequently that problem might occur, how damaging the result is, or how easily it is rectified.</p>
+
+<h1>So how do we keep bugs from getting to our customers?!?</h1>
+
+<p>Non-preventative measures (I call them “<strong>Reactive Measures</strong>“) do indeed exist, and can help you safely maintain a fast and steady flow of new features to customers.</p>
+
+<ul>
+<li><a href="http://code.flickr.net/2009/12/02/flipping-out/">Feature-Flags</a> allow you to commit incomplete work to master and push it to production safely. Customer-specific feature flags allow you to test in production or enroll customers in a beta program. With a good feature-flag system, it’s even possible to release a feature to only a certain percentage of customers, and to watch your metrics to see the effects.</li>
+<li><strong>Easy/fast (read “Automated”) deployment.</strong> If deployment takes a long time, then you can’t afford to deploy often. Also, if you can’t deploy quickly, you can’t redeploy quickly (in the event of a problem).</li>
+<li><strong>Easy-undo.</strong> Rolling back from a defective release to a known-good release is the simplest and fastest way to recover from defects, if the process is both quick and easy. Defects will happen no matter how much prevention you use: Easy-undo can mean the difference between light customer impact and heavy customer impact.</li>
+<li><strong>Smaller releases.</strong> Smaller releases have less code, and therefore generally less bugs. Because they don’t contain many changes, they’re easier to test and a rollback is less-likely to negatively impact a customer. Also when a production defect appears in the latest release you have much less code to sift through to determine the cause.</li>
+<li><strong>Practice Continuous Integration</strong> (<a href="http://caines.ca/blog/programming/311/">which necessarily involves always committing to master, and only incidentally has to do with using a CI server</a>) . Feature branches, infrequent commits, and committing non-production-ready work are all practices that need to be avoided, because they are all time-consuming delaying mechanisms.</li>
+<li><strong>“Done” == “In Production”.</strong> If the team moves on to new features before the last one is in production, then that last feature is obviously unnecessarily being held back from release. They will be faster if they deliver to production and ensure it functions there properly before moving on to new features because it avoids unnecessary and time-consuming multi-tasking. This goes hand-in-hand with smaller, more frequent releases.</li>
+<li><strong>Comprehensive Automated testing.</strong> When you deploy more often, you need to test more often. The cheapest way to do this is with comprehensive automated tests. While they’re a heavy-upfront cost, if you run them as often as possible, they’ll pay for themselves very shortly.</li>
+<li><strong>Continuous Production testing.</strong> Create automated <em>black-box</em> integration tests for some of your most important features and figure out a way to run them repeatedly and continuously against your production deployment so that you know instantly when those features are broken. There’s no need to wait for customer feedback to learn about a faulty release.</li>
+<li><strong>Searchable, aggregated logging with proper log-levels.</strong> Making your logs easily searchable in one place makes them something that developers will actually use for defect detection and for debugging. They can go a long way to making your application more transparent.</li>
+<li><strong>Runtime monitoring, runtime metrics and information radiators (most importantly alerts).</strong> Instrument the things you care about most, and have alerts sent out when the measurements are abnormal.</li>
+</ul>
+
+
+<p><strong>Note:</strong> Of course some preventative processes are necessary, but when they are, automation is almost always preferable to time-consuming manual human processes.  Either way, you should consider the cost of the process and determine if it the fall-out from the type of defect it prevents is actually worth that cost.</p>
+
+<p>In the end, a fear of releasing is a fear of change, and a fear of change is a fear of improvement. This is a crucial lesson that Big Company software teams can learn from the small, scrappy start-ups that are quickly trying to disrupt them. The more often you release, the more often you can test hypotheses and get customer feedback, and the more often you can course-correct. Companies that don’t realize this are susceptible to being leap-frogged by competitors that do.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-03T06:43:58-08:00" data-updated="true" itemprop="datePublished">Jan 3<span>rd</span>, 2012</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/" itemprop="url">Your Team Probably Doesn&#8217;t Have the Same DVCS Requirements as Linus</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Version control branches come with costs. I’m at the point now that I don’t think it’s possible to get away without spending a couple of days every month managing issues with version control and merging if you’re using feature branches liberally as is common with DVCS (like git) users. I’ve spent days myself in the past months, so I felt compelled to write this because those were days I could’ve been actually doing something that adds value instead.</p>
+
+<p>The purpose of branching is to delay integration of some code into the main code line (for various reasons). There’s a heavy cost that comes from this in that the less often you merge, the harder it is to merge. I’m blown away by the effectiveness of automatic conflict resolution in git, but the bottom line is that if two developers are working in the same area of the codebase, <a href="http://martinfowler.com/bliki/SemanticConflict.html">semantic conflicts</a> will emerge that need the intervention of a human to resolve. These can be complicated and tedious and involve multiple developers. Yes, branching is easier with DVCS, but this actually exacerbates a fundamental merging problem that DVCS doesn’t solve.</p>
+
+<h1>“What if I keep my branches short-lived?”</h1>
+
+<p>There are some <a href="http://dev-spout.blogspot.com/2011/07/feature-branches-are-not-evil-in-fact.html">better defenses for branching</a>, like “What if I keep my branches very short-lived?”, and while it does mitigate most of the problems with merging, it also mitigates any advantage you think you might get from branching. If you’re only going to branch for a day, what’s the point?</p>
+
+<h1>“Then how can I pick and choose what gets added/released?”</h1>
+
+<p>Merging early and often leads to simpler merges, but what about the case when you get partway through a feature and want to scrap it because you’ve come up with a better way? There are a number of ways to mitigate this problem, but if your need to “unmerge” occurs more often than your need to merge, you’ve probably got larger organizational issues to deal with. If those issues are purely technical, try more prototyping to uncover those issues earlier, and <a href="http://www.rallydev.com/engblog/2011/12/20/feature-toggles-branching-in-code/">feature-toggles</a> for better control over what gets released. If those organizational issues are non-technical, like frequent changing requirements mid-feature-development then you simply need to get better (and probably smaller) <a href="http://www.agilemodeling.com/artifacts/userStory.htm#Introduction">user stories</a> before commencing.</p>
+
+<h1>“What if I do daily merges from the mainline into my feature branch?”</h1>
+
+<p>You’d think it shouldn’t matter which way you merge if you merge often, but that’s only fine if you’re the only one branching. As soon as someone else on the team comes along and starts up their own feature branch and follows your same best practice, the two of you are diverging from each other and creating merge-debt.</p>
+
+<h1>Using a continuous integration server is NOT sufficient for actually practicing continuous integration.</h1>
+
+<p>I’ve heard of some teams using a bot to auto-add all branches to the team’s CI server, making sure that each branch gets put through the proper rigor of the CI server. This is actually cargo-cult continuous integration though because those teams are not actually continually integrating at all. Merging early and often is a prerequisite of continuous integration, by definition. Instead, running multiple branches in CI supports maintaining those multiple distinct branches for even longer, so you’re actually using the CI server to undermine the ideals of CI.  Even if you run a special build that tries to auto-merge all branches (yeah right!), but is not the mainline and is not intended for release, you lose the ability to regularly deliver work to some staging environment for manual regression testing.</p>
+
+<h1>A small non-distributed team doesn’t have the same problems as Linus</h1>
+
+<p>If your team is in the same room and practices <a href="http://c2.com/cgi/wiki?CollectiveCodeOwnership">collective code ownership</a> (instead of having a central maintainer) you should just do in-person peer code reviews (or better yet, pair programming) instead of relying on pull requests. It’s wasteful to force every aspect of intra-team communication to go through the computers in the room. I would even go so far as to say that if you’re in the same room, you don’t actually need a DVCS.</p>
+
+<p>Most of the reasons behind feature branches seem to be a cure that’s worse than the disease itself. It’s vastly simpler for us to commit to the mainline at all times, early and often, and deal with deactivating or removing particular pieces of code in other ways (like feature-toggles) as those problems arise (which does not in my experience tend to be very often compared to how often I am merging new stuff in that stays in).</p>
+
+<p>I don’t mean to be negative about DVCS either. I actually use git exclusively now, I think github has been a huge boon to open source, and I love anything that makes Linus more effective at maintaining my favourite OS kernel. It just really seems like feature-branches have never solved any real problem that I have, while they have caused a lot of pain.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-14T07:51:37-07:00" data-updated="true" itemprop="datePublished">Sep 14<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/09/14/yoagile-the-good-parts/" itemprop="url">Agile: The Good Parts</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Let’s just forget about story points, pigs, chickens, daily stand-ups, burndown charts, sprints and scrummasters for a second.  In my experience all of that weird jargon is really hurting Agile’s adoption among the no-nonsense type of developer that doesn’t have time for fluff and wants to know the real benefits of something before investing time in learning about it (instead of a million other things they could be learning).</p>
+
+<p>I’ve also seen that when anyone happens to cite a failed experience with Agile, the explanation from Agilists is invariably the cryptic “you weren’t doing it right”. This is a bit of an irritating response to anyone that’s spent a significant amount of time following the ceremonies and speaking the lingo though.  Instead I’d like to submit that you have a much better chance of succeeding with Agile if you know the real reasons behind the madness.</p>
+
+<p>There are a number of Agile values I’ve noticed in my years of practicing scrum and XP that I think stand on their own even if you’re not doing Agile and just want to improve your development process in some small way.  I’m going to list them (and try to stay jargon-free) because I imagine that they would be useful individually, but they do have a sort of self-reinforcing quality to them where their effects will somehow be amplified if you use them together.  You should also feel free to break the rules where you feel they need to be broken, but I’ve very rarely found that to be necessary.  Usually when I’ve broken these rules, I’ve regretted it later, because what I thought was an exception didn’t really end up being an exception.</p>
+
+<h1>Create a team, not just a group of individuals.</h1>
+
+<p>A project will move faster when it is being developed by a team that self-organizes around its goals rather than a group of individuals working separately.  Here are few rules of thumb to creating a team instead of just having a group of individuals:</p>
+
+<ul>
+<li>Don’t assign tasks to individuals.  Let the team figure out who works on what, and let the team take responsibility for all tasks rather than individuals.   Everyone on the team needs to agree on what it means to be done and how, and everyone on the team needs to take responsibility for it.</li>
+<li>Strive for cross-functional skillsets.   Let the team members teach each other so they can better help each other in the future rather than allowing one person to become the bottleneck for any particular kind of task.</li>
+<li>Try not to change team size or membership very much.  A good team can be a fragile thing.</li>
+<li>Throw out the notion of individual code ownership. The entire team owns the code.</li>
+<li>Create more of a bullpen environment where the team members are all basically in the line of sight of one another and can just talk to one another about what they’re working on.  This was tough, because it made us give up our individual offices, telecommuting, and deciding our own hours, but it was well worth it for the improvement to the quality of our work day.  Almost anytime a developer has to use some means of communication other than his voice to talk with a teammate, you have unnecessarily wasted time.</li>
+<li>Put QA personnel on the team so that testing can be can be on-going and so the team can more easily take on QA and testing as a team-wide responsibility.</li>
+<li>The whole team needs to agree on what kind of work is necessary for each task before it is to be considered “done”.  (coding standards, documentation standards, how rigorously they test, etc, etc)</li>
+<li>The result of this was a highly capable team that could “swarm” to complete goals reliably and quickly.  We actually developed a sort of sports team mentality that made this way of working genuinely fun, and helped us push ourselves to be better all the time.  There are a lot of challenges to creating a great team that can inter-communicate openly and honestly, but it’s an amazing thing to behold when it happens.</li>
+</ul>
+
+
+<h1>Estimates need to come from developers.</h1>
+
+<p>This is can be very hard for some organizations to swallow, but developers are the ones that are most qualified to do estimations, and as professionals, they should be working diligently to improve their estimation capability.  When a developer is responsible for estimation, that developer feels a sense of ownership about his work and will feel a vastly greater sense of responsibility to meet the estimate.  Developers that have never learned how to estimate will not be good at it at first, but there’s no other way for them to get good at it than to have them do it.  There are a few major things that can vastly help estimation too:</p>
+
+<ul>
+<li>Always break work down into tiny chunks.  We generally broke work up into chunks that were less than 3 days of effort.  I’ve never seen a task that couldn’t be broken down into subtasks that are this small or smaller, if the developers are so inclined.</li>
+<li>The team should take a look at bad estimates in retrospect and figure out where they went wrong.
+Recognize work that will be impossible to do due to lack of clarity from the business, or unmet dependencies and push to have those requirements met.</li>
+<li>For highly speculative work, just commit to doing a proof-of-concept, or time-boxed research.</li>
+<li>The more developers that are involved in the estimation process, the better.  You’ll probably want to include QA/testers as well, because good ones have unique insights.</li>
+</ul>
+
+
+<h1>Context-switching should be avoided <em>mercilessly</em>.</h1>
+
+<p>This means that each developer needs the discipline to make sure he only works on one task at a time, that the team works on as few tasks at one time, and that developers need sustained uninterruptable timeboxes where the priority of work is not allowed to change.</p>
+
+<p>Most people (especially non-developers) have no idea how much of a huge time-suck that context switching is, and few realize how seldom it’s actually worthwhile.  Also if the team is tackling as few tasks as possible at once, if any task can be finished by having more developers on it at once, then that’s what the team should do rather than starting as many tasks as possible and working on them in parallel.  This might sound counter intuitive, but with the team ultra-focussed on as few tasks as possible at once, they can get the totality completed faster.</p>
+
+<h1>Try to always improve.</h1>
+
+<p>The team must commit to continually improving. At regular intervals, the team should look at how things are going and pick a few actionable things to make their work better/faster/easier.  You’d be surprised at the huge speed improvements that can come from this practice over time.  If the team has a shared calendar, set up a reoccurring meeting at a regular interval to have this meeting, and be laser-focussed on deciding what improvement you want to achieve and how exactly you’ll try to achieve that.  We’ve always set aside 1 hour per week, but your mileage may vary.  Start every meeting by evaluating how successful the team was with the previous meeting’s goals.</p>
+
+<h1>If something is difficult or time-consuming, do it more often.</h1>
+
+<p>This sounds crazy to the uninitiated but there are two reasons for this:</p>
+
+<ol>
+<li>Doing difficult things more often will drive out new creativity in making them less difficult.  Pro-tip: Automation is almost always the answer when the problem is testing (See <a href="http://www.agiledata.org/essays/tdd.html">TDD</a>, <a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">BDD</a>, <a href="http://testobsessed.com/2008/12/08/acceptance-test-driven-development-atdd-an-overview/">ATDD</a>) or deployment.  (See <a href="http://continuousdelivery.com/">Continuous Delivery</a>)</li>
+<li>Many types of tasks get more difficult the longer they are postponed and so are always easier if you do them more often instead of letting the risk of complexity pile up.  Integrating code into the main branch is one example  (See <a href="http://martinfowler.com/articles/continuousIntegration.html">Continuous Integration</a>).  Deploying is another (See <a href="http://continuousdelivery.com/">Continuous Delivery</a>).</li>
+</ol>
+
+
+<h1>Be merciless about achieving high quality</h1>
+
+<p>Over the long haul, <a href="http://caines.ca/blog/testing/quality-control-is-the-constraint/">speed comes from quality</a>, so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.</p>
+
+<ul>
+<li>Have QA personnel on every team, and have them testing as the team works.</li>
+<li>The whole team needs to agree on what level of quality is needed, and what quality metrics will be used to judge every check-in.</li>
+<li>Perform a root-cause-analysis on each defect.  Try to figure out how to avoid that class of defect in the future.</li>
+</ul>
+
+
+<h1>Do everything in tiny increments.</h1>
+
+<p>Tiny increments reduce the risk of compounding problems, and allow you to get feedback and correct your course more often.</p>
+
+<ul>
+<li>break-down your work into tiny tasks</li>
+<li>plan just-in-time and just enough to do work.</li>
+<li>test as you go, instead of in huge batches</li>
+<li>merge code to the mainline early and often.</li>
+<li>deploy early and often.</li>
+<li>don’t add anything to the system that you don’t need until you need it (<a href="http://c2.com/xp/YouArentGonnaNeedIt.html">YAGNI</a>)</li>
+</ul>
+
+
+<h1>Get customer feedback early and often</h1>
+
+<p>Get customer feedback early and often to converge on the best possible solution as fast as possible by constantly correcting course instead of blindly following some long-running plan or doing unnecessary work.  The customer’s priorities and vision of the product will change as he sees results, so it’s better to not find out about these changes after a lot of unnecessary work has been done.</p>
+
+<ul>
+<li>Do work in priority order as dictated by the customer.  This will allow them to see the aspects that they care about most as early as possible, and therefore help you converge on a unified vision of the product faster.</li>
+<li>Work break-down is better done in vertical slices where the customer can get some amount of real value from each piece (or at least see some evidence of work) rather than having many non-user-facing tasks, where possible.  This allows for more potential for feedback.</li>
+<li>The work shouldn’t be considered done by anyone on the team until the customer, or a representative of the customer agrees that it’s done.</li>
+<li>Constantly improve estimation skills so that they are generally more reliable so the customer knows the cost of the work he has requested and can make realistic decisions based on that.</li>
+</ul>
+
+
+<p>Anyway, feel free to try what you want and throw out the rest!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-05T14:33:50-08:00" data-updated="true" itemprop="datePublished">Dec 5<span>th</span>, 2010</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2010/12/05/quality-is-the-constraint/" itemprop="url">Quality Is the Constraint</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>One fine day in the trenches, a junior engineer was tasked with optimizing a particular web service call that was way too slow (sometimes slower than 20 seconds!).  I had just figured out how to use a performance profiler for that particular platform, so I thought I’d offer to show him how to use it.  His response was that he was on a tight deadline and didn’t have time to learn to use the profiler, and that he was just going to tune the database calls to make them perform better.</p>
+
+<p>Later in the year when the problem still wasn’t solved, I had a chance to take it on myself.  The profiler showed me that this service call was itself making around 20 web service calls to a second system that could obviously add up to 20 seconds, if that other web service took 1 second for each of its responses (and the logs showed that sometimes it did).  It turned out that almost all of those web service calls were redundant and completely unnecessary.  Simply removing them (which took about 1 day of effort) shaved 19 seconds off this web service call’s duration in production in some cases.</p>
+
+<p>The total execution time spent on database calls was 5 milliseconds.  A 50% improvement there would probably take a week’s worth of effort, and really only get you 2 or 3 milliseconds of performance improvement.</p>
+
+<p>The moral of the story is that there’s a pretty simple process for optimizing a system:</p>
+
+<ul>
+<li>Identify and isolate the component that is tying up the most time in the system  (let’s call it the bottleneck)</li>
+<li>Optimize that component to make it less wasteful</li>
+<li>Repeat</li>
+</ul>
+
+
+<p>Skipping step 1 isn’t a shortcut.  It’s absolutely critical to know that you’re optimizing the bottleneck, and not some other random component.</p>
+
+<p>This is pretty obvious stuff for most experienced developers of course.  And while they seem to know to apply this to the systems that they work on, it’s more rare that they notice it outside of the code and see it in the process of software engineering in general.</p>
+
+<p>The software development <em>process</em> is a system as well, made up of components.  Requirements come in at one end, and deliverables go out the other end.  As people who are involved in that process, we naturally want it to be more and more efficient.  We are constantly trying to figure out how to optimize that system so we can deliver better software in less time.</p>
+
+<p>So step 1:  Identify and isolate the component that is tying up the most time in the system.</p>
+
+<p>Not every team develops software the same way, so this component of the process could be different team by team.  In practice though, I’ve always seen teams spending the most time doing these sorts of things:</p>
+
+<ul>
+<li>Refactoring poorly written code so that features can be added</li>
+<li>Learning/relearning existing code that has long since swapped out of all developers’ “mind pages” (for extension or bug-squashing).</li>
+<li>Debugging</li>
+<li>Performing Manual User Acceptance Testing (by both developers and testers)</li>
+<li>issue tracking (administration of that tool and issue in it)</li>
+<li>discovery and documentation of steps to reproduce</li>
+<li>triage (what bugs to squash first?)</li>
+<li>communication between customers, support, QA and developers</li>
+<li>customer support</li>
+<li>customer dissatisfaction leading to churn and reputation problems (affecting the entire organization)</li>
+</ul>
+
+
+<p>All of these time consumers are affected directly or indirectly by our ability to control quality.  In my experience, the majority of the software development process isn’t hung up in requirements analyis, design, or implementation.  It’s hung up in all these Quality Control related issues.  Quality Control is the constraint that keeps us from creating the right software faster.  Steve McConnell confirms it in a more scientific way than I ever could:</p>
+
+<blockquote><p>The rest of us would do well to learn from a discovery made by IBM in the 1970s: Products with the lowest defect counts also have the shortest schedules (Jones 1991). Many organizations currently develop software with defect levels that give them longer schedules than necessary. After surveying about 4000 software projects, Capers Jones reported that poor quality was one of the most common reasons for schedule overruns (1994). He also reported that poor quality is implicated in close to half of all canceled projects. A Software Engineering Institute survey found that more than 60 percent of organizations assessed suffered from inadequate quality assurance (Kitson and Masters 1993). On the curve in Figure 1, those organizations are to the left of the 95-percent-removal line.</p></blockquote>
+
+<p>(<a href="http://www.stevemcconnell.com/articles/art04.htm">http://www.stevemcconnell.com/articles/art04.htm</a> — The whole article is extremely illuminating)</p>
+
+<p>What this means is that if we really want to move quickly, we need to take a good hard look at how we manage quality.  Of course this is counter-intuitive, and its actually hard to swallow, because ensuring quality can be mundane and tedious if you’re not doing it right.  But as developers we’d be silly to ignore the real bottleneck in the process, and optimizing for that.  Micro-optimizations elsewhere in the process will yield very little benefit compared to improving measures that ensure quality.</p>
+
+<p>As developers, we love to argue about and discuss these micro-optimizations all day long:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Editor_war">what text editor you use</a></li>
+<li><a href="http://steve-yegge.blogspot.com/2008/09/programmings-dirtiest-little-secret.html">how important input speed is</a></li>
+<li><a href="http://stackoverflow.com/questions/136056/ide-or-text-editor">IDEs vs. editors</a></li>
+</ul>
+
+
+<p>It sure seems silly though to be pursuing micro-optimizations, at the expense of tackling the real #1 time-suck:  Quality.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-26T16:19:01-08:00" data-updated="true" itemprop="datePublished">Dec 26<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2009/12/26/the-lost-art-of-prototyping/" itemprop="url">The Lost Art of Prototyping</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Prototyping is a <strong>design</strong> methodology that basically involves “trying stuff out and seeing what works”. It’s meant to be iterative in that you continue to create prototypes (possibly by alterring previous prototypes) until you’ve got all the information you need to say your design is complete.</p>
+
+<p>If we were building cars, we would probably first prototype a body design with CGI to be able to collect feedback before building the car itself. It’s much cheaper (effort and materials wise) to iteratively develop the body with a 3d model than with the actual materials that would be used.</p>
+
+<p>If we were designing websites, we might prototype the design in photoshop for a bunch of iterations until the client is happy. The great thing about that is that the web designer can actually chop up that protoype in photoshop, and use it for images as part of the work after the client has approved the design stage. In this case, the prototype isn’t a throw-away prototype — it’s actually useful to bring into the implementation stage.</p>
+
+<p>In software development we can (and usually do) prototype similarly. There’s usually a point in the design process where a developer needs to “try some stuff out and see what works”. Once the developer has proven a methodology with code, the prototyping phase can mostly be called complete. Throwing away that code would widely be considered a huge waste though, so it usually ends up being used in the final implementation as well.</p>
+
+<h1>Prototyping VS. Hacking</h1>
+
+<p>It’s probably safe to say that many developers do prototyping (a design methodology) and implementation <strong>at the same</strong> time bouncing back and forth between the two as necessary, blurring that line between design and implementation.</p>
+
+<p>This way of developing is seductive, because you get straight to banging on the keyboard, which feels like you’re making progress, but it’s really upstream in the design stage where you get the opportunity to save the most amount of time. If you don’t distinguish between design and implementation, it’s tough to tell which stage you’re in at any given time, and so it’s tough to determine if you’re in <strong>the right stage</strong>.</p>
+
+<p>You can imagine how wasteful this back-and-forth would be if you were an automative engineer instead, and you swapped back and forth between prototyping and working on the implementation details. As you iterate on the prototype, those details you worked on in the last iteration could be completely removed — that’s a big waste of time, and it’s often emotionally difficult to let go of design decisions that have undergone a lot of implementation work. So while realistically design never really stops, you do want to do as much up front as possible.</p>
+
+<p>So there are definitely right and wrong ways to prototype, but it’s extremely valuable and worthwhile if done correctly. I doubt many developers would argue that sometimes you just need to try stuff out and see what works. Very few developers are interested in development methodologies that omit the ability to prototype.</p>
+
+<h1>So What about TDD?</h1>
+
+<p>This seems to me to be the most often used argument against Test Driven Development (TDD). I agree that TDD doesn’t work well for tasks that don’t have clear-cut solutions, but TDD is still always applicable downstream after the solution has become more clear. The trick is to reach a certain level of solidity with your solution’s plan <em>before</em> you get into TDD.</p>
+
+<p>Here’s a case in point as <a href="http://xprogramming.com/xpmag/oksudoku/">Ron Jeffries attempts to “solve sudoku” with TDD without even knowing the rules of the game</a>. If you follow his method of solving the problem and compare it against <a href="http://norvig.com/sudoku.html">Peter Norvig’s design-first approach</a>, TDD starts to look like a miserable failure. Indeed, some have dragged this out as a case against the utility of TDD “in the real world”.  Ron Jeffries’ example doesn’t really make the case against TDD at all though; It simply shows that you have no business being in the TDD stage before you fully understand the problem and you’ve done adequate design. TDD doesn’t preclude other design methods (like prototyping) at all.</p>
+
+<p>And in cases of large architectural issues, prototyping is likely not the first tool that you should turn to — it’s too detail oriented, and you can iterate much faster on designs expressed via whiteboard doodling, flowcharts, UML, etc. You might move to prototyping at some stage later though before you completely decide on some particular design. The important part to keep in mind though is that you’re <strong>not</strong> in the implementation stage — you’re planning.  Changes are cheap and easy at this stage, and it saves you so much more time than if you just jumped in and started developing.</p>
+
+<p>The software that comes out of the prototyping process is a nice side effect, but it’s almost never ready for production. This is where TDD comes in. If you have a clear understanding of the solution you want to implement (whether you used prototyping or not) then your design is sufficiently complete to <strong>start</strong> TDD. In this way TDD and prototyping are not opposed at all. Prototyping is just one possible methodology in the design stage that should precede implementation. TDD just says that tests should be written before implementation. It doesn’t say anything about what else you do prior to implementation.</p>
+
+<p>So, there’s nothing un-TDD about prototyping a solution, setting it aside, writing your tests, then writing an implementation that passes those tests (based on the knowledge you got from your prototype). Ideally you’re working with units that are single-minded and small so copying/pasting from the prototype isn’t even necessary, but to be honest, I think some copy/paste from the prototype is fine. If it’s done in a careful way where you’re not hurting the quality of the final code (because prototypes generally don’t care all that much about code quality), you might as well make use of your previous work, if you can. You just have to be careful that it’s the quality you want, but then again TDD will force a lot of the quality.</p>
+
+<h1>The Steel Thread</h1>
+
+<p>The concept of <a href="http://en.wikipedia.org/wiki/Steel_thread">the steel thread</a> is one that I use quite often on the team that I work in when we’re working on complex tasks. It’s definitely a loose sort of prototype, and it’s meant to prove the basics of our core concepts. Basically, we concentrate on the core functionality of the complex task, putting priority on the completion of the “<a href="http://en.wikipedia.org/wiki/Happy_path">happy path</a>“, the path of execution without error scenarios, special cases, etc. Once that core functionality is in place, the general design can be considered verified, the necessary components can be easily identified, and the existing work can be evolved to something high-quality (possibly through a fresh start with TDD). Work is easily divided amoung teammates after this steal thread has been acheived.</p>
+
+<h1>Spike Solutions</h1>
+
+<p><a href="http://www.extremeprogramming.org/rules/spike.html">Spike Solutions</a> are like the opposite of the steel thread in many ways. Where the steal thread tries to prove the viability of the entire solution (in a breadth-first sort-of-way), a spike solution will try to prove the viability of a part of the solution that isn’t very well known, in a depth first sort-of-way. It’s useful when there’s a particular piece of the solution that we’re not sure will work, so we prototype that part as quickly as possible to make sure our overall solution won’t fail because of that single part.</p>
+
+<p>The point of the concepts of steel threads and spikes is to tackle the unknowns early on and prove the viability of the entire solution as early as possible. Once everyone is relatively sure that the team is on the right path and the design is firmed up, you’re ready to get into the more detail-oriented aspects of development.   It’s not until this point that I’d switch to TDD, and start writing my tests for the implementation stage of the work.</p>
+
+<h1>Is this just <a href="http://c2.com/xp/BigDesignUpFront.html">BDUF</a>?</h1>
+
+<p>I don’t think so.   I’m not proposing a huge documentation process that specifies every aspect of the final product.  I’m simply talking about spending some time to loosely figure out what we’re going to do before we do it.    It’s time well spent, because it’s just so much cheaper to make major changes at this earlier stage in the process.  We’ll still figure out the minor details as we go.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-20T16:27:28-08:00" data-updated="true" itemprop="datePublished">Dec 20<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2009/12/20/the-future-proofing-trap/" itemprop="url">The Future Proofing Trap</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<blockquote><p>“We will encourage you to develop the three great virtues of a programmer: laziness, impatience, and hubris.” — <a href="http://en.wikipedia.org/wiki/Larry_Wall">Larry Wall</a></p></blockquote>
+
+<p>In this quote Larry Wall makes some great points about what it means to be a great programmer in a zen-like,  toungue-in-cheek sort-of-way.  Let’s look at one aspect of the Virtue of Laziness.</p>
+
+<p>Every reasonable developer knows that he should write his code to be easily maintained.  As part of that work, it’s natural for that developer to want to try to make his code as ready for future change as possible.  Taking that desire a few steps further, he might want to write code that solves future needs in addition to the current requirements, so that that code doesn’t even need to be revisited.  Unfortunately, that’s a common mistake that leads to a lot of wasted time and <strong>less</strong> maintainable code.</p>
+
+<p>I’d like to propose a principle of software development that I’ve come to believe:</p>
+
+<p><strong>The most maintainable code is the simplest possible code that meets all the requirements.</strong></p>
+
+<p>This is almost a tautology because simple code is (by definition) easier to understand, so it’s easier to change/enhance/extend.  Code that does more than what’s currently necessary is not as simple as it could be though, so it’s not as maintainable given the current requirements.</p>
+
+<p>One might argue that code that does more than what’s necessary can meet future requirements without change, thereby proving itself to be more easily maintained (no maintenance required!), but all of that hinges upon the developer’s ability to consistently and accurately foresee future requirements.  Otherwise that developer has:</p>
+
+<ul>
+<li>wasted time developing unnecessary functionality</li>
+<li>decreased the maintainability of the codebase</li>
+</ul>
+
+
+<h1>Even when everybody is pretty certain of the future requirements…</h1>
+
+<p>Now let’s consider the case where the developer is almost absolutely sure that the requirements will change a certain way, and so the code should be written to handle that scenario as well.  Wouldn’t it be better to do that work now?  No.  It still takes more time and effort (at a time when we know its not necessary), and it’s still less maintainable code until those requirements change (in case other unrelated changes are required).  On top of all that, there’s <em>still</em> risk that the requirements won’t change in the anticipated way!</p>
+
+<h1>Even when everyone is absolutely 100% certain of the future requirements…</h1>
+
+<p>Now let’s consider the case where everyone is 100% certain that the requirements will change in a specific way, and you can write your code to handle that way as well as the current way.  In that infrequent scenario, you don’t face a bunch of losing propositions, so it does make a bit more sense.  However, I’d still like to pose a question:  how much more work is it to do the additional work later instead of now?  Truthfully, the amount of effort is virtually identical regardless of whether you do it now or later.  That means you can enjoy maintaining the simpler version until the time comes that it needs to be changed to meet new requirements.</p>
+
+<p>This isn’t a new idea I’ve dreamt up: it’s the <a href="ttp://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a> principle, and it’s an essential part of <a href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">Uncle Bob’s 3 Rules of TDD</a>.  It’s also a great way to avoid unnecessarily complex code.</p>
+
+<p>(It’s important to note too that YAGNI doesn’t say to avoid making your work as futureproof as possble.  YAGNI just says not to put extra code into making that possible.  For example, if you create a class for a UI button that will be used to save some user data in a form, don’t call it “UserDataSaveButton” — just call it “Button”.  It’s no extra work and the re-usability possibilities have increased dramatically.)</p>
+
+<p>We’re not engineers building bridges;  we don’t work with unchangeable steel and concrete, and we can accomodate changing requirements easily.  It’s unrealistic and wasteful to guess that we know what future requirements will come, especially when the potential work saved in the long run is neglible.</p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="/" class="prev">Prev</a>
+    
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

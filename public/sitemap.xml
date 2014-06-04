@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://caines.ca/blog/2009/12/20/the-future-proofing-trap/</loc>
+        <lastmod>2014-06-03T17:31:10-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://caines.ca/blog/2009/12/26/the-lost-art-of-prototyping/</loc>
         <lastmod>2014-06-03T17:23:29-07:00</lastmod>
     </url>
@@ -71,16 +75,20 @@
         <lastmod>2014-06-03T09:38:47-07:00</lastmod>
     </url>
     <url>
+        <loc>http://caines.ca/blog/2014/06/03/code-slower/</loc>
+        <lastmod>2014-06-03T17:34:42-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://caines.ca/robots.txt</loc>
         <lastmod>2014-06-01T23:44:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/</loc>
-        <lastmod>2014-06-03T17:23:29-07:00</lastmod>
+        <lastmod>2014-06-03T17:34:42-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/archives/</loc>
-        <lastmod>2014-06-03T17:23:29-07:00</lastmod>
+        <lastmod>2014-06-03T17:34:42-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/categories/</loc>

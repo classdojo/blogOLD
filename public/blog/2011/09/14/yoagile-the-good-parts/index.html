@@ -1,0 +1,284 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Agile: The Good Parts - caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="Agile: The Good Parts Let’s just forget about story points, pigs, chickens, daily stand-ups, burndown charts, sprints and scrummasters for a second &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/2011/09/14/yoagile-the-good-parts/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/03/code-slower/">Code Slower</a></li>
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+  <li><a href="/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/">The Node.js Community is Quietly Changing the Face of Open Source</a></li>
+  
+  <li><a href="/blog/2013/03/16/release-ophobia/">Release-ophobia</a></li>
+  
+  <li><a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">Your Team Probably Doesn't have the Same DVCS Requirements as Linus</a></li>
+  
+  <li><a href="/blog/2011/09/14/yoagile-the-good-parts/">Agile: The Good Parts</a></li>
+  
+  <li><a href="/blog/2010/12/05/quality-is-the-constraint/">Quality is the Constraint</a></li>
+  
+  <li><a href="/blog/2009/12/26/the-lost-art-of-prototyping/">The Lost Art of Prototyping</a></li>
+  
+  <li><a href="/blog/2009/12/20/the-future-proofing-trap/">The Future Proofing Trap</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Agile: The Good Parts</h1>
+	<div class="entry-content" itemprop="articleBody"><p>Let’s just forget about story points, pigs, chickens, daily stand-ups, burndown charts, sprints and scrummasters for a second.  In my experience all of that weird jargon is really hurting Agile’s adoption among the no-nonsense type of developer that doesn’t have time for fluff and wants to know the real benefits of something before investing time in learning about it (instead of a million other things they could be learning).</p>
+
+<p>I’ve also seen that when anyone happens to cite a failed experience with Agile, the explanation from Agilists is invariably the cryptic “you weren’t doing it right”. This is a bit of an irritating response to anyone that’s spent a significant amount of time following the ceremonies and speaking the lingo though.  Instead I’d like to submit that you have a much better chance of succeeding with Agile if you know the real reasons behind the madness.</p>
+
+<p>There are a number of Agile values I’ve noticed in my years of practicing scrum and XP that I think stand on their own even if you’re not doing Agile and just want to improve your development process in some small way.  I’m going to list them (and try to stay jargon-free) because I imagine that they would be useful individually, but they do have a sort of self-reinforcing quality to them where their effects will somehow be amplified if you use them together.  You should also feel free to break the rules where you feel they need to be broken, but I’ve very rarely found that to be necessary.  Usually when I’ve broken these rules, I’ve regretted it later, because what I thought was an exception didn’t really end up being an exception.</p>
+
+<h1>Create a team, not just a group of individuals.</h1>
+
+<p>A project will move faster when it is being developed by a team that self-organizes around its goals rather than a group of individuals working separately.  Here are few rules of thumb to creating a team instead of just having a group of individuals:</p>
+
+<ul>
+<li>Don’t assign tasks to individuals.  Let the team figure out who works on what, and let the team take responsibility for all tasks rather than individuals.   Everyone on the team needs to agree on what it means to be done and how, and everyone on the team needs to take responsibility for it.</li>
+<li>Strive for cross-functional skillsets.   Let the team members teach each other so they can better help each other in the future rather than allowing one person to become the bottleneck for any particular kind of task.</li>
+<li>Try not to change team size or membership very much.  A good team can be a fragile thing.</li>
+<li>Throw out the notion of individual code ownership. The entire team owns the code.</li>
+<li>Create more of a bullpen environment where the team members are all basically in the line of sight of one another and can just talk to one another about what they’re working on.  This was tough, because it made us give up our individual offices, telecommuting, and deciding our own hours, but it was well worth it for the improvement to the quality of our work day.  Almost anytime a developer has to use some means of communication other than his voice to talk with a teammate, you have unnecessarily wasted time.</li>
+<li>Put QA personnel on the team so that testing can be can be on-going and so the team can more easily take on QA and testing as a team-wide responsibility.</li>
+<li>The whole team needs to agree on what kind of work is necessary for each task before it is to be considered “done”.  (coding standards, documentation standards, how rigorously they test, etc, etc)</li>
+<li>The result of this was a highly capable team that could “swarm” to complete goals reliably and quickly.  We actually developed a sort of sports team mentality that made this way of working genuinely fun, and helped us push ourselves to be better all the time.  There are a lot of challenges to creating a great team that can inter-communicate openly and honestly, but it’s an amazing thing to behold when it happens.</li>
+</ul>
+
+
+<h1>Estimates need to come from developers.</h1>
+
+<p>This is can be very hard for some organizations to swallow, but developers are the ones that are most qualified to do estimations, and as professionals, they should be working diligently to improve their estimation capability.  When a developer is responsible for estimation, that developer feels a sense of ownership about his work and will feel a vastly greater sense of responsibility to meet the estimate.  Developers that have never learned how to estimate will not be good at it at first, but there’s no other way for them to get good at it than to have them do it.  There are a few major things that can vastly help estimation too:</p>
+
+<ul>
+<li>Always break work down into tiny chunks.  We generally broke work up into chunks that were less than 3 days of effort.  I’ve never seen a task that couldn’t be broken down into subtasks that are this small or smaller, if the developers are so inclined.</li>
+<li>The team should take a look at bad estimates in retrospect and figure out where they went wrong.
+Recognize work that will be impossible to do due to lack of clarity from the business, or unmet dependencies and push to have those requirements met.</li>
+<li>For highly speculative work, just commit to doing a proof-of-concept, or time-boxed research.</li>
+<li>The more developers that are involved in the estimation process, the better.  You’ll probably want to include QA/testers as well, because good ones have unique insights.</li>
+</ul>
+
+
+<h1>Context-switching should be avoided <em>mercilessly</em>.</h1>
+
+<p>This means that each developer needs the discipline to make sure he only works on one task at a time, that the team works on as few tasks at one time, and that developers need sustained uninterruptable timeboxes where the priority of work is not allowed to change.</p>
+
+<p>Most people (especially non-developers) have no idea how much of a huge time-suck that context switching is, and few realize how seldom it’s actually worthwhile.  Also if the team is tackling as few tasks as possible at once, if any task can be finished by having more developers on it at once, then that’s what the team should do rather than starting as many tasks as possible and working on them in parallel.  This might sound counter intuitive, but with the team ultra-focussed on as few tasks as possible at once, they can get the totality completed faster.</p>
+
+<h1>Try to always improve.</h1>
+
+<p>The team must commit to continually improving. At regular intervals, the team should look at how things are going and pick a few actionable things to make their work better/faster/easier.  You’d be surprised at the huge speed improvements that can come from this practice over time.  If the team has a shared calendar, set up a reoccurring meeting at a regular interval to have this meeting, and be laser-focussed on deciding what improvement you want to achieve and how exactly you’ll try to achieve that.  We’ve always set aside 1 hour per week, but your mileage may vary.  Start every meeting by evaluating how successful the team was with the previous meeting’s goals.</p>
+
+<h1>If something is difficult or time-consuming, do it more often.</h1>
+
+<p>This sounds crazy to the uninitiated but there are two reasons for this:</p>
+
+<ol>
+<li>Doing difficult things more often will drive out new creativity in making them less difficult.  Pro-tip: Automation is almost always the answer when the problem is testing (See <a href="http://www.agiledata.org/essays/tdd.html">TDD</a>, <a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">BDD</a>, <a href="http://testobsessed.com/2008/12/08/acceptance-test-driven-development-atdd-an-overview/">ATDD</a>) or deployment.  (See <a href="http://continuousdelivery.com/">Continuous Delivery</a>)</li>
+<li>Many types of tasks get more difficult the longer they are postponed and so are always easier if you do them more often instead of letting the risk of complexity pile up.  Integrating code into the main branch is one example  (See <a href="http://martinfowler.com/articles/continuousIntegration.html">Continuous Integration</a>).  Deploying is another (See <a href="http://continuousdelivery.com/">Continuous Delivery</a>).</li>
+</ol>
+
+
+<h1>Be merciless about achieving high quality</h1>
+
+<p>Over the long haul, <a href="http://caines.ca/blog/testing/quality-control-is-the-constraint/">speed comes from quality</a>, so everyone on the team needs to make quality their job.  Everyone needs to test, and everyone needs to think about how to continually make testing easier without cutting corners.</p>
+
+<ul>
+<li>Have QA personnel on every team, and have them testing as the team works.</li>
+<li>The whole team needs to agree on what level of quality is needed, and what quality metrics will be used to judge every check-in.</li>
+<li>Perform a root-cause-analysis on each defect.  Try to figure out how to avoid that class of defect in the future.</li>
+</ul>
+
+
+<h1>Do everything in tiny increments.</h1>
+
+<p>Tiny increments reduce the risk of compounding problems, and allow you to get feedback and correct your course more often.</p>
+
+<ul>
+<li>break-down your work into tiny tasks</li>
+<li>plan just-in-time and just enough to do work.</li>
+<li>test as you go, instead of in huge batches</li>
+<li>merge code to the mainline early and often.</li>
+<li>deploy early and often.</li>
+<li>don’t add anything to the system that you don’t need until you need it (<a href="http://c2.com/xp/YouArentGonnaNeedIt.html">YAGNI</a>)</li>
+</ul>
+
+
+<h1>Get customer feedback early and often</h1>
+
+<p>Get customer feedback early and often to converge on the best possible solution as fast as possible by constantly correcting course instead of blindly following some long-running plan or doing unnecessary work.  The customer’s priorities and vision of the product will change as he sees results, so it’s better to not find out about these changes after a lot of unnecessary work has been done.</p>
+
+<ul>
+<li>Do work in priority order as dictated by the customer.  This will allow them to see the aspects that they care about most as early as possible, and therefore help you converge on a unified vision of the product faster.</li>
+<li>Work break-down is better done in vertical slices where the customer can get some amount of real value from each piece (or at least see some evidence of work) rather than having many non-user-facing tasks, where possible.  This allows for more potential for feedback.</li>
+<li>The work shouldn’t be considered done by anyone on the team until the customer, or a representative of the customer agrees that it’s done.</li>
+<li>Constantly improve estimation skills so that they are generally more reliable so the customer knows the cost of the work he has requested and can make realistic decisions based on that.</li>
+</ul>
+
+
+<p>Anyway, feel free to try what you want and throw out the rest!</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

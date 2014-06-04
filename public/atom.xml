@@ -4,7 +4,7 @@
   <title><![CDATA[caines.ca]]></title>
   <link href="http://caines.ca/atom.xml" rel="self"/>
   <link href="http://caines.ca/"/>
-  <updated>2014-06-03T17:23:40-07:00</updated>
+  <updated>2014-06-03T17:38:46-07:00</updated>
   <id>http://caines.ca/</id>
   <author>
     <name><![CDATA[Gregg Caines]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Code Slower]]></title>
+    <link href="http://caines.ca/blog/2014/06/03/code-slower/"/>
+    <updated>2014-06-03T17:32:30-07:00</updated>
+    <id>http://caines.ca/blog/2014/06/03/code-slower</id>
+    <content type="html"><![CDATA[<p>Here’s a controversial opinion, but one that I really believe to be true: most of the things we do to produce code faster are actually counter-productive.  It sounds crazy, and I would naturally oppose it except that every time I ignore this lesson, experience has a way of reteaching me.  This is as much a message to myself as it is to anyone else that might happen upon it (I’m talking to you, viagra comment spammers).</p>
+
+<h1>Development Time VS. Maintenance Time</h1>
+
+<p>There’s no doubt that the original development stage of a piece of software can be time-consuming.  It’s interesting though, when you consider the difference in time spent in development vs. time spent in maintenance.  At what point do you cross into maintenance mode?</p>
+
+<p>Let’s face it: you’re actually also in maintenance mode pretty much right away, unless you’re some superhuman that conceives of the whole system at once and doesn’t make any design tweaks (or even typos) while coding.  But you’re not.  So the development-time VS. maintenance-time dichotomy is a false one.  You’re always in maintenance mode.</p>
+
+<h1>Invest Early, Invest Often</h1>
+
+<p>So if you spend so much time (all your time) in maintenance mode, then it makes sense to do every little change and tweak in such a way that your subsequent tweaks and changes are as easy as possible.  We should be spending the majority of our energy optimizing our time spent on maintenance and not our time spent on development.</p>
+
+<p>Now it’s natural that one might say “well why not optimize both?”, and that’s a valid question.  There’s no good reason not to try to optimize both, but we have to remember to never ever ever optimize the development process at the expense of the maintenance process, simply because we just spend <strong>so</strong> much time in maintenance mode.</p>
+
+<h1>Some examples</h1>
+
+<h2>Skipping the planning stage.</h2>
+
+<p>This is generally caused by the “Weeks of coding can save days of planning” fallacy.  Uncover all the main parts of your design <strong>before</strong> you code yourself into a corner that requires a near-rewrite to escape.</p>
+
+<h2>Writing untestable code or skipping unit-testing</h2>
+
+<p>Unit-tests are your insurance that future changes don’t cause non-obvious regressions.  They also have a magical way of creating better factored, higher-quality code.  If you skip this stage, your code <strong>will not</strong> be factored as well as it could be, and come maintenance time, you’ll be scared to make changes for fear of breaking something somewhere else.</p>
+
+<h2>Writing classes and functions that do a lot</h2>
+
+<p>This one is a really seductive one.  We want to be <strong>consumers</strong> of classes and methods that do a lot for us, because higher levels of abstraction are how we get more done in less time.  From the consumer stand-point, this makes lots of sense, and it’s actually the best way to improve development speed and maintenance speed at the same time.  If you’re also the person writing the class or function that does more though, you have to be very careful to use the highest abstractions possible for that as well, even if you’re writing its inner abstractions as well.  What this means is that every level of abstraction does as little as possible, and you build up to the level of abstraction that you want with those thin, thin layers.  Classes and functions that try to do a lot instead of relying on other classes and functions are very hard to maintain, simply because there’s so much to do read and understand, and there’s no easy way for the maintainer to skim and decide what piece is relevant, because the pieces are doing multiple things.</p>
+
+<h2>Leaving code in a low-quality state</h2>
+
+<p>I’m talking about everything involving non-readable and poorly factored code, including bad names, foggy separation of concerns, etc.  Code should not be written just for the machine.  It needs to be written for the next guy that comes along as well.  That next guy could be you.  Or a <a href="http://wtfcode.net/post/193202062/always-code-as-if-the-guy-who-ends-up-maintaining">violent psychopath</a></p>
+
+<h2>Using code generation</h2>
+
+<p>Code generation is just pure evil, if there’s ever a remote chance a human will ever have to read it or change it.  A computer program doesn’t know how to write code that a human will understand, and human understanding is exactly what we need to strive for if we care about making maintainable code.</p>
+
+<h1>Understatement of the day:  You’re more than just a typist</h1>
+
+<p>It’s largely irrelevant if you can touch type at 90 wpm.  It’s largely irrelevant if your IDE can do automated refactors.  It’s largely irrelevant if your efficiency with Emacs or vim makes you look like Neo in The Matrix.  These things are great bonuses, but won’t make much difference to your proficiency (and efficiency) as a programmer if you neglect to first consider the maintainability of your codebase.  (Corollary:  In the name of all that is good in this world, please don’t name your variables p1, atb, etc, or your functions like atoi() just for the sake of saving keystrokes!)</p>
+
+<p>Time and time again my mistakes remind me:  there’s only one way to be more productive over the long haul: work with better, higher abstractions.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Production-Quality Node.js Web Apps : Part II, Detecting Defects]]></title>
@@ -1898,6 +1947,47 @@ Recognize work that will be impossible to do due to lack of clarity from the bus
 <h1>Is this just <a href="http://c2.com/xp/BigDesignUpFront.html">BDUF</a>?</h1>
 
 <p>I don’t think so.   I’m not proposing a huge documentation process that specifies every aspect of the final product.  I’m simply talking about spending some time to loosely figure out what we’re going to do before we do it.    It’s time well spent, because it’s just so much cheaper to make major changes at this earlier stage in the process.  We’ll still figure out the minor details as we go.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Future Proofing Trap]]></title>
+    <link href="http://caines.ca/blog/2009/12/20/the-future-proofing-trap/"/>
+    <updated>2009-12-20T16:27:28-08:00</updated>
+    <id>http://caines.ca/blog/2009/12/20/the-future-proofing-trap</id>
+    <content type="html"><![CDATA[<blockquote><p>“We will encourage you to develop the three great virtues of a programmer: laziness, impatience, and hubris.” — <a href="http://en.wikipedia.org/wiki/Larry_Wall">Larry Wall</a></p></blockquote>
+
+<p>In this quote Larry Wall makes some great points about what it means to be a great programmer in a zen-like,  toungue-in-cheek sort-of-way.  Let’s look at one aspect of the Virtue of Laziness.</p>
+
+<p>Every reasonable developer knows that he should write his code to be easily maintained.  As part of that work, it’s natural for that developer to want to try to make his code as ready for future change as possible.  Taking that desire a few steps further, he might want to write code that solves future needs in addition to the current requirements, so that that code doesn’t even need to be revisited.  Unfortunately, that’s a common mistake that leads to a lot of wasted time and <strong>less</strong> maintainable code.</p>
+
+<p>I’d like to propose a principle of software development that I’ve come to believe:</p>
+
+<p><strong>The most maintainable code is the simplest possible code that meets all the requirements.</strong></p>
+
+<p>This is almost a tautology because simple code is (by definition) easier to understand, so it’s easier to change/enhance/extend.  Code that does more than what’s currently necessary is not as simple as it could be though, so it’s not as maintainable given the current requirements.</p>
+
+<p>One might argue that code that does more than what’s necessary can meet future requirements without change, thereby proving itself to be more easily maintained (no maintenance required!), but all of that hinges upon the developer’s ability to consistently and accurately foresee future requirements.  Otherwise that developer has:</p>
+
+<ul>
+<li>wasted time developing unnecessary functionality</li>
+<li>decreased the maintainability of the codebase</li>
+</ul>
+
+
+<h1>Even when everybody is pretty certain of the future requirements…</h1>
+
+<p>Now let’s consider the case where the developer is almost absolutely sure that the requirements will change a certain way, and so the code should be written to handle that scenario as well.  Wouldn’t it be better to do that work now?  No.  It still takes more time and effort (at a time when we know its not necessary), and it’s still less maintainable code until those requirements change (in case other unrelated changes are required).  On top of all that, there’s <em>still</em> risk that the requirements won’t change in the anticipated way!</p>
+
+<h1>Even when everyone is absolutely 100% certain of the future requirements…</h1>
+
+<p>Now let’s consider the case where everyone is 100% certain that the requirements will change in a specific way, and you can write your code to handle that way as well as the current way.  In that infrequent scenario, you don’t face a bunch of losing propositions, so it does make a bit more sense.  However, I’d still like to pose a question:  how much more work is it to do the additional work later instead of now?  Truthfully, the amount of effort is virtually identical regardless of whether you do it now or later.  That means you can enjoy maintaining the simpler version until the time comes that it needs to be changed to meet new requirements.</p>
+
+<p>This isn’t a new idea I’ve dreamt up: it’s the <a href="ttp://c2.com/cgi/wiki?YouArentGonnaNeedIt">YAGNI</a> principle, and it’s an essential part of <a href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">Uncle Bob’s 3 Rules of TDD</a>.  It’s also a great way to avoid unnecessarily complex code.</p>
+
+<p>(It’s important to note too that YAGNI doesn’t say to avoid making your work as futureproof as possble.  YAGNI just says not to put extra code into making that possible.  For example, if you create a class for a UI button that will be used to save some user data in a form, don’t call it “UserDataSaveButton” — just call it “Button”.  It’s no extra work and the re-usability possibilities have increased dramatically.)</p>
+
+<p>We’re not engineers building bridges;  we don’t work with unchangeable steel and concrete, and we can accomodate changing requirements easily.  It’s unrealistic and wasteful to guess that we know what future requirements will come, especially when the potential work saved in the long run is neglible.</p>
 ]]></content>
   </entry>
   

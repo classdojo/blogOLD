@@ -1,0 +1,847 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>The Node.js Community is Quietly Changing the Face of Open Source - caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="The Node.js Community Is Quietly Changing the Face of Open Source If you consider the number of packages on pypi, npm, and rubygems, and the release &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/03/code-slower/">Code Slower</a></li>
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+  <li><a href="/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/">The Node.js Community is Quietly Changing the Face of Open Source</a></li>
+  
+  <li><a href="/blog/2013/03/16/release-ophobia/">Release-ophobia</a></li>
+  
+  <li><a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">Your Team Probably Doesn't have the Same DVCS Requirements as Linus</a></li>
+  
+  <li><a href="/blog/2011/09/14/yoagile-the-good-parts/">Agile: The Good Parts</a></li>
+  
+  <li><a href="/blog/2010/12/05/quality-is-the-constraint/">Quality is the Constraint</a></li>
+  
+  <li><a href="/blog/2009/12/26/the-lost-art-of-prototyping/">The Lost Art of Prototyping</a></li>
+  
+  <li><a href="/blog/2009/12/20/the-future-proofing-trap/">The Future Proofing Trap</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">The Node.js Community Is Quietly Changing the Face of Open Source</h1>
+	<div class="entry-content" itemprop="articleBody"><p>If you consider the number of packages on <a href="https://pypi.python.org/pypi">pypi</a>, <a href="http://npmjs.org/">npm</a>, and <a href="http://rubygems.org/">rubygems</a>, and the release dates of python (1991), ruby (1995) and node.js (2009), it looks a lot like those communities are getting new packages at the following rates, per year:</p>
+
+<p><strong>python:</strong>  29,720 packages / 22 years = <strong>1351 packages per year</strong></p>
+
+<p><strong>ruby:</strong>      54,385 packages / 18 years = <strong>3022 packages per year</strong></p>
+
+<p><strong>node.js</strong>  26,966 packages / 4 years = <strong>6742 packages per year</strong></p>
+
+<p>It’s important to note that I’m only showing the other languages as a measuring stick.  There are probably a lot of reasons for the disparity here (including my imprecise math), and I’m not trying to say anything like “node.js > ruby > python”  but obviously new node.js packages are being published to npm at a staggering rate.   I just checked npm (on a Sunday night) and 20 new versions of packages have been published to npm in the last hour alone.</p>
+
+<p>This is a pretty amazing feat for node.js.  How is this possible?</p>
+
+<h1>Batteries NOT included</h1>
+
+<p>If you’ve needed an HTTP client in Python, you’ve probably asked yourself “should I use urllib, urllib2, or httplib for this?” like <a href="http://stackoverflow.com/questions/3305250/python-urllib-vs-httplib">so many people</a> before you.  Well the answer is probably that you should use <a href="http://docs.python-requests.org/en/latest/">requests</a>.  It’s just a really simple, intuitive HTTP client library that wraps up a lot of weirdness and bugs from the standard libraries, but it’s not a standard library like the others.</p>
+
+<p>The “Batteries included” philosophy of Python was definitely the right approach during the mid 90’s and one of the reasons that I loved Python so much; this was a time before modern package management, and before it was easy to find and install community-created libraries.  Nowadays though I think it’s counter-productive.  Developers in the community rarely want to bother trying to compete with the standard library, so people are less likely to try to write libraries that improve upon it.</p>
+
+<p>Developers are less likely to use non-standard libraries in their projects too.  I’ve heard many instance of people suffering through using an inferior standard library just to have “no dependencies”.  But in this day and age of cheap massive storage and modern package management, there are very few reasons for a policy of “no dependencies”.</p>
+
+<p>Conversely, the node.js core developers seem to actually want to minimize the standard library as much as possible.  They have repeatedly <em>removed</em> features from the standard library to free them up to be implemented by the community instead.  This allows for the most variety and lets the best implementation win (but only until someone makes a better one, of course!).</p>
+
+<p>Imagine how liberating this is for standard library maintainers too.  The node.js standard library is <a href="http://nodejs.org/api/">comparatively tiny</a>, freeing the core developers to just deal with the core necessities.</p>
+
+<h1>The Tiny Module Aesthetic</h1>
+
+<p>Just like the 140 character limit on twitter makes people “blog” more, the node.js community has a <a href="http://substack.net/how_I_write_modules">culture of publishing tiny modules</a> that makes people more comfortable with publishing smaller packages, and so it happens vastly more often.</p>
+
+<p>While I don’t really consider myself “a node.js developer”, I’ve found myself publishing <a href="https://npmjs.org/~cainus">over a dozen packages</a> in the last year myself, just because I’m working on a node.js project at work, and I publish any reusable package from that work that I create.  My project ends up factored better, and I end up with a bunch of building blocks I can re-use elsewhere (and then I do!).  Sometimes random people from the interwebs <a href="https://github.com/cainus/Prozess/pull/26">even fix my bugs before I notice them</a>!</p>
+
+<p>This approach is not unusual at all either, at least in the node.js community.  The community is lead by developers that have each published literally hundreds of packages.  I don’t even know how <a href="https://npmjs.org/~substack">this is possible</a>.</p>
+
+<p>Of course there’s absolutely nothing to stop other languages from following suit, so it seems to me like community culture is the deciding factor.</p>
+
+<p>Massive monolithic frameworks like Ruby on Rails tend to not take hold in the node.js community mindshare, I think due in part to this “tiny module aesthetic”, and it’s all the better for it.  It seems to me that monolithic frameworks like Rails don’t have a clear notion of what does <strong>not</strong> belong in Rails, and so they tend to expand indefinitely to include everything an application could need.  This leads to people trying to assert that Rails is the best solution for all problems, and having a cooling effect on innovation within the web application space in the Ruby community.</p>
+
+<p>The tiny module aesthetic also leads to an ecosystem of extreme re-use.  When a package doesn’t do more than is absolutely necessary, it’s very easy to understand and to integrate into other applications.  Conversely, while massive monolithic frameworks tend to appear in a lot of end-user applications, they rarely never end up being dependencies in other packages themselves.  It seems unfortunate to me that so much great software should be so difficult to re-use.</p>
+
+<h1>git and github.com monoculture</h1>
+
+<p>To be honest, few things are more boring to me in software development than version control, and I find the complexity of git to be a bit silly and mostly unnecessary for me, but I’ve never heard of a node.js developer that doesn’t use it, and there’s huge value in that kind of monoculture.  It means that they all speak with a common language and there’s no impedance when you want to contribute to someone else’s projects.</p>
+
+<p><a href="https://github.com/">Github.com</a> has a similar effect in lowering the barriers for cross-pollination between developers.  I’ve only very rarely seen a node.js project that wasn’t on github.  This means I immediately know exactly where to find source code if I want to contribute.</p>
+
+<p>The pluses and minuses of a github monoculture go far beyond this, but there’s probably enough fodder there for an entirely different post.</p>
+
+<h1>Permissive Licensing</h1>
+
+<p>Node.js packages tend to use extremely permissive licensing like MIT and BSD licensing.  In fact, the default license for a package created by <code>npm init</code> is BSD.  I think this is another sign of the times.</p>
+
+<p>Very few people care anymore if someone else forks and doesn’t contribute back.  There’s very little to gain in not contributing back anyway because of the cost of maintaining your own fork.</p>
+
+<p>This is important because no one wants to have to deal with dependencies that make them think about legal repercussions, or give them extra responsibilities.  Licenses like the GPL end up having a cooling effect on software-reuse for this exact reason.</p>
+
+<hr />
+
+<p>EDIT Jun 3rd, 2014:  Comments below are basically copy/pasted from my old blog format for posterity.</p>
+
+<hr />
+
+<div id="comments">
+<h2 id="comments-title">
+30 thoughts on &ldquo;<span>The node.js Community is Quietly Changing the Face of Open Source</span>&rdquo;         </h2>
+<ol class="commentlist unstyled">
+
+<li  id="li-comment-1498" class="comment even thread-even depth-1">
+<article id="comment-1498" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/120061cb6e8934e09ec4cdf57d082e0f?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://maxogden.com' rel='external nofollow' class='url'>max ogden</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-14T10:25:52+00:00">April 14, 2013 at 10:25 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Nice writeup! I do think that the term &#8216;node community&#8217; is a little bit too general since some of the most popular node modules are in fact bigger than they should be. </p>
+<p>For example, the 4 most popular modules from <a href="https://npmjs.org/" rel="nofollow">https://npmjs.org/</a>: underscore, async, request and express could all be split up into smaller pieces:</p>
+<p>Underscore isn&#8217;t terribly large but it has things tucked in it like a templating function that don&#8217;t belong. </p>
+<p>Async is thematically consistent, offering many variations on a theme, but from the empirical usage patterns that I&#8217;ve seen most people use a small percentage of the offered functionality. </p>
+<p>Request actually went through the modularization process over the last month or two and went from having 1 or 2 dependencies to having 11. </p>
+<p>Express is perhaps the greediest module on NPM (IMHO) in that it invented its own naive APIs early on which means that now you can only use modules designed for express with express since the extensibility is stuck in a relatively pre-cambrian era. Classic framework lock-in, albeit to a lesser extent than other, larger web frameworks. I&#8217;ve thought a lot about why this happened and believe that if you try to make a land-grab early on and abstract too much too early then you get stuck with your abstractions due to backwards compatibility. Good software grows slowly.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1498 .comment -->
+
+</li>
+
+<li  id="li-comment-1499" class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1">
+<article id="comment-1499" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c8475420ebca73833e55ccf57d8d7500?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://caines.ca' rel='external nofollow' class='url'>Gregg Caines</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-14T13:30:35+00:00">April 14, 2013 at 1:30 pm</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Yeah I totally agree, and you&#8217;ve probably explained it even better than I did.</p>
+<p>Express is actually a bit of a conundrum for me for a few reasons, especially since in trying to create a mini API framework myself ( <a href="http://percolatorjs.com" rel="nofollow">http://percolatorjs.com</a> ), I&#8217;ve felt forced into duplicating some of the things I dislike about the modularity (or lack of modularity) in express, to the point that I eventually gave up and added &#8216;connect&#8217; middleware support.  There are a few competing pressures that make web frameworks like express (and rails for that matter) popular:</p>
+<p>(1) Some people just want to &#8220;get shit done&#8221; &#8482; and don&#8217;t want to have to search for multiple pieces of a puzzle to hobble together a solution.  I think there&#8217;s probably a gap where finding the best modules for a given problem is still a too hard.  Filling that gap (somehow) will promote collaboration even more.  The current npm search (on its own) doesn&#8217;t solve the problem IMO.</p>
+<p>(2) HTTP is actually really complicated and very hard to abstract effectively.  For example, how many frameworks 404 when you try an invalid method on an existing resource instead of the proper 405?  This is mostly because of the way routing is abstracted; These frameworks use the http method as the first &#8216;key&#8217; in the routing table, when really the url makes more sense as a key and the method should be secondary.  There are a number of cross-cutting aspects like this including logging, error-handling, and authentication where some sort of centralized pre-processing makes a lot of sense.  Not all &#8220;aspects&#8221; should be handled with serialized pre-processing middleware though, and unfortunately that&#8217;s what we&#8217;re seeing a proliferation of.  I&#8217;m disappointed that I can&#8217;t build a mini-framework without integrating connect, or rewriting/repackaging all those otherwise great connect middleware modules out there, but I don&#8217;t know a better way.  To be honest, I don&#8217;t even know at this point what the better abstraction would be.  Doing everything in pre-processing middleware and monkey-patching the request/response objects doesn&#8217;t seem like the answer though.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1499 .comment -->
+
+</li>
+
+<li  id="li-comment-1507" class="comment even thread-even depth-1">
+<article id="comment-1507" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/2c3f82d7e0971f4c1e2a0362f7d67bc4?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://iknuth.com' rel='external nofollow' class='url'>Edwin Knuth</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-15T22:41:53+00:00">April 15, 2013 at 10:41 pm</time>: </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Good stuff.  I haven&#8217;t felt this excited about a platform community in a long time.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1507 .comment -->
+
+</li>
+
+<li  id="li-comment-1508" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1508" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c1f1e16b07305fafb16504e0bcd26c87?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://teddy.fr' rel='external nofollow' class='url'>Ronan Berder</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-15T23:37:41+00:00">April 15, 2013 at 11:37 pm</time>:  </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Good read: spot on.</p>
+<p>I would add a couple additional factors to that trend:</p>
+<p>- Proper package management: `npm` was and still is what got me hooked up. Package management is often an afterthought that is rarely properly addressed.</p>
+<p>- Flat community: which is partly illustrated with the extreme culture of re-use you mentioned. I feel there is much lower friction in creating and contributing to modules in the node.js community, with no gate keeper in sight.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1508 .comment -->
+
+</li>
+
+<li  id="li-comment-1509" class="comment even thread-even depth-1">
+<article id="comment-1509" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/f5eb27f42a3a520903f1a4b8e55744e4?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://qq.is/' rel='external nofollow' class='url'>Mark Smith</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T00:26:52+00:00">April 16, 2013 at 12:26 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>For a similar system: Perl&#8217;s CPAN (the package repository) has been online since 1995 and presently has 120,447 modules for a yearly rate of 6691 modules for 18 years now.</p>
+<p>It&#8217;s been providing the same functionality you mention: an encouraged license (&#8220;the same terms as Perl&#8221;), a monoculture of software (CPAN for package distribution/documentation), and an emphasis on tiny modules. Little packages are encouraged and really the way to go when you&#8217;re building Perl modules.</p>
+<p>That said, it&#8217;s great to see those practices being adopted successfully by Node and seeing the success of the groups using it. We live in very exciting times for open source. :)</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1509 .comment -->
+
+</li>
+
+<li  id="li-comment-1510" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1510" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/7617806a46bacb54f44c7ca8f6647e6e?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://liveditor.com' rel='external nofollow' class='url'>Edwin Yip | dev of LIVEditor</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T03:02:19+00:00">April 16, 2013 at 3:02 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>The &#8220;The Tiny Module Aesthetic&#8221; reminds me that, the emerging of  the &#8220;Single-purpose app&#8221; in recent years, and the design philology of the Unix utilities. And I think those are all about &#8220;simplicity&#8221;, which I think and care about the more and more in recent years, but I always have to remind myself about when writing code for LIVEditor &#8211; my code editor with &#8220;Firebug&#8221; embedded.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1510 .comment -->
+
+</li>
+
+<li  id="li-comment-1512" class="comment even thread-even depth-1">
+<article id="comment-1512" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/7a3cffc8ed6e84af12c633e063cd1ec1?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn">Mansur</span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T03:21:08+00:00">April 16, 2013 at 3:21 am</time>:               </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>There are some frameworks in Node.JS which are just copied, not unique, like for example <a href="https://github.com/biggora/caminte" rel="nofollow">https://github.com/biggora/caminte</a> &#8211; is just a copy of Juggling DB <a href="https://github.com/1602/jugglingdb" rel="nofollow">https://github.com/1602/jugglingdb</a>.<br />
+I would strongly recommend to use genuine frameworks which have been tested by the community and better supported.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1512 .comment -->
+
+</li>
+
+<li  id="li-comment-1514" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1514" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c3c59c91293af5a13a840a9855024afe?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://www.technostall.com/' rel='external nofollow' class='url'>Chankey Pathak</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T04:11:27+00:00">April 16, 2013 at 4:11 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Why don&#8217;t you consider Perl? 120,460 Perl modules in 15 years, that makes it 8030 modules per year and it&#8217;s increasing exponentially now.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1514 .comment -->
+
+</li>
+
+<li  id="li-comment-1515" class="comment even thread-even depth-1">
+<article id="comment-1515" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/5a07b05ddc37550d0dd6311c4a4c31ca?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn">PeterisP</span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T04:16:12+00:00">April 16, 2013 at 4:16 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>&#8220;Batteries not included&#8221; approach puts a significant cost on application developers.<br />
+If I need to do a simple thing X, I&#8217;d rather have a single good library for X rather than twenty libraries with varying focus and quality.  Even if one of those twenty libraries would be far better for my needs, the task of properly comparing and choosing the lib is often higher than doing X with a random library.</p>
+<p>It also reduces maintainability &#8211; if one project uses lib1 for X, and another project uses lib2 with a different API for the exact same thing, then it makes stuff harder to maintain.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1515 .comment -->
+
+</li>
+
+<li  id="li-comment-1516" class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1">
+<article id="comment-1516" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c8475420ebca73833e55ccf57d8d7500?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://caines.ca' rel='external nofollow' class='url'>Gregg Caines</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T06:29:43+00:00">April 16, 2013 at 6:29 am</time>:  </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>@ Chankey Pathak, Mark Smith: For the record, I didn&#8217;t include perl because I haven&#8217;t got any perl experience to draw from, while I&#8217;ve spent years writing reams of code in ruby, python and node.js.  I can honestly say though that CPAN is nothing short of legendary even outside the perl community, and npmjs.org would do well to follow its lead.  It would be interesting to know too how CPAN maintains that rate of growth, and if it&#8217;s due to the same things I&#8217;ve mentioned.</p>
+<p>I should also add that node.js isn&#8217;t even the language/platform that&#8217;s nearest and dearest to my heart.  I&#8217;d really just love my other favorite languages&#8217; ecosystems to pick up some of these qualities.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1516 .comment -->
+
+</li>
+
+<li  id="li-comment-1518" class="comment even thread-even depth-1">
+<article id="comment-1518" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/e03a08f9418b20c5a3ea8956a40f595b?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='https://twitter.com/sheeshee' rel='external nofollow' class='url'>Su-Shee</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T08:47:49+00:00">April 16, 2013 at 8:47 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>From a CPAN&#8217;s lover&#8217;s perspective NPM already is _very_ well done and pretty smooth to use. </p>
+<p>From a Perl lover&#8217;s perspective, JavaScript doesn&#8217;t have a choice anyways, because you really NEED a lot of modules to work around well let&#8217;s politely say &#8220;language quirks&#8221;. ;) </p>
+<p>You simply need things like underscore or node, because it gives you things which aren&#8217;t builtin in the language. (*cough* npm install printf *cough* ;) </p>
+<p>Similarily, Perl has gotten its Lisp-style MOP OO module Moose, because there&#8217;s no such thing as a &#8220;class&#8221; in Perl. </p>
+<p>Our equivalent of underscore-alike modules are for example List::Utils, Lists::MoreUtils etc. etc. &#8211; and you can&#8217;t possibly shove ALL those modules into what we call &#8220;core&#8221; &#8211; set aside that half of the people want Foo and the other half Bar and then there&#8217;s our  &#8220;problem&#8221; we&#8217;re really proud of: Backwards compatibility is _amazing_ in Perl and there&#8217;s always someone who runs a 12 year old Perl and still needs his Really::Ancient::Module::BlahBlah. ;) </p>
+<p>So far I encountered exactly ONE npm module which I couldn&#8217;t install blindly with npm install -g &#8211; and that was due to an architecture check in its requirements (which isn&#8217;t necessary, module very high level) and my Linux flavor returns a different architecture string &#8211; so one lesson might be to encourage a best practise &#8220;don&#8217;t overdo requirements for your module, it just complicates things&#8221;</p>
+<p>In Perl, it&#8217;s common that you simply ask &#8220;the community&#8221; (IRC for example) &#8220;what do I want for XY?&#8221; and get a variety of 2-5 modules and a short explanation why you want A and not B. Imagine for example you have more than one XML/HTML parser module (which we do) &#8211; do you want XPath support or do you prefer DOM-style methods? Do you need a strict parser or do you want to work on dirty HTML? </p>
+<p>Most module authors mention these kinds of use cases and &#8220;flavors&#8221; to do things and refer graciously to the alternatives. Plus, there&#8217;s the entire commenting and rating system for modules and yes, you of course look if Perl gurus Tom, Dick and Harry Superperl ranks module Foo highly or not &#8211; it&#8217;s not that we don&#8217;t have our own little rockstars and divas. ;)</p>
+<p>Due to variety and so many choices, there&#8217;s also bad choices and we put A LOT of work into discouraging certain modules these days which are simply not really appropriate to use in 2013 or some well known badly written ones. But you can&#8217;t just throw them out, too &#8211; because Perl is installed everywhere &#8211; what is the browser for JavaScript is pretty much any Linux/Unix for Perl. And all the shitty JavaScript quirks you&#8217;ve gotten from browser vendors, we get from distributors which come with a Perl from 1999 in 2013. </p>
+<p>Sooner rather than later (there already are a couple) there will be a class of modules on NPM which are dual use &#8211; browser and Node-based server-side and you will have to keep that straight and compatible and that will be a lot of work. Also, what if people start writing JavaScript modules which are able to run in browser, on Node AND on e.g. spidermonkey? (what about Rhino/Nashorn?) I&#8217;d encourage that a lot, not everything needs Node and NPM is the de facto thing to put a module up on by now. </p>
+<p>Another advantage of CPAN is: It&#8217;s _extremely_ centralized. You look for a module on CPAN. Period. There&#8217;s no &#8220;download from here&#8221; or &#8220;fetch from there&#8221; &#8211; it&#8217;s on CPAN or it doesn&#8217;t exist. As CPAN is tested and tested and retested by volunteers, using modules from CPAN pretty much ensures been tested on a dozen platforms. If you use the plain &#8220;cpan Foo::Bar&#8221; installer, you can always watch all tests live while running the installation of a module.</p>
+<p>And Perl modules have tests LIKE THERE&#8217;S NO TOMORROW &#8211; as Perl&#8217;s testing flavor TAP is extremely easy and simply and cheaply to do, modules actually _do_ have a LOT of tests.</p>
+<p>Last but not least: On average, the commonly used Perl modules are _extremely_ well documented  and the docs can be read on commandline and via web. The documentation style is probably rather old-school from a Node lover&#8217;s perspective &#8211; it&#8217;s more on the dry, informative side and less about being cute and funny &#8211;  but some docs literally go into the amount of a book written.</p>
+<p>Also, no matter how big a project &#8211; I simply expect it to be installable via CPAN. There&#8217;s a couple of Perl things which are more applications but &#8220;modules&#8221; and are not installable via CPAN, but that&#8217;s pretty rare. Entire frameworks are installed via CPAN &#8211; think like the difference of how you install Derby.js and Meteor.js. </p>
+<p>And: I run deliberately large dependency-chains for the fun of it &#8211; CPAN has a flag for &#8220;resolve all dependencies yourself and say auto-yes to everything you&#8217;re asked during installation&#8221; and I manage a couple of hundred modules in ONE session WITHOUT any error while running ALL tests during installation &#8211; possibly on half a dozen Perl versions (Made with perlbrew which is our nvm/rvm/virtualenv). </p>
+<p>As the Perl mantra &#8220;there&#8217;s more than one way to do it&#8221; is done by the JavaScript community on the same level of excess (a dozen web frameworks anyone? ;)  you&#8217;ve made your choice already anyways to go down the road of extreme flexibility and variety. It already happened, no going back here. </p>
+<p>The Perl community for example is very forceful to really push people into using modules from CPAN exactly BECAUSE they&#8217;re tested and have solved hundreds of problems for you &#8211; you don&#8217;t split a CSV file by hand, you use Text::CSV which is proven to work for a decade. You won&#8217;t do better with your meager little split. :) </p>
+<p>You don&#8217;t parse HTML with regex, you use a module. You don&#8217;t validate email addresses by hand, you use a module. We have modules like Regex::Common for example which contain a range of common usecases people usally throw (bad) regex on or modules which pretty much read any stupid format known to mankind &#8211; it&#8217;s all put into modules and more modules. </p>
+<p>Luckily, Perl also has most of the necessary modules I usally call &#8220;boring shit&#8221; modules &#8211; Excel reading and writing anyone? Those are the true heroes in my opinion &#8211; people who sit down and really write this kind of ungrateful, boring stuff you suddenly need there&#8217;s *gasp* lurking an &#8220;enterprise&#8221; around the corner &#8211; not to mention that nobody in their right mind is going to implement SSL bindings three times. (One lesson for JavaScript/Node might be to maybe not add another web framework but deliberately go for the boring stuff sooner rather than later and get it over with..) </p>
+<p>For my part, I can&#8217;t rave enough about CPAN and some of the people poured their hearts and time and knowledge into some modules. Billion euro/dollar businesses run on it &#8211; some for over a decade straight. </p>
+<p>So, hack, upload and enjoy. :)  </p>
+<p>Yours truely &#8211; a Perl lover. :) </p>
+<p>CPAN&#8217;s main website: <a href="http://metacpan.org" rel="nofollow">http://metacpan.org</a></p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1518 .comment -->
+
+</li>
+
+<li  id="li-comment-1519" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1519" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/d0d69c7fb957410cba3d3a1ce6d2e7d3?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://subdigit.com/' rel='external nofollow' class='url'>subdigit</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T09:19:34+00:00">April 16, 2013 at 9:19 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Maven is also something that&#8217;s begun to pick up pace in the Java community.  Stats seem to be here: <a href="http://search.maven.org/#stats" rel="nofollow">http://search.maven.org/#stats</a></p>
+<p>But not sure about exact growth rate.  A pretty picture is available here: <a href="http://mvnrepository.com/" rel="nofollow">http://mvnrepository.com/</a></p>
+<p>While having a small standard library is great for essentially encouraging reinventing the wheel to make it better, it can at times be a detriment for &#8220;just getting things done&#8221;.  It&#8217;s called a &#8220;standard&#8221; for a reason, which is that you can rely on it to be present and available for use, and more importantly, for understanding by the developers that come in and out of a project.</p>
+<p>That being said, popular extensions will solidify and essentially become a 3rd party standard for use and becomes indispensable and tied into the core project, whether it&#8217;s just the common-knowledge standard du jour, or it actually gets merged in.</p>
+<p>It certainly is a more interesting way to get a diversity of development of what people consider to be core though.  For that, I find that model interesting to watch and see how it grows and if anything I favor &#8220;wins&#8221; :).</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1519 .comment -->
+
+</li>
+
+<li  id="li-comment-1520" class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+<article id="comment-1520" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c8475420ebca73833e55ccf57d8d7500?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://caines.ca' rel='external nofollow' class='url'>Gregg Caines</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T09:37:13+00:00">April 16, 2013 at 9:37 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Su-Shee: thanks for the education! I agree, CPAN sounds great.  Since we&#8217;re getting along so well, I won&#8217;t say anything about the language itself.  :) </p>
+<p>A few minor clarifications on javascript in 2013:  Don&#8217;t `npm install printf`, use util.format:  <a href="http://nodejs.org/api/util.html#util_util_format_format" rel="nofollow">http://nodejs.org/api/util.html#util_util_format_format</a> .  Underscore is much less necessary nowadays (especially in node.js) as a result of ecmascript 1.6 improvements  (See &#8220;iteration methods&#8221; at <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array" rel="nofollow">https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array</a> ).  Also using jslint will keep you 99% quirk-free (I have it integrated into my builds and vim).</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1520 .comment -->
+
+</li>
+
+<li  id="li-comment-1521" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1521" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/0fc5485611721e78b1583657212a046a?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://sourcecontribute.com/' rel='external nofollow' class='url'>Rudolf Olah</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T10:30:05+00:00">April 16, 2013 at 10:30 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>There&#8217;s no need to slander the GPL in this post, it&#8217;s just as permissive and would allow the same type of collaboration. The trouble is that most developers also want to use libraries as part of proprietary code bases. I don&#8217;t understand why they don&#8217;t just dual-license; GPL for non-profits and devs, MIT/BSD for commercial/proprietary software.</p>
+<p>There really should be a bigger push to license internal code under the GPL. 99% of the time it doesn&#8217;t offer a competitive edge. It&#8217;s the data and marketing and network effects that have more to do with it than anything.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1521 .comment -->
+
+</li>
+
+<li  id="li-comment-1522" class="comment even thread-even depth-1">
+<article id="comment-1522" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/9b947f8fe80d95df24fd3ab465869bc2?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn">Andrew de Andrade</span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T10:46:25+00:00">April 16, 2013 at 10:46 am</time>:   </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Great post. I&#8217;d also add to that list the benefits of local by default packages that are in your project folder. The approach of tools like easy_install, pip, bundler, etc is to hide all your depemdencies in some dot-prefixed folder outside your project directory. This promotes an out of sight, out of mind mentality. The npm approach on the other hand puts them in your project and makes it much more likely that you are going to explore the source of your dependencies, more likely that you bug fix those dependencies instead of work around bugs and most importantly you&#8217;ll treat that folder like part of your own project. This last point means that you are likely to develop one of your own generic modules to the point where it&#8217;s good enough to submit back to npm as a public module.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1522 .comment -->
+
+</li>
+
+<li  id="li-comment-1523" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1523" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/e03a08f9418b20c5a3ea8956a40f595b?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='https://twitter.com/sheeshee' rel='external nofollow' class='url'>Su-Shee</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T11:03:23+00:00">April 16, 2013 at 11:03 am</time>:  </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Oh, go ahead and say something about the language and I will probably tell you the exact same thing back about JavaScript &#8211; or something quite similar. If anything, both have A LOT of history and baggage &#8211; but they both also have A LOT of flexibility, otherwise the range of modules existing as of today wouldn&#8217;t even be possible and people wouldn&#8217;t deliver at that speed. And let&#8217;s face it: We can happily unite (Come along, you too Java, don&#8217;t be shy&#8230;) in Python&#8217;s and Ruby&#8217;s dislike for {} and ; &#8211; and we use a lot of them. ;)  </p>
+<p>Sadly, format.util supported too few options when I looked last. (In the end, I did it in DB anyways..) &#8211; but it&#8217;ll evolve, I&#8217;m sure. </p>
+<p>Underscore will probably move to other list-supporting functions over the years I would expect, the map-grep-filter-foreach range is just the basics anyways. (At least, Perl didn&#8217;t need map-grep-foreach-shift-unshift-push-pop-splice as a module, that really is core-core&#8230;)</p>
+<p>And before someone is tempted to bitch about Java-and-Maven: _THAT_ community delivered literally EVERYTHING I can think up of &#8220;boring shit&#8221; and &#8220;enterprisey stuff&#8221; you can imagine. And if you ever looked for &#8220;good PDF manipulation&#8221; for example: Java did deliver. Kudos for that. </p>
+<p>If anything the lesson simply is: Yes, you want TONS of modules, yes, the environment IS important, no, it doesn&#8217;t matter if you&#8217;re a less-than-perfect language, as long as you support a certain flexibility, people will work around it. </p>
+<p>And style evolves a lot &#8211; nobody writes JavaScript like in 2000 anymore and you get discouraged a lot to do so &#8211; same goes for Perl. But if you already had a web business in 2000, you probably just can&#8217;t throw out your entire carefully crafted JavaScript or your backend of the day (in 2000) and that is something EVERYBODY faces. Perl did and we paid dearly, Java does, Ruby will, Python will do too. </p>
+<p>JavaScript showed &#8211; thanks to Douglas Crockford and jQuery among others and yes, thanks to Node.js, too &#8211; how to evolve nicely into a new style &#8211; but also Node.js setups will at some point be really huge and not that easily updated anymore and then you face the very same thing everybody else does. </p>
+<p>And god do I wish this petty bickering among languages would stop &#8211; we owe each other so many things &#8211; all of us &#8211; and all of us owe Lisp and Smalltalk and C. </p>
+<p>Let me all remind you that there was a time when &#8220;real programmers&#8221; laughed about using a &#8220;scripting language&#8221; on this cheap little Linux hack with this meh little HTML thingie to put up a business on and now look where we all are today&#8230;</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1523 .comment -->
+
+</li>
+
+<li  id="li-comment-1524" class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+<article id="comment-1524" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c8475420ebca73833e55ccf57d8d7500?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://caines.ca' rel='external nofollow' class='url'>Gregg Caines</a></span> <span class="says">said</span> on :</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Su-shee: Totally agree.  Well said.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1524 .comment -->
+
+</li>
+
+<li  id="li-comment-1525" class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1">
+<article id="comment-1525" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c8475420ebca73833e55ccf57d8d7500?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://caines.ca' rel='external nofollow' class='url'>Gregg Caines</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T12:39:51+00:00">April 16, 2013 at 12:39 pm</time>:             </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Rudolph:  &#8220;Slander&#8221; is a legal term and a pretty ridiculous one for what I said.  More legalese isn&#8217;t going to help the GPL&#8217;s case.  You already agree that the GPL is more restrictive for people mixing software with other proprietary software, so how can it *possibly* be slanderous for me to say it&#8217;s not as permissive?</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1525 .comment -->
+
+</li>
+
+<li  id="li-comment-1526" class="comment even thread-even depth-1">
+<article id="comment-1526" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c794c7c92f51240638e2ba1e8952f854?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://www.luarocks.org' rel='external nofollow' class='url'>Hisham</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T12:49:20+00:00">April 16, 2013 at 12:49 pm</time>:    </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Well, counting the age of the Python and Ruby repos by the age of the language (and not of the package management projects, such as pypi and rubygems) while considering node.js by the age of the project and not the language (JavaScript) skews the numbers quite a bit!</p>
+<p>Let&#8217;s compare by language age:</p>
+<p>python:  29,720 packages / 22 years (1991) = 1351 packages per year</p>
+<p>ruby:      54,385 packages / 18 years (1995) =    3022 packages per year</p>
+<p>node.js  26,966 packages / 18 years (1995) =   1498 packages per year</p>
+<p>And by package manager age:</p>
+<p>python:  29,720 packages / 11 years (2002?)  = 2701 packages per year</p>
+<p>ruby:      54,385 packages / 10 years (2003) = 5438 packages per year</p>
+<p>node.js  26,966 packages / 4 years (2009) = 6742 packages per year</p>
+<p>Except that, of course, these numbers are meaningless, because each language/tools has its own submission evaluation process (including &#8220;no evaluation&#8221;), and also different granularities in how to count &#8220;packages&#8221; (by module? by a set of modules that compose a project?).</p>
+<p>Also, language-specific package managers are more or less a new thing &#8212; counting for example the number of packages submitted <i>last year</i> would be a more meaningful metric (apart from the problems I raised above.)</p>
+<p>Still, it&#8217;s nice to see that language-specifc package managers are thriving, and I wish all the best to all of them. :)</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1526 .comment -->
+
+</li>
+
+<li  id="li-comment-1532" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1532" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/f1e3ab214a976a39cfd713bc93deb10f?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn">TJ</span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T17:40:50+00:00">April 16, 2013 at 5:40 pm</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>The reason Express is the size it is, is because all these things are what we would be duplicating each time anyway. Yes a lot of it could/should/will live in npm, but an aggregate is not harmful. Look at npm-www for example, this is what happens when you re-create things every single time you write an app, it becomes are large unwieldy mess of stitching together random things and re-inventing within the app itself instead of an aggregate &#8220;framework&#8221;. Most middleware should absolutely be abstracted to a lower level and then &#8220;wrapped&#8221; as middleware, there&#8217;s no question about that, but should they cease to exist? absolute not.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1532 .comment -->
+
+</li>
+
+<li  id="li-comment-1534" class="comment byuser comment-author-admin bypostauthor even thread-even depth-1">
+<article id="comment-1534" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c8475420ebca73833e55ccf57d8d7500?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://caines.ca' rel='external nofollow' class='url'>Gregg Caines</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-16T20:07:35+00:00">April 16, 2013 at 8:07 pm</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>TJ: Yeah, I actually agree that the core http module isn&#8217;t a useful enough abstraction to be used for many (most?) real world web applications.  It also doesn&#8217;t offer a reasonable way to add functionality other than wrapping it or monkey-patching the request/response objects.  Cross-cutting concerns are the obvious problem (security, logging, routing, etc), but also: what if you want to just add functionality that&#8217;s more easily accessible than constantly requiring the same 20 modules that are all very HTTP relevant?  And I agree that larger aggregates are useful and valid (and I bet you&#8217;d also agree conversely that putting an orm in a web server abstraction is a superfluous aggregation, and so there are limits to what aggregates make sense).    </p>
+<p>I don&#8217;t actually have a better solution than what express does.  I hope that was obvious from my comments.  I certainly tried, but ended up coming back to connect.  At the same time, I find it unfortunate that connect middleware have non-obvious interdependencies and are difficult to keep clash-free (basically all the problems of monkey-patching).  But like I say, I haven&#8217;t got a better proposal.</p>
+<p>I personally don&#8217;t think node.js has the HTTP abstraction problem solved very well (yet).</p>
+<p>> Most middleware should absolutely be abstracted to a lower level and then “wrapped” as middleware, there’s no question about that</p>
+<p>Not a bad start!</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1534 .comment -->
+
+</li>
+
+<li  id="li-comment-1536" class="comment odd alt thread-odd thread-alt depth-1">
+<article id="comment-1536" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c3c59c91293af5a13a840a9855024afe?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://www.tizentips.com/' rel='external nofollow' class='url'>Chankey Pathak</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-17T00:12:52+00:00">April 17, 2013 at 12:12 am</time>:  </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>@Su-Shee: If there would be an upvote button on comments here I would&#8217;ve hit it so hard that it would break my mouse! Well written, +1 to you.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1536 .comment -->
+
+</li>
+
+<li  id="li-comment-1587" class="comment even thread-even depth-1">
+<article id="comment-1587" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/efab0eadca0e9998429621eb25379f37?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://gflarity.github.com' rel='external nofollow' class='url'>Geoff Flarity</a></span> <span class="says">said</span> on <time pubdate datetime="2013-04-21T20:38:03+00:00">April 21, 2013 at 8:38 pm</time>:               </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Some times I get confused when people try to convince other&#8217;s programmers that easily re-usuable modules are awesome and you should try them. Then I remember that not every was into perl 10 years a go&#8230;  Even if you&#8217;re not a fan of the perl syntax (beauty), CPAN is the shit and so is NPM.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1587 .comment -->
+
+</li>
+
+<li id="li-comment-1623" class="pingback odd alt thread-odd thread-alt depth-1">
+<p class="row">
+<strong class="ping-label span1">Pingback:</strong>
+<span class="span7"><a href='http://open.blogs.nytimes.com/2013/04/25/this-weeks-links-_why-edition/' rel='external nofollow' class='url'>This Week&#039;s Links: _why Edition - NYTimes.com</a></span>
+</p>
+
+</li>
+
+<li  id="li-comment-1903" class="comment even thread-even depth-1">
+<article id="comment-1903" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/ccd75193c0478fcb39029aa2cd2da43b?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><a href='http://www.shybadger.com' rel='external nofollow' class='url'>Adam</a></span> <span class="says">said</span> on <time pubdate datetime="2013-05-15T20:17:50+00:00">May 15, 2013 at 8:17 pm</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>I&#8217;m sure this was already said.. but you can&#8217;t compare node.js to php/ruby. I am a node developer.. but node is a new FRAMEWORK. It would be more accurate to compare JAVASCRIPT to php/ruby.</p>
+<p>Just FYI</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1903 .comment -->
+
+</li>
+
+<li  id="li-comment-1905" class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1">
+<article id="comment-1905" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://0.gravatar.com/avatar/c8475420ebca73833e55ccf57d8d7500?s=70&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn"><time pubdate datetime="2013-05-15T23:17:40+00:00">May 15, 2013 at 11:17 pm</time>:</span>                 </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>Adam: The comparisons I make are comparisons in the customs of the communities surrounding those technologies and not the technologies themselves.  I think at that level, it&#8217;s apples-to-apples.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-1905 .comment -->
+
+</li>
+
+<li  id="li-comment-2121" class="comment even thread-even depth-1">
+<article id="comment-2121" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/ffb3baf93be7d2ae4e5ea0f72c803dbf?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn">Juzer Ali</span> <span class="says">said</span> on <time pubdate datetime="2013-06-30T12:30:43+00:00">June 30, 2013 at 12:30 pm</time>:                    </p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>@PeterisP:<br />
+&gt; “Batteries not included” approach puts a significant cost on application developers.<br />
+I agree, it sure wastes a hell lot of time.</p>
+<p>@TJ: Is express code too succinct for what it does? For example, its very difficult to figure out what is happening inside a router <a href="https://github.com/visionmedia/express/blob/master/lib/router/index.js#L46" rel="nofollow">https://github.com/visionmedia/express/blob/master/lib/router/index.js#L46</a></p>
+</div><!-- .comment-content -->
+</article><!-- #comment-2121 .comment -->
+
+</li>
+
+<li id="li-comment-2170" class="pingback odd alt thread-odd thread-alt depth-1">
+<p class="row">
+<strong class="ping-label span1">Pingback:</strong>
+<span class="span7"><a href='http://scalableapps.com/?p=1' rel='external nofollow' class='url'>To node or not to node – overview of Node.js | Developing Scalable Applications</a><span class="sep">&nbsp;</span></span>
+</p>
+
+</li>
+
+<li  id="li-comment-2323" class="comment even thread-even depth-1">
+<article id="comment-2323" class="comment row">
+<div class="comment-author-avatar span1">
+<img alt='' src='http://1.gravatar.com/avatar/368346708a485060d31f77677a21d2a5?s=70&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D70&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />                </div>
+<footer class="comment-meta span7">
+<p class="comment-author vcard">
+<span class="fn">Simon Boudrias</span> <span class="says">said</span> on <time pubdate datetime="2013-09-13T10:17:43+00:00">September 13, 2013 at 10:17 am</time>:</p><!-- .comment-author .vcard -->
+
+
+</footer><!-- .comment-meta -->
+
+<div class="comment-content span7">
+<p>@Adam I have to disagree here. JavaScript is only a language (it is syntax), PHP/Ruby are more than syntax, it is syntax + all about the runtime and functions hooks to the environment. Node.js is JavaScript + runtime/hooks stuff. That&#8217;s why Node.js is comparable to PHP and Ruby, JavaScript isn&#8217;t.</p>
+</div><!-- .comment-content -->
+</article><!-- #comment-2323 .comment -->
+
+</li>
+
+<li id="li-comment-2404" class="pingback odd alt thread-odd thread-alt depth-1">
+<p class="row">
+<strong class="ping-label span1">Pingback:</strong>
+<span class="span7"><a href='http://adaptivepatterns.net/blog/?p=1418' rel='external nofollow' class='url'>~ The Truth about JavaScript. &laquo; Clint Nash</a><span class="sep">&nbsp;</span></span>
+</p>
+
+</li>
+</ol><!-- .commentlist .unstyled -->
+
+
+</div>
+
+
+<!-- #comments -->
+
+
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Code Slower - caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="Code Slower Here’s a controversial opinion, but one that I really believe to be true: most of the things we do to produce code faster are actually &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/2014/06/03/code-slower/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/03/code-slower/">Code Slower</a></li>
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+  <li><a href="/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/">The Node.js Community is Quietly Changing the Face of Open Source</a></li>
+  
+  <li><a href="/blog/2013/03/16/release-ophobia/">Release-ophobia</a></li>
+  
+  <li><a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">Your Team Probably Doesn't have the Same DVCS Requirements as Linus</a></li>
+  
+  <li><a href="/blog/2011/09/14/yoagile-the-good-parts/">Agile: The Good Parts</a></li>
+  
+  <li><a href="/blog/2010/12/05/quality-is-the-constraint/">Quality is the Constraint</a></li>
+  
+  <li><a href="/blog/2009/12/26/the-lost-art-of-prototyping/">The Lost Art of Prototyping</a></li>
+  
+  <li><a href="/blog/2009/12/20/the-future-proofing-trap/">The Future Proofing Trap</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Code Slower</h1>
+	<div class="entry-content" itemprop="articleBody"><p>Here’s a controversial opinion, but one that I really believe to be true: most of the things we do to produce code faster are actually counter-productive.  It sounds crazy, and I would naturally oppose it except that every time I ignore this lesson, experience has a way of reteaching me.  This is as much a message to myself as it is to anyone else that might happen upon it (I’m talking to you, viagra comment spammers).</p>
+
+<h1>Development Time VS. Maintenance Time</h1>
+
+<p>There’s no doubt that the original development stage of a piece of software can be time-consuming.  It’s interesting though, when you consider the difference in time spent in development vs. time spent in maintenance.  At what point do you cross into maintenance mode?</p>
+
+<p>Let’s face it: you’re actually also in maintenance mode pretty much right away, unless you’re some superhuman that conceives of the whole system at once and doesn’t make any design tweaks (or even typos) while coding.  But you’re not.  So the development-time VS. maintenance-time dichotomy is a false one.  You’re always in maintenance mode.</p>
+
+<h1>Invest Early, Invest Often</h1>
+
+<p>So if you spend so much time (all your time) in maintenance mode, then it makes sense to do every little change and tweak in such a way that your subsequent tweaks and changes are as easy as possible.  We should be spending the majority of our energy optimizing our time spent on maintenance and not our time spent on development.</p>
+
+<p>Now it’s natural that one might say “well why not optimize both?”, and that’s a valid question.  There’s no good reason not to try to optimize both, but we have to remember to never ever ever optimize the development process at the expense of the maintenance process, simply because we just spend <strong>so</strong> much time in maintenance mode.</p>
+
+<h1>Some examples</h1>
+
+<h2>Skipping the planning stage.</h2>
+
+<p>This is generally caused by the “Weeks of coding can save days of planning” fallacy.  Uncover all the main parts of your design <strong>before</strong> you code yourself into a corner that requires a near-rewrite to escape.</p>
+
+<h2>Writing untestable code or skipping unit-testing</h2>
+
+<p>Unit-tests are your insurance that future changes don’t cause non-obvious regressions.  They also have a magical way of creating better factored, higher-quality code.  If you skip this stage, your code <strong>will not</strong> be factored as well as it could be, and come maintenance time, you’ll be scared to make changes for fear of breaking something somewhere else.</p>
+
+<h2>Writing classes and functions that do a lot</h2>
+
+<p>This one is a really seductive one.  We want to be <strong>consumers</strong> of classes and methods that do a lot for us, because higher levels of abstraction are how we get more done in less time.  From the consumer stand-point, this makes lots of sense, and it’s actually the best way to improve development speed and maintenance speed at the same time.  If you’re also the person writing the class or function that does more though, you have to be very careful to use the highest abstractions possible for that as well, even if you’re writing its inner abstractions as well.  What this means is that every level of abstraction does as little as possible, and you build up to the level of abstraction that you want with those thin, thin layers.  Classes and functions that try to do a lot instead of relying on other classes and functions are very hard to maintain, simply because there’s so much to do read and understand, and there’s no easy way for the maintainer to skim and decide what piece is relevant, because the pieces are doing multiple things.</p>
+
+<h2>Leaving code in a low-quality state</h2>
+
+<p>I’m talking about everything involving non-readable and poorly factored code, including bad names, foggy separation of concerns, etc.  Code should not be written just for the machine.  It needs to be written for the next guy that comes along as well.  That next guy could be you.  Or a <a href="http://wtfcode.net/post/193202062/always-code-as-if-the-guy-who-ends-up-maintaining">violent psychopath</a></p>
+
+<h2>Using code generation</h2>
+
+<p>Code generation is just pure evil, if there’s ever a remote chance a human will ever have to read it or change it.  A computer program doesn’t know how to write code that a human will understand, and human understanding is exactly what we need to strive for if we care about making maintainable code.</p>
+
+<h1>Understatement of the day:  You’re more than just a typist</h1>
+
+<p>It’s largely irrelevant if you can touch type at 90 wpm.  It’s largely irrelevant if your IDE can do automated refactors.  It’s largely irrelevant if your efficiency with Emacs or vim makes you look like Neo in The Matrix.  These things are great bonuses, but won’t make much difference to your proficiency (and efficiency) as a programmer if you neglect to first consider the maintainability of your codebase.  (Corollary:  In the name of all that is good in this world, please don’t name your variables p1, atb, etc, or your functions like atoi() just for the sake of saving keystrokes!)</p>
+
+<p>Time and time again my mistakes remind me:  there’s only one way to be more productive over the long haul: work with better, higher abstractions.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

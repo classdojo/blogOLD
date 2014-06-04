@@ -1,0 +1,248 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Quality is the Constraint - caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="Quality Is the Constraint One fine day in the trenches, a junior engineer was tasked with optimizing a particular web service call that was way too &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/2010/12/05/quality-is-the-constraint/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/03/code-slower/">Code Slower</a></li>
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+  <li><a href="/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/">The Node.js Community is Quietly Changing the Face of Open Source</a></li>
+  
+  <li><a href="/blog/2013/03/16/release-ophobia/">Release-ophobia</a></li>
+  
+  <li><a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">Your Team Probably Doesn't have the Same DVCS Requirements as Linus</a></li>
+  
+  <li><a href="/blog/2011/09/14/yoagile-the-good-parts/">Agile: The Good Parts</a></li>
+  
+  <li><a href="/blog/2010/12/05/quality-is-the-constraint/">Quality is the Constraint</a></li>
+  
+  <li><a href="/blog/2009/12/26/the-lost-art-of-prototyping/">The Lost Art of Prototyping</a></li>
+  
+  <li><a href="/blog/2009/12/20/the-future-proofing-trap/">The Future Proofing Trap</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Quality Is the Constraint</h1>
+	<div class="entry-content" itemprop="articleBody"><p>One fine day in the trenches, a junior engineer was tasked with optimizing a particular web service call that was way too slow (sometimes slower than 20 seconds!).  I had just figured out how to use a performance profiler for that particular platform, so I thought I’d offer to show him how to use it.  His response was that he was on a tight deadline and didn’t have time to learn to use the profiler, and that he was just going to tune the database calls to make them perform better.</p>
+
+<p>Later in the year when the problem still wasn’t solved, I had a chance to take it on myself.  The profiler showed me that this service call was itself making around 20 web service calls to a second system that could obviously add up to 20 seconds, if that other web service took 1 second for each of its responses (and the logs showed that sometimes it did).  It turned out that almost all of those web service calls were redundant and completely unnecessary.  Simply removing them (which took about 1 day of effort) shaved 19 seconds off this web service call’s duration in production in some cases.</p>
+
+<p>The total execution time spent on database calls was 5 milliseconds.  A 50% improvement there would probably take a week’s worth of effort, and really only get you 2 or 3 milliseconds of performance improvement.</p>
+
+<p>The moral of the story is that there’s a pretty simple process for optimizing a system:</p>
+
+<ul>
+<li>Identify and isolate the component that is tying up the most time in the system  (let’s call it the bottleneck)</li>
+<li>Optimize that component to make it less wasteful</li>
+<li>Repeat</li>
+</ul>
+
+
+<p>Skipping step 1 isn’t a shortcut.  It’s absolutely critical to know that you’re optimizing the bottleneck, and not some other random component.</p>
+
+<p>This is pretty obvious stuff for most experienced developers of course.  And while they seem to know to apply this to the systems that they work on, it’s more rare that they notice it outside of the code and see it in the process of software engineering in general.</p>
+
+<p>The software development <em>process</em> is a system as well, made up of components.  Requirements come in at one end, and deliverables go out the other end.  As people who are involved in that process, we naturally want it to be more and more efficient.  We are constantly trying to figure out how to optimize that system so we can deliver better software in less time.</p>
+
+<p>So step 1:  Identify and isolate the component that is tying up the most time in the system.</p>
+
+<p>Not every team develops software the same way, so this component of the process could be different team by team.  In practice though, I’ve always seen teams spending the most time doing these sorts of things:</p>
+
+<ul>
+<li>Refactoring poorly written code so that features can be added</li>
+<li>Learning/relearning existing code that has long since swapped out of all developers’ “mind pages” (for extension or bug-squashing).</li>
+<li>Debugging</li>
+<li>Performing Manual User Acceptance Testing (by both developers and testers)</li>
+<li>issue tracking (administration of that tool and issue in it)</li>
+<li>discovery and documentation of steps to reproduce</li>
+<li>triage (what bugs to squash first?)</li>
+<li>communication between customers, support, QA and developers</li>
+<li>customer support</li>
+<li>customer dissatisfaction leading to churn and reputation problems (affecting the entire organization)</li>
+</ul>
+
+
+<p>All of these time consumers are affected directly or indirectly by our ability to control quality.  In my experience, the majority of the software development process isn’t hung up in requirements analyis, design, or implementation.  It’s hung up in all these Quality Control related issues.  Quality Control is the constraint that keeps us from creating the right software faster.  Steve McConnell confirms it in a more scientific way than I ever could:</p>
+
+<blockquote><p>The rest of us would do well to learn from a discovery made by IBM in the 1970s: Products with the lowest defect counts also have the shortest schedules (Jones 1991). Many organizations currently develop software with defect levels that give them longer schedules than necessary. After surveying about 4000 software projects, Capers Jones reported that poor quality was one of the most common reasons for schedule overruns (1994). He also reported that poor quality is implicated in close to half of all canceled projects. A Software Engineering Institute survey found that more than 60 percent of organizations assessed suffered from inadequate quality assurance (Kitson and Masters 1993). On the curve in Figure 1, those organizations are to the left of the 95-percent-removal line.</p></blockquote>
+
+<p>(<a href="http://www.stevemcconnell.com/articles/art04.htm">http://www.stevemcconnell.com/articles/art04.htm</a> — The whole article is extremely illuminating)</p>
+
+<p>What this means is that if we really want to move quickly, we need to take a good hard look at how we manage quality.  Of course this is counter-intuitive, and its actually hard to swallow, because ensuring quality can be mundane and tedious if you’re not doing it right.  But as developers we’d be silly to ignore the real bottleneck in the process, and optimizing for that.  Micro-optimizations elsewhere in the process will yield very little benefit compared to improving measures that ensure quality.</p>
+
+<p>As developers, we love to argue about and discuss these micro-optimizations all day long:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Editor_war">what text editor you use</a></li>
+<li><a href="http://steve-yegge.blogspot.com/2008/09/programmings-dirtiest-little-secret.html">how important input speed is</a></li>
+<li><a href="http://stackoverflow.com/questions/136056/ide-or-text-editor">IDEs vs. editors</a></li>
+</ul>
+
+
+<p>It sure seems silly though to be pursuing micro-optimizations, at the expense of tackling the real #1 time-suck:  Quality.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>
