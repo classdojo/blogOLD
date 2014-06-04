@@ -1,6 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://caines.ca/blog/2009/12/26/the-lost-art-of-prototyping/</loc>
+        <lastmod>2014-06-03T17:23:29-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/2010/12/05/quality-is-the-constraint/</loc>
+        <lastmod>2014-06-03T15:39:59-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/2011/09/14/yoagile-the-good-parts/</loc>
+        <lastmod>2014-06-03T07:59:04-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://caines.ca/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/
+        </loc>
+        <lastmod>2014-06-03T07:47:45-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://caines.ca/blog/2013/03/16/release-ophobia/</loc>
+        <lastmod>2014-06-03T07:39:00-07:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://caines.ca/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/
+        </loc>
+        <lastmod>2014-06-03T07:29:36-07:00</lastmod>
+    </url>
+    <url>
         <loc>
             http://caines.ca/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/
         </loc>
@@ -40,7 +68,7 @@
         <loc>
             http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/
         </loc>
-        <lastmod>2014-06-02T17:52:02-07:00</lastmod>
+        <lastmod>2014-06-03T09:38:47-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/robots.txt</loc>
@@ -48,11 +76,11 @@
     </url>
     <url>
         <loc>http://caines.ca/</loc>
-        <lastmod>2014-06-02T22:26:21-07:00</lastmod>
+        <lastmod>2014-06-03T17:23:29-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/archives/</loc>
-        <lastmod>2014-06-02T22:26:21-07:00</lastmod>
+        <lastmod>2014-06-03T17:23:29-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/categories/</loc>

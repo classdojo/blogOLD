@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming, | caines.ca]]></title>
   <link href="http://caines.ca/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://caines.ca/"/>
-  <updated>2014-06-02T22:26:22-07:00</updated>
+  <updated>2014-06-03T17:23:40-07:00</updated>
   <id>http://caines.ca/</id>
   <author>
     <name><![CDATA[Gregg Caines]]></name>
@@ -28,11 +28,15 @@
 
 <p>I&rsquo;m a huge fan of constantly measuring the quality aspects that are measurable.  You&rsquo;re not going to detect all possible bugs this way, but you <em>will</em> find a lot of them, and detection this way is a lot more comprehensive than manual testing and a lot faster than waiting for customers to complain.</p>
 
-<p>There are (at least) 4 types of error scenarios that you&rsquo;re going to want to eliminate:<br/>
-* restarts
-* time-outs
-* 500s
-* logged errors</p>
+<p>There are (at least) 4 types of error scenarios that you&rsquo;re going to want to eliminate:</p>
+
+<ul>
+<li>restarts</li>
+<li>time-outs</li>
+<li>500s</li>
+<li>logged errors</li>
+</ul>
+
 
 <h3>Restarts</h3>
 

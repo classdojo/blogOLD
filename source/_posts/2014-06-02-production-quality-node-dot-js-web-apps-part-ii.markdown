@@ -17,6 +17,7 @@ I could go straight to talking about preventing/avoiding them, but detection is 
 I'm a huge fan of constantly measuring the quality aspects that are measurable.  You're not going to detect all possible bugs this way, but you *will* find a lot of them, and detection this way is a lot more comprehensive than manual testing and a lot faster than waiting for customers to complain.
 
 There are (at least) 4 types of error scenarios that you're going to want to eliminate:  
+
 * restarts
 * time-outs
 * 500s
