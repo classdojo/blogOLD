@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: quality | caines.ca]]></title>
+  <title><![CDATA[Category: quality, | caines.ca]]></title>
   <link href="http://caines.ca/blog/categories/quality/atom.xml" rel="self"/>
   <link href="http://caines.ca/"/>
-  <updated>2014-06-03T22:31:00-07:00</updated>
+  <updated>2014-06-22T23:03:47-07:00</updated>
   <id>http://caines.ca/</id>
   <author>
     <name><![CDATA[Gregg Caines]]></name>
@@ -14,154 +14,239 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Production-Quality Node.js Web Apps : Part I, The Basics]]></title>
-    <link href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/"/>
-    <updated>2014-06-01T10:09:00-07:00</updated>
-    <id>http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been working on production-quality node.js web applications for a couple of years now, and I thought it&rsquo;d be worth writing down some of the more interesting tricks that I&rsquo;ve learned along the way.</p>
+    <title type="html"><![CDATA[Production-Quality Node.js Web Apps : Part II, Detecting Defects]]></title>
+    <link href="http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/"/>
+    <updated>2014-06-02T17:41:31-07:00</updated>
+    <id>http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii</id>
+    <content type="html"><![CDATA[<p>This is the second part of a three part series on making node.js web apps that are (what I would consider to be) production quality.  The <a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">first part</a> really just covered the basics, so if you&rsquo;re missing some aspect covered in the basics, you&rsquo;re likely going to have some issues with the approaches discussed here.</p>
 
-<p>I&rsquo;m mostly going to talk about maintaining a low-defect rate and high availability, rather than get into the details about scaling that are covered in a lot of other places.   In particular, I’ll be talking about load-balancing, process management, logging, and metrics, and the how’s and why’s of each.</p>
+<p>First, I&rsquo;m going to talk about a few major classes of defects and how to <strong>detect</strong> them.</p>
 
-<h3>Balance the Load</h3>
+<p>I could go straight to talking about preventing/avoiding them, but detection is really the first step.  You&rsquo;re simply not going to get a low-defect rate by just using prevention techniques without also using detection techniques.  Try to avoid the junior engineer mindset of assuming that &ldquo;being really careful&rdquo; is enough to achieve a low defect rate.  You can get a much lower defect rate and move much faster by putting systems in place where your running application is actively telling <em>you</em> about defects that it encounters.  This really is a case where working smart pays much higher dividends than working hard.</p>
 
-<p>I&rsquo;m going to assume that you&rsquo;re already load-balancing on a given server with <a href="http://nodejs.org/api/cluster.html">cluster</a> or some higher level abstraction ( I use <a href="https://github.com/isaacs/cluster-master">cluster-master</a>) as well as between servers with a load-balancer like <a href="http://haproxy.1wt.eu/">ha-proxy</a>.</p>
+<h2>The types of defects you&rsquo;re most likely to encounter</h2>
 
-<p>Performance considerations aside, your service will have much better availability, quality, and uptime if you&rsquo;ve got multiple processes running on multiple machines.  More specifically, you get:
-* the ability to immediately failover in the case of single process or single machine failure
-* reduced overall service failure in the case of single process or single machine failure
-* the ability to gracefully deploy with the load-balancer</p>
+<p>I&rsquo;m a huge fan of constantly measuring the quality aspects that are measurable.  You&rsquo;re not going to detect all possible bugs this way, but you <em>will</em> find a lot of them, and detection this way is a lot more comprehensive than manual testing and a lot faster than waiting for customers to complain.</p>
 
-<h3>Gracefully Deploy</h3>
-
-<p>Gracefully deploying means that your deploy process has enough servers running to handle the load at all times throughout the actual deployment process, and that none of the servers are taken off-line while outstanding requests are still in progress.  This means:</p>
+<p>There are (at least) 4 types of error scenarios that you&rsquo;re going to want to eliminate:</p>
 
 <ul>
-<li><p>Your clustering solution must be able to stop new connections and not exit the master process until all servers have finished processing their existing requests.  The solution I personally use is <a href="https://github.com/isaacs/cluster-master">cluster-master</a>, but there are bunch of suitable alternatives.</p></li>
-<li><p>You need a rolling deployment, meaning that servers are restarted one-at-a-time, or in small groups, rather than all at once.  The easiest way to do this is probably to write a nice deploy script that takes restarting servers out of the load-balancer until they&rsquo;re running again.</p></li>
+<li>restarts</li>
+<li>time-outs</li>
+<li>500s</li>
+<li>logged errors</li>
 </ul>
 
 
-<p>If you don&rsquo;t have a graceful deploy solution, every deployment of new code will lose requests in progress, and your users will have a terrible experience.</p>
+<h3>Restarts</h3>
 
-<p>Also note: I&rsquo;ve seen a few clustering solutions that use some sort of hot-deploy (hot-deploy loads a new version of code without taking the server down) functionality.  If you&rsquo;ve got a rolling deploy via your load balancer though, you probably <em>don&rsquo;t</em> need any sort of hot-deploy functionality.  I&rsquo;d personally avoid solutions that involve the complexity of hot-deploying.</p>
+<p>Assuming you&rsquo;ve got a service manager to restart your application when it fails and a cluster manager to restart a chlid process when one fails (like I talked about in <a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Part I</a>), one of the worst types of error-scenarios that you&rsquo;re likely to encounter will be when a child process dies and has to restart.  It&rsquo;s a fairly common mistke to believe that once you have automatic restarting working, process failure is no longer a problem.  That&rsquo;s really only the beginning of a solution to the problem though.  Here&rsquo;s why:</p>
 
-<h3>Run as a Service</h3>
+<ul>
+<li><p>Node.js is built to solve the <a href="http://www.kegel.com/c10k.html">C10K problem</a>, so you should expect to have a high number of requests per process in progress at any given time.</p></li>
+<li><p>The node process itself handles your web-serving, and there&rsquo;s no built-in request isolation like you might find in other frameworks like PHP, where one request can&rsquo;t have any direct effects on another request.  With a node.js web application, any uncaught exception or unhandled <code>error</code> event will bring down the entire server, including your thousands of connections in progress.</p></li>
+<li><p>Node.js&rsquo;s asynchronous nature and multiple ways to express errors (exceptions, error events, and callback parameters) make it difficult to anticipate or catch errors more holistically as your codebase gets larger, more complex, and has more external or 3rd-party dependencies.</p></li>
+</ul>
 
-<p>You&rsquo;re also going to want to be running your app as a service that the OS knows to restart with some service manager like <a href="http://caolanmcmahon.com/posts/deploying_node_js_with_upstart/">upstart</a>.  A service manager like this is going to be absolutely essentially for when your node.js app crashes, or when you spin up new machines.</p>
 
-<p>It&rsquo;s probably worth noting that you won&rsquo;t really want to use something like <a href="https://github.com/nodejitsu/forever">forever</a> or <a href="http://nodemon.io/">nodemon</a> in production, because it doesn&rsquo;t survive reboots, and is pretty redundant once you&rsquo;ve added service management that actually does (This is a case where you don&rsquo;t want redundancy, because these types of process managers can end up fighting with each other to restart the app, thus never really allowing the app to start).</p>
+<p>These three factors combine to make restarts both deadly and difficult to avoid unless you&rsquo;re very careful.</p>
 
-<h4>Log to Standard Output</h4>
+<p><strong>Detection</strong>: The easiest way to detect these is to put metrics and logging at the earliest place in both your cluster child code and your cluster master code to tell you when the master or child processes start.  If you want to remove the noise caused by new servers starting up, or normal deployments, then you may want to write something a little more complex that can specifically detect abnormal restarts (I&rsquo;ve got a tiny utility for that called <a href="https://github.com/cainus/restart-o-meter">restart-o-meter</a> too).</p>
 
-<p>Logging to standard output (using <code>console.log()</code>) and standard error (using <code>console.error()</code>) is the simplest and most powerful way to log.  Here&rsquo;s how:</p>
+<p>You might have an aggregated logging solution than can send you alerts based on substrings that it finds in the logs too, or that can feed directly into a time-series metrics system.</p>
 
-<h5>pipe it, don&rsquo;t write it</h5>
+<h3>Time-outs</h3>
 
-<p>In the config file for running your app, you want something like this to specify a log file:</p>
+<p>Time-outs are another type of failed request, where the server didn&rsquo;t respond within some threshold that you define.  This is pretty common if you forget to call <code>res.end()</code>, or a response just takes too long.</p>
 
-<p><code>bash
-node server.js &gt;&gt; /var/log/myserver.log 2&gt;&amp;1
-</code></p>
-
-<p>The <code>&gt;&gt;</code> tells your node process to append output to the specified log file and the <code>2&gt;&amp;1</code> tells it that both standard out and standard error should go to that same log file.  You don&rsquo;t want to be writing to the logs programmatically from within the node process, because you will miss any output that you don&rsquo;t specifically log, like standard error output from node.js itself which happens anytime that your server crashes.  That kind of information is too critical to miss.</p>
-
-<h5>console is the only &ldquo;logging library&rdquo; you need</h5>
-
-<p>With this kind of logging set up, I just have to <code>console.log()</code> for any debug output that I need (usually just temporarily for a specific issue that I&rsquo;m trying to solve), or <code>console.error()</code> for any errors I encounter.</p>
-
-<p>Additionally, one of the first things I do on a new web service is to set up a <code>console.log()</code> for each request (this should work in any <code>express</code> or <code>connect</code> app):</p>
+<p><strong>Detection</strong>:  You can just write a quick and dirty middleware like this to detect them:</p>
 
 <p>```javascript
-  app.use(function(req, res, next){</p>
+app.use(function(req, res, next){
+  timeoutThreshold = 10000; // 10 seconds
+  res.timeoutCheck = setTimeout(function(){</p>
 
-<pre><code>res.on('finish', function(evt){
-  console.log(req.method, req.url, res.statusCode);
-});
+<pre><code>metrics.increment("slowRequest");
+console.error("slow request: ", req.method.toUpperCase(), req.url);
+</code></pre>
+
+<p>  }, timeoutThreshold);
+  res.on(&lsquo;finish&rsquo;, function(evt){</p>
+
+<pre><code>  clearTimeout(res.timeoutCheck);
 </code></pre>
 
 <p>  });
+  next();
+});
 ```</p>
 
-<p>This chunk of code gives me nice simple logs for every request that look like this:</p>
+<p>(or you can grab <a href="https://www.npmjs.org/package/connect-settimeout">this middleware I wrote</a> that does basically the same thing).</p>
+
+<h3>500s</h3>
+
+<p>On a web application, one of the first things I want to ensure is that we&rsquo;re using proper status codes.  This isn&rsquo;t just HTTP nerd talk (though no one will say I&rsquo;m innocent of that), but rather a great system of easily categorizing the nature of your traffic going through your site.  I&rsquo;ve written about <a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">the common anti-patterns here</a>, but the gist of it is:</p>
+
+<h5>Respond with 500-level errors if the problem was a bug in your app, and not in the client.</h5>
+
+<p>This lets you know that there was a problem, and it&rsquo;s your fault.  Most likely you only ever need to know <code>500 Internal Server Error</code> to accomplish this.</p>
+
+<h5>Respond with 400-level errors if the problem was a bug in the client.</h5>
+
+<p>This lets you know that there was a problem and it was the client app&rsquo;s fault.  If you learn these 4 error codes, you&rsquo;ll have 90% of the cases covered:</p>
+
+<ul>
+<li>400 Bad Request  &mdash; When it&rsquo;s a client error, and you don&rsquo;t have a better code than this, use this.  You can always give more detail in the response body.</li>
+<li>401 Not Authenticated &mdash; When they need to be logged in, but aren&rsquo;t.</li>
+<li>403 Forbidden &mdash; When they&rsquo;re not allowed to do do something</li>
+<li>404 Not Found &mdash; When a url doesn&rsquo;t point to an existing thing.</li>
+</ul>
+
+
+<p>If you don&rsquo;t use these status codes properly, you won&rsquo;t be able to distinguish between:</p>
+
+<ul>
+<li>successes and errors</li>
+<li>errors that are the server&rsquo;s responsibility and errors that are the client&rsquo;s responsibility.</li>
+</ul>
+
+
+<p>These distinctions are dead-simple to make and massively important for determining if errors are occuring, and if so, where to start debugging.</p>
+
+<p>If you&rsquo;re in the context of a request and you know to expect exceptions or error events from a specific piece of code, but don&rsquo;t know/care exactly what type of exception, you&rsquo;re probably going to want to log it with console.error() and respond with a 500, indicating to the user that there&rsquo;s a problem with your service.  Here are a couple of common scenarios:</p>
+
+<ul>
+<li>the database is down, and this request needs it</li>
+<li>some unexpected error is caught</li>
+<li>some api for sending email couldn&rsquo;t connect to the smtp service</li>
+<li>etc, etc</li>
+</ul>
+
+
+<p>These are all legitimate 500 scenarios that tell the user &ldquo;hey the problem is on our end, and there&rsquo;s no problem with your request.  You may be able to retry the exact same request later&rdquo;.  A number of the &ldquo;unexpected errors&rdquo; that you might catch though will indicate that your user actually did send some sort of incorrect request.  In that case, you want to respond with a reasonable 4xx error instead (often just a 400 for &ldquo;Bad Request&rdquo;) that tells them what they did wrong.</p>
+
+<p>Either way, you generally don&rsquo;t want 500s at all.  I get rid of them by fixing the issues that caused them, or turning them into 4xxs where appropriate (eg. when bad user input is causing the 500), to tell the client that the problem is on their end.  The only times that I don&rsquo;t try to change a response from a 500 is when it really is some kind of internal server error (like the database is down), and not some programming error on my part or a bad client request.</p>
+
+<p><strong>Detection</strong>:  500s are important enough that you&rsquo;re going to want to have a unified solution for them.  There should be some simple function that you can call in all cases where you plan to respond with a 500 that will log your 500, the error that caused it, and the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">.stack property</a> of that error, as well as incrementing a metric, like so:</p>
+
+<p>```javascript
+var internalServerError = function(err, req, res, body){</p>
+
+<pre><code>console.log("500 ", req.method, req.url);
+console.error("Internal Server Error", err, err.stack);
+metrics.increment("internalServerError");
+res.statusCode = 500;
+res.end(body);
+</code></pre>
+
+<p>};
+```</p>
+
+<p>Having a unified function you can call like this (possibly monkey-patched onto the response object by a middleware, for convenience) gives you the ability to change how 500&rsquo;s are logged and tracked everywhere, which is good, because you&rsquo;ll probably want to tweak it fairly often.</p>
+
+<p>You&rsquo;re probably actually going to use this on <em>most</em> asynchronous functions in your HTTP handling code (controllers?) that you call that you don&rsquo;t expect an error on.  Here&rsquo;s an example:</p>
+
+<p>```javascript
+function(req, res){</p>
+
+<pre><code>db.user.findById(someId, function(err, user){
+    if (err) return internalServerError(err, req, res, "Internal Server Error");
+    // ...
+    // and normal stuff with the user object goes here
+    // ...
+});
+</code></pre>
+
+<p>}
+```</p>
+
+<p>In this case, I just expect to get a user back, and not get any errors (like the database is disconnected, or something), so I just put the 500 handler in the case that an <code>err</code> object is passed, and go back to my happy-path logic.  If 500s start to show up there at runtime, I&rsquo;ll be able to decide if they should be converted to a 4xx error, or fixed.</p>
+
+<p>For example if I start seeing errors where err.message is &ldquo;User Not Found&rdquo;, as if the client requested a non-existant user, I might add 404 handling like so:</p>
+
+<p>```javascript
+function(req, res){</p>
+
+<pre><code>db.user.findById(someId, function(err, user){
+    if (err) {
+        if (err.message === "User Not Found"){
+            res.status = 404;
+            return res.end("User not found!")
+        }
+        return internalServerError(err, req, res, "Internal Server Error");
+    }
+    // ...
+    // and normal stuff with the user object goes here
+    // ...
+});
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Conversely, if I start seeing errors where err.message is &ldquo;Database connection lost&rdquo;, which is a valid 500 scenario, I might not add any specific handling for that scenario.  Instead, I&rsquo;d start looking into solving how the database connection is getting lost.</p>
+
+<p>If you&rsquo;re building a JSON API, I&rsquo;ve got a great middleware for unified error-handling (and status codes in general) called <a href="https://github.com/cainus/json-status">json-status</a>.</p>
+
+<p>A unified error handler like this leaves you with the ability to expand all internal server error handling later too, when you get additional ideas.  For example, We&rsquo;ve also added the ability for it to log the requesting user&rsquo;s information, if the user is logged in.</p>
+
+<h3>Logged Errors</h3>
+
+<p>I often make liberal use of <code>console.error()</code> to log errors and their <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">.stack properties</a> when debugging restarts and 500s, or just reporting different errors that shouldn&rsquo;t necessarily have impact on the http response code (like errors in fire-and-forget function calls where we don&rsquo;t care about the result enough to call the request a failure).</p>
+
+<p><strong>Detection</strong>:  I ended up adding a method to <code>console</code> called <code>console.flog()</code> (You can name the method whatever you want, instead of &lsquo;flog&rsquo; of course!  I&rsquo;m just weird that way.) that acts just like <code>console.error()</code> (ultimately by calling it with the same arguments), but also increments a &ldquo;logged error&rdquo; metric like so:</p>
+
+<p>```javascript
+console.flog = function(){
+  if (metrics.increment){</p>
+
+<pre><code>metrics.increment("loggedErrors");  
+// assume `metrics` is required earlier
+</code></pre>
+
+<p>  }</p>
+
+<p>  var args = Array.prototype.slice.call(arguments);
+  if (process.env.NODE_ENV !== &ldquo;testing&rdquo;){</p>
+
+<pre><code>args.unshift("LOGGED ERROR:");  
+// put a prefix on error logs to make them easier to search for
+</code></pre>
+
+<p>  }</p>
+
+<p>  console.error.apply(console, args);
+};
+```</p>
+
+<p>With this in place, you can convert all your <code>console.error()</code>s to <code>console.flog()</code>s and your metrics will be able to show you when logged errors are increasing.</p>
+
+<p>It&rsquo;s nice to have it on <code>console</code> because it sort of makes sense there and console is available everywhere without being specifically <code>require()</code>ed.  I&rsquo;m normally against this kind of flagrant monkey-patching, but it&rsquo;s really just <em>too</em> convenient in this case.</p>
+
+<h4>Log Levels</h4>
+
+<p>I should note too that I don&rsquo;t use traditional log levels (error/debug/info/trace) anymore, because I don&rsquo;t find them all that useful.  I&rsquo;m logging everything as an error or not, and I generally just strive to keep the logs free of everything other than lines that indicate the requests being made like so:</p>
 
 <p><code>
-...
-POST /api/session 400
-POST /api/session 401
-POST /api/session 200
-GET /api/status 200
-GET /api/status 200
-...
+  ...
+  POST /api/session 201
+  GET /api/status 200
+  POST /api/passwordReset 204
+  GET /api/admin.php 404
+  ...
 </code></p>
 
-<h5>rotating the logs</h5>
+<p>That doesn&rsquo;t mean that I don&rsquo;t sometimes need debug output, but it&rsquo;s so hard to know what debug output I need in advance that I just add it as needed and redeploy.  I&rsquo;ve just never found other log-levels to be useful.</p>
 
-<p>The missing infrastructure needed to support this is a way to rotate the logs, like <a href="http://www.rackspace.com/knowledge_center/article/understanding-logrotate-part-1">logrotate</a>.  Once that&rsquo;s set up properly, your logs will rotate for you nicely and not fill up your disk on you.</p>
+<h2>More About Metrics</h2>
 
-<h2>Tools to Help Detect Problems at Runtime</h2>
+<p>All of the efforts above have been to make defects self-reporting and visible.  Like I said in the first part of this series, the greatest supplement to logging that I&rsquo;ve found is the time-series metrics graph.  Here&rsquo;s how it actually looks (on a live production system) in practice for the different types of defects that have been discussed here.</p>
 
-<p>There are two basic key ways that I like to instrument an application to detect problems that occur at runtime: Aggregated logging and metrics.</p>
+<p><img src="/images/bad_stuff.png" title="[metrics : restarts, 500s, logged errors, timeouts [metrics : restarts, 500s, logged errors, timeouts]]" ></p>
 
-<h4>Agreggated Logging</h4>
+<p>The way to make metrics most effective, is to keep them on a large video display in the room where everyone is working.  It might seem like this shouldn&rsquo;t make a difference if everyone can just go to their own web browsers to see the dashboard whenever they want, but it absolutely has a huge difference in impact.  Removing that minor impediment and just having metrics always available at a glance results in people checking them far more often.</p>
 
-<p>One of the most important things you can do for error and defect detection is to have aggregated logging &mdash; some service that brings all your web servers' logs together into one large searchable log.  There are a few products for this:  The stand-out open source one for me seemed to be the <a href="http://www.elasticsearch.org/overview/kibana/">logstash/kibana combination</a>, though these days I&rsquo;m lazy and generally use the <a href="https://papertrailapp.com/">papertrail service</a> instead.</p>
-
-<p>I would highly recommend that you set a service like this up immediately, because the small amount of friction involved in <code>ssh</code>ing into servers to <code>tail</code> logs is enough to seriously reduce how often you and your teammates will actually look at the logs. The sooner you set this up, the sooner you can benefit from being able to learn about your application through the logs that you have it write.</p>
-
-<h4>Metrics</h4>
-
-<p>When I say &ldquo;metrics&rdquo; I really mean time-series metrics, that allow me to see the frequency of different types of events over time.  These are invaluable because they</p>
-
-<ul>
-<li>tell you when something unusual is happening</li>
-<li>aggregate certain types of data in ways that logs can&rsquo;t</li>
-<li>help you rally the team or company around specific high-value goals (be careful with this one!)</li>
-</ul>
-
-
-<p>The stand-out metrics/graphic open source product is probably <a href="http://graphite.wikidot.com/">graphite</a>.  I&rsquo;ve generally been using <a href="https://metrics.librato.com">Librato&rsquo;s metrics service</a> though because it&rsquo;s easy to set up, and looks great, so that&rsquo;s where I&rsquo;ll pull my screenshots from for time-series data.  I&rsquo;ve also had a pretty good experience with <a href="http://datadog.com">DataDog&rsquo;s service</a> as well.  Both also come with the ability to raise alerts when a metric surpasses a threshold, which can be a nice way to know when something is going on that you should investigate.</p>
-
-<h5>Basic Metrics</h5>
-
-<p>There are a bunch of basic metrics that you can track to see what&rsquo;s going on in your server.</p>
-
-<p>Here&rsquo;s an example of some very high-level metrics for us over a week:</p>
-
-<p><img src="/images/metrics_requests_duration.png" title="[metrics : number of requests vs average duration [metrics : number of requests vs average duration]]" ></p>
-
-<ul>
-<li>in blue: number of requests</li>
-<li>in green: average duration of requests</li>
-</ul>
-
-
-<p>(Note that at this resolution, the y-values are averages over such long durations that the values aren&rsquo;t really that useful at face value; it&rsquo;s the visualization of general trends that is useful.)</p>
-
-<p>There are a few obvious things that should jump out right away in this example:</p>
-
-<ul>
-<li>We have daily traffic spikes with 5 peaks really standing out and 2 being almost flat (those happen to be Saturday and Sunday).</li>
-<li>We had a spike in average request duration (on Friday morning &mdash; the third peak).  This was caused by some performance issues with our database, and resulted in service outage for a number of our users during that time.</li>
-</ul>
-
-
-<p>I can basically put <code>metrics.increment("someEventName");</code> anywhere in my codebase to tell my metrics service when a particular event occurred.</p>
-
-<p>Also consider OS metrics like:
-* disk space usage
-* cpu utilization
-* memory consumption
-* etc, etc</p>
-
-<p>I&rsquo;ve got my codebase set up so that <code>metrics.gauge("someMetricName", value);</code> will allow me to graph specific values like these over time as well.</p>
-
-<p>If you&rsquo;re not already doing monitoring like this, you must be wondering what your servers would tell you.  When it&rsquo;s this easy, you tend to do it all the time and get all kinds of interesting metrics including more business-specific metrics.</p>
-
-<h2>What next?</h2>
-
-<p>These are really just the basics.  If you&rsquo;re not doing these things, and you care about running a production-quality web service, you&rsquo;re probably putting yourself at a disadvantage.</p>
-
-<p>There is a lot more that you can do though, and I&rsquo;ll get into that in my next post, which will be Part II to this one.</p>
+<p>Without metrics like this, and a reasonable aggregated logging solution, you are really flying blind, and won&rsquo;t have any idea what&rsquo;s going on in your system from one deployment to the next.  I personally can&rsquo;t imagine going back to my old ways that didn&rsquo;t have these types of instrumentation.</p>
 ]]></content>
   </entry>
   

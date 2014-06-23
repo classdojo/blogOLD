@@ -79,16 +79,22 @@
         <lastmod>2014-06-03T22:21:42-07:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://caines.ca/blog/2014/06/22/production-quality-node-dot-js-web-apps-part-iii/
+        </loc>
+        <lastmod>2014-06-22T23:03:46-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://caines.ca/robots.txt</loc>
         <lastmod>2014-06-01T23:44:31-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/</loc>
-        <lastmod>2014-06-03T22:31:00-07:00</lastmod>
+        <lastmod>2014-06-22T23:03:46-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/archives/</loc>
-        <lastmod>2014-06-03T22:31:00-07:00</lastmod>
+        <lastmod>2014-06-22T23:03:46-07:00</lastmod>
     </url>
     <url>
         <loc>http://caines.ca/blog/categories/</loc>

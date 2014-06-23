@@ -1,0 +1,126 @@
+---
+layout: post
+title: "Production-Quality Node.js Web Apps : Part III, Preventing Defects"
+date: 2014-06-22 22:56:10 -0700
+comments: true
+categories: node.js, programming, quality
+---
+
+This is the last part of my 3-part series on production-quality node.js web applications.  I've decided to leave error-prevention to the end, because while it's super-important, it's often the only strategy developers employ to ensure customers have the most defect-free experience as possible.  It's definitely worth checking out parts [I](http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/) and [II](http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/) if you're curious about other strategies and really interested in getting significant results.
+
+
+### Error Prevention
+With that said, let's talk about a few error prevention tricks and tactics that I've found extremely valuable.  There are a bunch of code conventions and practices that can help immensely, and here's where I'll get into those.  With that said I should add that I'm not going to talk about [node-fibers](https://github.com/laverdet/node-fibers), or [harmony-generators](http://blogs.atlassian.com/2013/11/harmony-generators-and-promises-for-node-js-async-fun-and-profit/), or [streamline.js](https://github.com/Sage/streamlinejs), which all have different solutions - ultimately because I haven't used them (which is because none of them are considered very 'standard' (yet)).  There are people using them to solve a few of the issues I'll talk about though.
+
+
+#### High test coverage, extensive testing
+There should be no surprise here, but I think test coverage is absolutely essential in any dynamically typed app because so many errors can only happen at runtime.  If you haven't got heavy test coverage, (even coverage itself is valuable!), you will run into all kinds of problems as the codebase gets larger and more complex, and you'll be too scared to make sweeping changes (like change out your database abstraction, or how sessions are handled).  An untested/uncovered codebase will have you constantly shipping codepaths to production that have never been actually executed before anywhere.
+
+The simplest way I've found to get code coverage stats (and I've used multiple methods in the past) is to use [istanbul](http://gotwarlost.github.io/istanbul/).  Here's istanbul's output on a file from one of my npm libraries:
+
+![istanbul.png](/images/istanbul.png "istanbul output")
+
+The places marked in red are the places that my tests are not testing at all.  I use this tool all the time to see what I might have missed testing-wise, when I haven't been doing TDD, and then I try to close up the gaps.
+
+
+#### Use a consistent error passing interface and strategy
+Asynchronous code should **always** take a callback that expects an Error object (or null) in the first parameter (the standard node.js convention).  This means:
+
+* Never create an asynchronous function that doesn't take a callback, no matter how little you care about the result.
+
+* Never create an asynchronous function that doesn't take an error parameter as the first parameter in its callback, even if you don't have a reason for it immediately.
+
+* Always use an [Error object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) for errors, and not a string, because they have very handy [stacktraces](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack).
+
+Following these rules will make things much easier to debug later when things go wrong in production.
+
+Of course there are some cases where you can get away with breaking these rules, but even in those cases, over time, as you use these functions more often and change their internal workings, you'll often be glad that you followed these rules. 
+
+
+
+#### Use a consistent error-checking and handling strategy.
+Always check the errors from a callback.  If you really don't care about an error (which should probably be rare), do something like this to make it obvious:
+
+```javascript
+getUser(userId, function(err, user){
+  if (err){
+    // do nothing.  we didn't need a user that badly
+  }
+});
+```
+
+Even then, it's probably best to log the error at the very least.  It's extremely rare that you'd bother writing code of which you don't care about the success/failure.
+
+In many cases you won't be expecting an error, but you'll want to know about it.  In those cases, you can do something like this to at least get it into your logs: 
+
+```javascript
+getUser(userId, function(err, user){
+  if (err){
+    console.error('unexpected error', err, err.stack);
+    // TODO actually handle the error though!
+  }
+});
+```
+
+You're going to want to actually handle the unexpected error there too of course.  
+
+If you're in some nested callback, you can just pass it up to a higher callback for that callback to handle:
+
+```javascript
+getUser(userId, function(err, user){
+  if (err){
+    return cb(err);
+  }
+});
+```
+
+NB: I almost always use `return` when calling callbacks to end execution of the current function right there and to save myself from having to manage a bunch of `if..else` scenarios.  Early returns are just so much simpler in general that I rarely find myself using `else` anywhere anymore.  This also saves you from becoming another "[can't set headers after they are sent](https://www.google.com/search?q=headers+already+sent+node.js&oq=headers+already+sent+node.js&aqs=chrome..69i57.5322j0j7&client=ubuntu-browser&sourceid=chrome&es_sm=94&ie=UTF-8#q=can't+set+headers+after+they+are+sent)" casualty.
+
+If you're at the top of a web request and you're dealing with an error that you didn't expect, you should send a 500 status code, because that's the appropriate code for errors that you didn't write appropriate handling for.
+
+```javascript
+getUser(userId, function(err, user){
+  if (err){
+    console.error('unexpected error', err, err.stack);
+    res.writeHead(500);
+    res.end("Internal Server Error");
+  }
+});
+```
+
+In general, you should always be handling or passing up every single error that could possibly occur.  This will make surfacing a particular error much easier.  Heavy production use has an uncanny ability to find itself in pretty much any codepath you can write.
+
+
+#### Watch out for `error` events.
+Any EventEmitters in your code (including streams) that emit an `error` event absolutely need to have a listener for those `error` events.  Uncaught `error` events will bring down your entire process, and usually end up being the main cause of process crashes in projects that I've worked on.  
+
+The next question will be how you handle those errors, and you'll have to decide on a case-by-case basis.  Usually you'll at least want to 500 on those as well, and probably log the issue.
+
+
+### Managing Errors at Runtime
+
+#### Domains
+[Domains](http://nodejs.org/api/domain.html) are without a doubt your best tool for catching errors in runtime that you missed at development time.  There are three places that I've used them to great effect:
+
+1. To wrap the main process.  When it dies, a domain catches the error that caused it.
+2. To wrap cluster's child processes.  If you use [cluster-master](https://github.com/isaacs/cluster-master) like I do, or if you use cluster.setupMaster() with a different file specified via `exec` for child processes, you'll want the contents of the file to be wrapped in a domain as well.  This means that when a child process has an uncaught error, this domain catch it.
+3. To wrap the request and response objects of each http request.  This makes it much more rare that any particular request will take down your process.  I just use [node-domain-middleware](https://github.com/brianc/node-domain-middleware) to do this for me (This seems like it should work in any connect-compatible server as well, despite the name).
+
+In the case of catching an error with a domain on the main process, or a child process, you should usually just log the issue (and bump a restart metric), and let the process restart (via a process manager for the main process, or via cluster for the child process -- see [part I](http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/) for details about this).  You probably do not want to the process to carry on, because if you knew enough about this type of error to catch it, you should have caught it before it bubble up to the process level.  Since this is an unexpected error, it could have unexpected consequences on the state of your application.  It's much cleaner and safer to just let the process restart.
+
+If you've caught a an error from request or response object, it's probably safe and appropriate to send a 500 status code, log the error (and stack trace) and bump a `500` metric.
+
+Also, I've written a module that helps me test that my domains are correctly in place: [error-monkey](https://github.com/cainus/error-monkey).  You can temporarily insert error-monkey objects in different places in your codebase to ensure that domains are catching them correctly.  This way, you're not tweaking the location of your domains and waiting for errors to happen in production to verify them.
+
+
+#### Gracefully restarting
+Now that domains have given you a place to catch otherwise uncaught exceptions and you can hook in your own restart logic, you'll want to think about gracefully restarting rather than just killing the process abruptly and dropping all outstanding requests in progress.  Instead you'll want tp restart only after all current requests have completed ( see : [http://nodejs.org/api/http.html#http_server_close_callback](http://nodejs.org/api/http.html#http_server_close_callback) ).  This way, the process can be restarted more gracefully.
+
+If you're running a bunch of node processes (usually with cluster), and a number of servers (usually behind a load-balancer), it shouldn't be that catastrophic to close one instance temporarily, as long as it's done in a graceful manner.  
+
+Additionally, you may want to force a restart in the case that the graceful shutdown is taking an inordinate amount of time (probably due to hanging connections).  The right amount of time probably has a lot to do with what types of requests you're fulfilling, and you'll want to think about what makes sense for your application.
+
+## With that said...
+These are just my notes on what I've tried so far that achieved worthy results.  I'd be interested to hear if anyone else has tried any other approaches for preventing, mitigating, and detecting defects.
+
+

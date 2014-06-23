@@ -9,7 +9,7 @@
 	<meta name="author" content="Gregg Caines">
 
 	
-	<meta name="description" content="Jun 2nd, 2014 metrics, node.js,, programming,, quality, Production-Quality Node.js Web Apps : Part II, Detecting Defects This is the second part of &hellip;">
+	<meta name="description" content="Jun 22nd, 2014 node.js,, programming,, quality Production-Quality Node.js Web Apps : Part III, Preventing Defects This is the last part of my 3-part &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -62,6 +62,8 @@
 <nav id="main-nav"><ul class="main">
     <li><a href="/">Latest</a></li>
 
+  
+  <li><a href="/blog/2014/06/22/production-quality-node-dot-js-web-apps-part-iii/">Production-Quality Node.js Web Apps : Part III, Preventing Defects</a></li>
   
   <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
   
@@ -139,6 +141,183 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-22T22:56:10-07:00" data-updated="true" itemprop="datePublished">Jun 22<span>nd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/node-dot-js/'>node.js,</a>, <a class='category' href='/blog/categories/programming/'>programming,</a>, <a class='category' href='/blog/categories/quality/'>quality</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/06/22/production-quality-node-dot-js-web-apps-part-iii/" itemprop="url">Production-Quality Node.js Web Apps : Part III, Preventing Defects</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>This is the last part of my 3-part series on production-quality node.js web applications.  I&rsquo;ve decided to leave error-prevention to the end, because while it&rsquo;s super-important, it&rsquo;s often the only strategy developers employ to ensure customers have the most defect-free experience as possible.  It&rsquo;s definitely worth checking out parts <a href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">I</a> and <a href="http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">II</a> if you&rsquo;re curious about other strategies and really interested in getting significant results.</p>
+
+<h3>Error Prevention</h3>
+
+<p>With that said, let&rsquo;s talk about a few error prevention tricks and tactics that I&rsquo;ve found extremely valuable.  There are a bunch of code conventions and practices that can help immensely, and here&rsquo;s where I&rsquo;ll get into those.  With that said I should add that I&rsquo;m not going to talk about <a href="https://github.com/laverdet/node-fibers">node-fibers</a>, or <a href="http://blogs.atlassian.com/2013/11/harmony-generators-and-promises-for-node-js-async-fun-and-profit/">harmony-generators</a>, or <a href="https://github.com/Sage/streamlinejs">streamline.js</a>, which all have different solutions &ndash; ultimately because I haven&rsquo;t used them (which is because none of them are considered very &lsquo;standard&rsquo; (yet)).  There are people using them to solve a few of the issues I&rsquo;ll talk about though.</p>
+
+<h4>High test coverage, extensive testing</h4>
+
+<p>There should be no surprise here, but I think test coverage is absolutely essential in any dynamically typed app because so many errors can only happen at runtime.  If you haven&rsquo;t got heavy test coverage, (even coverage itself is valuable!), you will run into all kinds of problems as the codebase gets larger and more complex, and you&rsquo;ll be too scared to make sweeping changes (like change out your database abstraction, or how sessions are handled).  An untested/uncovered codebase will have you constantly shipping codepaths to production that have never been actually executed before anywhere.</p>
+
+<p>The simplest way I&rsquo;ve found to get code coverage stats (and I&rsquo;ve used multiple methods in the past) is to use <a href="http://gotwarlost.github.io/istanbul/">istanbul</a>.  Here&rsquo;s istanbul&rsquo;s output on a file from one of my npm libraries:</p>
+
+<p><img src="/images/istanbul.png" title="istanbul output" alt="istanbul.png" /></p>
+
+<p>The places marked in red are the places that my tests are not testing at all.  I use this tool all the time to see what I might have missed testing-wise, when I haven&rsquo;t been doing TDD, and then I try to close up the gaps.</p>
+
+<h4>Use a consistent error passing interface and strategy</h4>
+
+<p>Asynchronous code should <strong>always</strong> take a callback that expects an Error object (or null) in the first parameter (the standard node.js convention).  This means:</p>
+
+<ul>
+<li><p>Never create an asynchronous function that doesn&rsquo;t take a callback, no matter how little you care about the result.</p></li>
+<li><p>Never create an asynchronous function that doesn&rsquo;t take an error parameter as the first parameter in its callback, even if you don&rsquo;t have a reason for it immediately.</p></li>
+<li><p>Always use an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error object</a> for errors, and not a string, because they have very handy <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">stacktraces</a>.</p></li>
+</ul>
+
+
+<p>Following these rules will make things much easier to debug later when things go wrong in production.</p>
+
+<p>Of course there are some cases where you can get away with breaking these rules, but even in those cases, over time, as you use these functions more often and change their internal workings, you&rsquo;ll often be glad that you followed these rules.</p>
+
+<h4>Use a consistent error-checking and handling strategy.</h4>
+
+<p>Always check the errors from a callback.  If you really don&rsquo;t care about an error (which should probably be rare), do something like this to make it obvious:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="c1">// do nothing.  we didn&#39;t need a user that badly</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even then, it&rsquo;s probably best to log the error at the very least.  It&rsquo;s extremely rare that you&rsquo;d bother writing code of which you don&rsquo;t care about the success/failure.</p>
+
+<p>In many cases you won&rsquo;t be expecting an error, but you&rsquo;ll want to know about it.  In those cases, you can do something like this to at least get it into your logs:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;unexpected error&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">// TODO actually handle the error though!</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You&rsquo;re going to want to actually handle the unexpected error there too of course.</p>
+
+<p>If you&rsquo;re in some nested callback, you can just pass it up to a higher callback for that callback to handle:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NB: I almost always use <code>return</code> when calling callbacks to end execution of the current function right there and to save myself from having to manage a bunch of <code>if..else</code> scenarios.  Early returns are just so much simpler in general that I rarely find myself using <code>else</code> anywhere anymore.  This also saves you from becoming another &ldquo;<a href="https://www.google.com/search?q=headers+already+sent+node.js&amp;oq=headers+already+sent+node.js&amp;aqs=chrome..69i57.5322j0j7&amp;client=ubuntu-browser&amp;sourceid=chrome&amp;es_sm=94&amp;ie=UTF-8#q=can't+set+headers+after+they+are+sent">can&rsquo;t set headers after they are sent</a>&rdquo; casualty.</p>
+
+<p>If you&rsquo;re at the top of a web request and you&rsquo;re dealing with an error that you didn&rsquo;t expect, you should send a 500 status code, because that&rsquo;s the appropriate code for errors that you didn&rsquo;t write appropriate handling for.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;unexpected error&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&quot;Internal Server Error&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In general, you should always be handling or passing up every single error that could possibly occur.  This will make surfacing a particular error much easier.  Heavy production use has an uncanny ability to find itself in pretty much any codepath you can write.</p>
+
+<h4>Watch out for <code>error</code> events.</h4>
+
+<p>Any EventEmitters in your code (including streams) that emit an <code>error</code> event absolutely need to have a listener for those <code>error</code> events.  Uncaught <code>error</code> events will bring down your entire process, and usually end up being the main cause of process crashes in projects that I&rsquo;ve worked on.</p>
+
+<p>The next question will be how you handle those errors, and you&rsquo;ll have to decide on a case-by-case basis.  Usually you&rsquo;ll at least want to 500 on those as well, and probably log the issue.</p>
+
+<h3>Managing Errors at Runtime</h3>
+
+<h4>Domains</h4>
+
+<p><a href="http://nodejs.org/api/domain.html">Domains</a> are without a doubt your best tool for catching errors in runtime that you missed at development time.  There are three places that I&rsquo;ve used them to great effect:</p>
+
+<ol>
+<li>To wrap the main process.  When it dies, a domain catches the error that caused it.</li>
+<li>To wrap cluster&rsquo;s child processes.  If you use <a href="https://github.com/isaacs/cluster-master">cluster-master</a> like I do, or if you use cluster.setupMaster() with a different file specified via <code>exec</code> for child processes, you&rsquo;ll want the contents of the file to be wrapped in a domain as well.  This means that when a child process has an uncaught error, this domain catch it.</li>
+<li>To wrap the request and response objects of each http request.  This makes it much more rare that any particular request will take down your process.  I just use <a href="https://github.com/brianc/node-domain-middleware">node-domain-middleware</a> to do this for me (This seems like it should work in any connect-compatible server as well, despite the name).</li>
+</ol>
+
+
+<p>In the case of catching an error with a domain on the main process, or a child process, you should usually just log the issue (and bump a restart metric), and let the process restart (via a process manager for the main process, or via cluster for the child process &mdash; see <a href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">part I</a> for details about this).  You probably do not want to the process to carry on, because if you knew enough about this type of error to catch it, you should have caught it before it bubble up to the process level.  Since this is an unexpected error, it could have unexpected consequences on the state of your application.  It&rsquo;s much cleaner and safer to just let the process restart.</p>
+
+<p>If you&rsquo;ve caught a an error from request or response object, it&rsquo;s probably safe and appropriate to send a 500 status code, log the error (and stack trace) and bump a <code>500</code> metric.</p>
+
+<p>Also, I&rsquo;ve written a module that helps me test that my domains are correctly in place: <a href="https://github.com/cainus/error-monkey">error-monkey</a>.  You can temporarily insert error-monkey objects in different places in your codebase to ensure that domains are catching them correctly.  This way, you&rsquo;re not tweaking the location of your domains and waiting for errors to happen in production to verify them.</p>
+
+<h4>Gracefully restarting</h4>
+
+<p>Now that domains have given you a place to catch otherwise uncaught exceptions and you can hook in your own restart logic, you&rsquo;ll want to think about gracefully restarting rather than just killing the process abruptly and dropping all outstanding requests in progress.  Instead you&rsquo;ll want tp restart only after all current requests have completed ( see : <a href="http://nodejs.org/api/http.html#http_server_close_callback">http://nodejs.org/api/http.html#http_server_close_callback</a> ).  This way, the process can be restarted more gracefully.</p>
+
+<p>If you&rsquo;re running a bunch of node processes (usually with cluster), and a number of servers (usually behind a load-balancer), it shouldn&rsquo;t be that catastrophic to close one instance temporarily, as long as it&rsquo;s done in a graceful manner.</p>
+
+<p>Additionally, you may want to force a restart in the case that the graceful shutdown is taking an inordinate amount of time (probably due to hanging connections).  The right amount of time probably has a lot to do with what types of requests you&rsquo;re fulfilling, and you&rsquo;ll want to think about what makes sense for your application.</p>
+
+<h2>With that said&hellip;</h2>
+
+<p>These are just my notes on what I&rsquo;ve tried so far that achieved worthy results.  I&rsquo;d be interested to hear if anyone else has tried any other approaches for preventing, mitigating, and detecting defects.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -1941,86 +2120,6 @@ I agree, it sure wastes a hell lot of time.</p>
 
 
 
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-16T07:33:09-07:00" data-updated="true" itemprop="datePublished">Mar 16<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/03/16/release-ophobia/" itemprop="url">Release-ophobia</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>If you’ve developed SaaS in a large organization (or even a small organization that acts like one), you’ve probably seen some of the symptoms of fear of releasing software:</p>
-
-<ul>
-<li>Off-hours deployments and weekend deployments</li>
-<li>Infrequent releases</li>
-<li>extended code-freeze and testing cycles</li>
-<li>Reluctance to refactor</li>
-<li>Feature branches for the purpose of ‘cherry-picking’</li>
-<li>release managers</li>
-<li>many non-customer-facing environments before production.</li>
-</ul>
-
-
-<p>These symptoms usually happen only in larger/older organizations, because of two factors:</p>
-
-<ul>
-<li>They take a lot more personnel / time to implement than smaller organizations have.</li>
-<li>They are usually processes and attitudes that are collected as a reaction to problems that occur in the course of a company’s lifetime.</li>
-</ul>
-
-
-<h1>“But you can’t be too careful!”</h1>
-
-<p>One problem is that you CAN indeed be too careful. It’s absolutely imperative that the costs be considered as well, if you want software development to still go reasonably fast. Otherwise these manual preventative processes will slowly creep in over time and your team will be releasing at a snail’s pace.</p>
-
-<p>The other problem is that these policies alone are in some ways not careful <em>enough</em>. Where are the techniques for mitigating defects that inevitably still slip through? Where are the techniques to detect them, limit the customers exposed, and limit the time that customers are exposed?</p>
-
-<p>All of these symptoms have a few things in common: They tend toward heavy <strong>manual and preventative</strong> process added generously over time, usually with little thought to the cost/benefit ratio of such process. It’s all too common for every production issue to result in a new process to prevent it, without regard to how infrequently that problem might occur, how damaging the result is, or how easily it is rectified.</p>
-
-<h1>So how do we keep bugs from getting to our customers?!?</h1>
-
-<p>Non-preventative measures (I call them “<strong>Reactive Measures</strong>“) do indeed exist, and can help you safely maintain a fast and steady flow of new features to customers.</p>
-
-<ul>
-<li><a href="http://code.flickr.net/2009/12/02/flipping-out/">Feature-Flags</a> allow you to commit incomplete work to master and push it to production safely. Customer-specific feature flags allow you to test in production or enroll customers in a beta program. With a good feature-flag system, it’s even possible to release a feature to only a certain percentage of customers, and to watch your metrics to see the effects.</li>
-<li><strong>Easy/fast (read “Automated”) deployment.</strong> If deployment takes a long time, then you can’t afford to deploy often. Also, if you can’t deploy quickly, you can’t redeploy quickly (in the event of a problem).</li>
-<li><strong>Easy-undo.</strong> Rolling back from a defective release to a known-good release is the simplest and fastest way to recover from defects, if the process is both quick and easy. Defects will happen no matter how much prevention you use: Easy-undo can mean the difference between light customer impact and heavy customer impact.</li>
-<li><strong>Smaller releases.</strong> Smaller releases have less code, and therefore generally less bugs. Because they don’t contain many changes, they’re easier to test and a rollback is less-likely to negatively impact a customer. Also when a production defect appears in the latest release you have much less code to sift through to determine the cause.</li>
-<li><strong>Practice Continuous Integration</strong> (<a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">which necessarily involves always committing to master, and only incidentally has to do with using a CI server</a>) . Feature branches, infrequent commits, and committing non-production-ready work are all practices that need to be avoided, because they are all time-consuming delaying mechanisms.</li>
-<li><strong>“Done” == “In Production”.</strong> If the team moves on to new features before the last one is in production, then that last feature is obviously unnecessarily being held back from release. They will be faster if they deliver to production and ensure it functions there properly before moving on to new features because it avoids unnecessary and time-consuming multi-tasking. This goes hand-in-hand with smaller, more frequent releases.</li>
-<li><strong>Comprehensive Automated testing.</strong> When you deploy more often, you need to test more often. The cheapest way to do this is with comprehensive automated tests. While they’re a heavy-upfront cost, if you run them as often as possible, they’ll pay for themselves very shortly.</li>
-<li><strong>Continuous Production testing.</strong> Create automated <em>black-box</em> integration tests for some of your most important features and figure out a way to run them repeatedly and continuously against your production deployment so that you know instantly when those features are broken. There’s no need to wait for customer feedback to learn about a faulty release.</li>
-<li><strong>Searchable, aggregated logging with proper log-levels.</strong> Making your logs easily searchable in one place makes them something that developers will actually use for defect detection and for debugging. They can go a long way to making your application more transparent.</li>
-<li><strong>Runtime monitoring, runtime metrics and information radiators (most importantly alerts).</strong> Instrument the things you care about most, and have alerts sent out when the measurements are abnormal.</li>
-</ul>
-
-
-<p><strong>Note:</strong> Of course some preventative processes are necessary, but when they are, automation is almost always preferable to time-consuming manual human processes.  Either way, you should consider the cost of the process and determine if it the fall-out from the type of defect it prevents is actually worth that cost.</p>
-
-<p>In the end, a fear of releasing is a fear of change, and a fear of change is a fear of improvement. This is a crucial lesson that Big Company software teams can learn from the small, scrappy start-ups that are quickly trying to disrupt them. The more often you release, the more often you can test hypotheses and get customer feedback, and the more often you can course-correct. Companies that don’t realize this are susceptible to being leap-frogged by competitors that do.</p>
 
 		
 		

@@ -1,0 +1,358 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Production-Quality Node.js Web Apps : Part III, Preventing Defects - caines.ca</title>
+	<meta name="author" content="Gregg Caines">
+
+	
+	<meta name="description" content="Production-Quality Node.js Web Apps : Part III, Preventing Defects This is the last part of my 3-part series on production-quality node.js web &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="caines.ca" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://caines.ca/blog/2014/06/22/production-quality-node-dot-js-web-apps-part-iii/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-10626105-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("gregg@caines.ca") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Latest</a></li>
+
+  
+  <li><a href="/blog/2014/06/22/production-quality-node-dot-js-web-apps-part-iii/">Production-Quality Node.js Web Apps : Part III, Preventing Defects</a></li>
+  
+  <li><a href="/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">Production-Quality Node.js Web Apps : Part II, Detecting Defects</a></li>
+  
+  <li><a href="/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">Production-Quality Node.js Web Apps : Part I, The Basics</a></li>
+  
+  <li><a href="/blog/2014/01/11/in-defence-of-the-office/">In Defence Of The Office</a></li>
+  
+  <li><a href="/blog/2013/09/13/you-probably-dont-need-to-version-your-web-api/">You probably don’t need to version your web API.</a></li>
+  
+  <li><a href="/blog/2013/06/09/my-favourite-new-ility/">My Favourite New Ility</a></li>
+  
+  <li><a href="/blog/2013/05/07/a-requiem-for-a-team/">A Requiem for a Team</a></li>
+  
+  <li><a href="/blog/2013/04/29/so-i-wrote-a-json-api-framework-and-the-framework-was-the-least-interesting-part/">So I wrote a JSON API Framework and the Framework was the Least Interesting Part</a></li>
+  
+  <li><a href="/blog/2013/04/21/3-terrible-anti-patterns-for-error-handling-in-rest-apis/">3 Terrible Anti-patterns for Error-Handling in 'REST' APIs:</a></li>
+  
+  <li><a href="/blog/2013/04/13/the-node-dot-js-community-is-quietly-changing-the-face-of-open-source/">The Node.js Community is Quietly Changing the Face of Open Source</a></li>
+  
+  <li><a href="/blog/2013/03/16/release-ophobia/">Release-ophobia</a></li>
+  
+  <li><a href="/blog/2012/01/03/your-team-probably-doesnt-have-the-same-dvcs-requirements-as-linus/">Your Team Probably Doesn't have the Same DVCS Requirements as Linus</a></li>
+  
+  <li><a href="/blog/2011/09/14/yoagile-the-good-parts/">Agile: The Good Parts</a></li>
+  
+  <li><a href="/blog/2010/12/05/quality-is-the-constraint/">Quality is the Constraint</a></li>
+  
+  <li><a href="/blog/2009/12/26/the-lost-art-of-prototyping/">The Lost Art of Prototyping</a></li>
+  
+  <li><a href="/blog/2009/12/20/the-future-proofing-trap/">The Future Proofing Trap</a></li>
+  
+  <li><a href="/blog/2009/12/13/code-slower/">Code Slower</a></li>
+  
+    </section>
+
+    <!-- <li><a href="/blog/archives">Archives</a></li> -->
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:gregg@caines.ca" title="Email">Email</a>
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/@greggcaines" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cainus" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Production-Quality Node.js Web Apps : Part III, Preventing Defects</h1>
+	<div class="entry-content" itemprop="articleBody"><p>This is the last part of my 3-part series on production-quality node.js web applications.  I&rsquo;ve decided to leave error-prevention to the end, because while it&rsquo;s super-important, it&rsquo;s often the only strategy developers employ to ensure customers have the most defect-free experience as possible.  It&rsquo;s definitely worth checking out parts <a href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">I</a> and <a href="http://caines.ca/blog/2014/06/02/production-quality-node-dot-js-web-apps-part-ii/">II</a> if you&rsquo;re curious about other strategies and really interested in getting significant results.</p>
+
+<h3>Error Prevention</h3>
+
+<p>With that said, let&rsquo;s talk about a few error prevention tricks and tactics that I&rsquo;ve found extremely valuable.  There are a bunch of code conventions and practices that can help immensely, and here&rsquo;s where I&rsquo;ll get into those.  With that said I should add that I&rsquo;m not going to talk about <a href="https://github.com/laverdet/node-fibers">node-fibers</a>, or <a href="http://blogs.atlassian.com/2013/11/harmony-generators-and-promises-for-node-js-async-fun-and-profit/">harmony-generators</a>, or <a href="https://github.com/Sage/streamlinejs">streamline.js</a>, which all have different solutions &ndash; ultimately because I haven&rsquo;t used them (which is because none of them are considered very &lsquo;standard&rsquo; (yet)).  There are people using them to solve a few of the issues I&rsquo;ll talk about though.</p>
+
+<h4>High test coverage, extensive testing</h4>
+
+<p>There should be no surprise here, but I think test coverage is absolutely essential in any dynamically typed app because so many errors can only happen at runtime.  If you haven&rsquo;t got heavy test coverage, (even coverage itself is valuable!), you will run into all kinds of problems as the codebase gets larger and more complex, and you&rsquo;ll be too scared to make sweeping changes (like change out your database abstraction, or how sessions are handled).  An untested/uncovered codebase will have you constantly shipping codepaths to production that have never been actually executed before anywhere.</p>
+
+<p>The simplest way I&rsquo;ve found to get code coverage stats (and I&rsquo;ve used multiple methods in the past) is to use <a href="http://gotwarlost.github.io/istanbul/">istanbul</a>.  Here&rsquo;s istanbul&rsquo;s output on a file from one of my npm libraries:</p>
+
+<p><img src="/images/istanbul.png" title="istanbul output" alt="istanbul.png" /></p>
+
+<p>The places marked in red are the places that my tests are not testing at all.  I use this tool all the time to see what I might have missed testing-wise, when I haven&rsquo;t been doing TDD, and then I try to close up the gaps.</p>
+
+<h4>Use a consistent error passing interface and strategy</h4>
+
+<p>Asynchronous code should <strong>always</strong> take a callback that expects an Error object (or null) in the first parameter (the standard node.js convention).  This means:</p>
+
+<ul>
+<li><p>Never create an asynchronous function that doesn&rsquo;t take a callback, no matter how little you care about the result.</p></li>
+<li><p>Never create an asynchronous function that doesn&rsquo;t take an error parameter as the first parameter in its callback, even if you don&rsquo;t have a reason for it immediately.</p></li>
+<li><p>Always use an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error object</a> for errors, and not a string, because they have very handy <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">stacktraces</a>.</p></li>
+</ul>
+
+
+<p>Following these rules will make things much easier to debug later when things go wrong in production.</p>
+
+<p>Of course there are some cases where you can get away with breaking these rules, but even in those cases, over time, as you use these functions more often and change their internal workings, you&rsquo;ll often be glad that you followed these rules.</p>
+
+<h4>Use a consistent error-checking and handling strategy.</h4>
+
+<p>Always check the errors from a callback.  If you really don&rsquo;t care about an error (which should probably be rare), do something like this to make it obvious:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="c1">// do nothing.  we didn&#39;t need a user that badly</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Even then, it&rsquo;s probably best to log the error at the very least.  It&rsquo;s extremely rare that you&rsquo;d bother writing code of which you don&rsquo;t care about the success/failure.</p>
+
+<p>In many cases you won&rsquo;t be expecting an error, but you&rsquo;ll want to know about it.  In those cases, you can do something like this to at least get it into your logs:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;unexpected error&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
+</span><span class='line'>    <span class="c1">// TODO actually handle the error though!</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You&rsquo;re going to want to actually handle the unexpected error there too of course.</p>
+
+<p>If you&rsquo;re in some nested callback, you can just pass it up to a higher callback for that callback to handle:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NB: I almost always use <code>return</code> when calling callbacks to end execution of the current function right there and to save myself from having to manage a bunch of <code>if..else</code> scenarios.  Early returns are just so much simpler in general that I rarely find myself using <code>else</code> anywhere anymore.  This also saves you from becoming another &ldquo;<a href="https://www.google.com/search?q=headers+already+sent+node.js&amp;oq=headers+already+sent+node.js&amp;aqs=chrome..69i57.5322j0j7&amp;client=ubuntu-browser&amp;sourceid=chrome&amp;es_sm=94&amp;ie=UTF-8#q=can't+set+headers+after+they+are+sent">can&rsquo;t set headers after they are sent</a>&rdquo; casualty.</p>
+
+<p>If you&rsquo;re at the top of a web request and you&rsquo;re dealing with an error that you didn&rsquo;t expect, you should send a 500 status code, because that&rsquo;s the appropriate code for errors that you didn&rsquo;t write appropriate handling for.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getUser</span><span class="p">(</span><span class="nx">userId</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;unexpected error&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&quot;Internal Server Error&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In general, you should always be handling or passing up every single error that could possibly occur.  This will make surfacing a particular error much easier.  Heavy production use has an uncanny ability to find itself in pretty much any codepath you can write.</p>
+
+<h4>Watch out for <code>error</code> events.</h4>
+
+<p>Any EventEmitters in your code (including streams) that emit an <code>error</code> event absolutely need to have a listener for those <code>error</code> events.  Uncaught <code>error</code> events will bring down your entire process, and usually end up being the main cause of process crashes in projects that I&rsquo;ve worked on.</p>
+
+<p>The next question will be how you handle those errors, and you&rsquo;ll have to decide on a case-by-case basis.  Usually you&rsquo;ll at least want to 500 on those as well, and probably log the issue.</p>
+
+<h3>Managing Errors at Runtime</h3>
+
+<h4>Domains</h4>
+
+<p><a href="http://nodejs.org/api/domain.html">Domains</a> are without a doubt your best tool for catching errors in runtime that you missed at development time.  There are three places that I&rsquo;ve used them to great effect:</p>
+
+<ol>
+<li>To wrap the main process.  When it dies, a domain catches the error that caused it.</li>
+<li>To wrap cluster&rsquo;s child processes.  If you use <a href="https://github.com/isaacs/cluster-master">cluster-master</a> like I do, or if you use cluster.setupMaster() with a different file specified via <code>exec</code> for child processes, you&rsquo;ll want the contents of the file to be wrapped in a domain as well.  This means that when a child process has an uncaught error, this domain catch it.</li>
+<li>To wrap the request and response objects of each http request.  This makes it much more rare that any particular request will take down your process.  I just use <a href="https://github.com/brianc/node-domain-middleware">node-domain-middleware</a> to do this for me (This seems like it should work in any connect-compatible server as well, despite the name).</li>
+</ol>
+
+
+<p>In the case of catching an error with a domain on the main process, or a child process, you should usually just log the issue (and bump a restart metric), and let the process restart (via a process manager for the main process, or via cluster for the child process &mdash; see <a href="http://caines.ca/blog/2014/06/01/production-quality-node-dot-js-web-apps-part-i/">part I</a> for details about this).  You probably do not want to the process to carry on, because if you knew enough about this type of error to catch it, you should have caught it before it bubble up to the process level.  Since this is an unexpected error, it could have unexpected consequences on the state of your application.  It&rsquo;s much cleaner and safer to just let the process restart.</p>
+
+<p>If you&rsquo;ve caught a an error from request or response object, it&rsquo;s probably safe and appropriate to send a 500 status code, log the error (and stack trace) and bump a <code>500</code> metric.</p>
+
+<p>Also, I&rsquo;ve written a module that helps me test that my domains are correctly in place: <a href="https://github.com/cainus/error-monkey">error-monkey</a>.  You can temporarily insert error-monkey objects in different places in your codebase to ensure that domains are catching them correctly.  This way, you&rsquo;re not tweaking the location of your domains and waiting for errors to happen in production to verify them.</p>
+
+<h4>Gracefully restarting</h4>
+
+<p>Now that domains have given you a place to catch otherwise uncaught exceptions and you can hook in your own restart logic, you&rsquo;ll want to think about gracefully restarting rather than just killing the process abruptly and dropping all outstanding requests in progress.  Instead you&rsquo;ll want tp restart only after all current requests have completed ( see : <a href="http://nodejs.org/api/http.html#http_server_close_callback">http://nodejs.org/api/http.html#http_server_close_callback</a> ).  This way, the process can be restarted more gracefully.</p>
+
+<p>If you&rsquo;re running a bunch of node processes (usually with cluster), and a number of servers (usually behind a load-balancer), it shouldn&rsquo;t be that catastrophic to close one instance temporarily, as long as it&rsquo;s done in a graceful manner.</p>
+
+<p>Additionally, you may want to force a restart in the case that the graceful shutdown is taking an inordinate amount of time (probably due to hanging connections).  The right amount of time probably has a lot to do with what types of requests you&rsquo;re fulfilling, and you&rsquo;ll want to think about what makes sense for your application.</p>
+
+<h2>With that said&hellip;</h2>
+
+<p>These are just my notes on what I&rsquo;ve tried so far that achieved worthy results.  I&rsquo;d be interested to hear if anyone else has tried any other approaches for preventing, mitigating, and detecting defects.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Gregg Caines
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	
+
+<script type="text/javascript">
+      var disqus_shortname = 'cainesca';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://caines.ca/blog/2014/06/22/production-quality-node-dot-js-web-apps-part-iii/';
+        var disqus_url = 'http://caines.ca/blog/2014/06/22/production-quality-node-dot-js-web-apps-part-iii/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>
